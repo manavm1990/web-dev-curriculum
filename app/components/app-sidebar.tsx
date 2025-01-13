@@ -18,6 +18,10 @@ const NAV_ITEMS = [
     title: 'Home',
     url: '/',
   },
+  {
+    title: '1-1 Soft Skills',
+    url: '/soft-skills',
+  },
 ]
 
 export function AppSidebar() {
