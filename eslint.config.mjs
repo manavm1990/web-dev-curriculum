@@ -1,5 +1,6 @@
 import { FlatCompat } from '@eslint/eslintrc'
 import eslintConfigPrettier from 'eslint-config-prettier'
+import eslintPluginEslintComments from 'eslint-plugin-eslint-comments'
 import eslintPluginUseEncapsulation from 'eslint-plugin-use-encapsulation'
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
@@ -22,6 +23,7 @@ const eslintConfig = [
     },
     plugins: {
       'use-encapsulation': eslintPluginUseEncapsulation,
+      'eslint-comments': eslintPluginEslintComments,
     },
     rules: {
       'no-extra-boolean-cast': 'error',
@@ -112,6 +114,8 @@ const eslintConfig = [
       '@next/next/no-page-custom-font': 'off',
       'react/no-unescaped-entities': 'off',
       'use-encapsulation/prefer-custom-hooks': 'error',
+      'eslint-comments/require-description': ['error'],
+      'eslint-comments/no-unlimited-disable': 'error',
     },
   },
 ]
