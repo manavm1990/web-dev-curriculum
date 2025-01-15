@@ -26,6 +26,8 @@ const eslintConfig = [
       'eslint-comments': eslintPluginEslintComments,
     },
     rules: {
+      'eslint-comments/require-description': 'error',
+      'eslint-comments/no-unlimited-disable': 'error',
       'no-extra-boolean-cast': 'error',
       'no-useless-catch': 'error',
       'no-useless-constructor': 'error',
@@ -114,8 +116,6 @@ const eslintConfig = [
       '@next/next/no-page-custom-font': 'off',
       'react/no-unescaped-entities': 'off',
       'use-encapsulation/prefer-custom-hooks': 'error',
-      'eslint-comments/require-description': ['error'],
-      'eslint-comments/no-unlimited-disable': 'error',
     },
   },
 ]
