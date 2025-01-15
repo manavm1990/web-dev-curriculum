@@ -22,7 +22,7 @@ const NAV_ITEMS = [
     title: '1-1 Soft Skills',
     url: '/soft-skills',
   },
-]
+] as const
 
 export function AppSidebar() {
   const pathname = usePathname()
@@ -39,7 +39,7 @@ export function AppSidebar() {
                   <SidebarMenuButton asChild>
                     <Link
                       href={item.url}
-                      className={pathname === item.url ? 'uppercase no-underline' : ''}
+                      className={pathname === item.url ? 'font-black text-sidebar-primary' : ''}
                     >
                       {item.title}
                     </Link>
