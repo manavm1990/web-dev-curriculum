@@ -1,0 +1,249 @@
+import Image from 'next/image'
+import Bq from '../components/ui/typography/bq'
+import Large from '../components/ui/typography/large'
+import macHome from './home.png'
+
+# Improving the Developer Experience
+
+<Lead>
+  For now, we are just reading about the tools. Once we install and start using them, you will want
+  to come back to this lesson as a reference.
+</Lead>
+
+<Large className="text-red-500">
+  Do not install any of these tools yet, especially if you are on Mac. We will install these in a
+  particular way to ensure that they work well together.
+</Large>
+
+## Why Do We Need Developer Tools?
+
+Think about building a house. You need different tools for different jobs:
+
+- A hammer for nails
+- A saw for cutting wood
+- A measuring tape for precise measurements
+- A level to keep things straight
+
+Building websites is similar! We need different tools to help us:
+
+- **VS Code** is like your workbench, where you'll write and edit your code.
+- **Terminal** is like your tool belt, letting you run commands and manage files.
+- **Git** is like your camera, taking snapshots of your work as you build.
+- **GitHub** is like your backup drive, keeping your work safe and shareable.
+- `npm` is like your hardware store - where you get pre-built parts to use.
+
+<Mermaid chart={`
+graph TB
+    subgraph Your Computer
+    A[VS Code<br/>Where you write code] --> B[Terminal<br/>How you run commands]
+    B --> C[Git<br/>Saves your work]
+    end
+    
+    subgraph The Cloud
+    C --> D[GitHub<br/>Stores your code]
+    B --> E[npm<br/>Downloads tools]
+    end
+
+    classDef local fill:#e1f5fe,stroke:#1e40af,stroke-width:2px
+    classDef cloud fill:#f3e5f5,stroke:#4f46e5,stroke-width:2px
+
+    class A,B,C local
+    class D,E cloud
+
+`} />
+
+## Don't Worry!
+
+- This might seem like a lot of new tools to learn.
+- We'll introduce them one at a time
+- You'll get plenty of practice with each later on in the course.
+- Soon they'll feel as natural as using your phone
+- **Remember:** every professional web developer, including me, started exactly where you are. My first bits of learning about this stuff was here at SWIC, and I literally took this 177 class! Granted, I have totally overhauled it a this point... but the point is that you can do this!
+
+## What We'll Cover
+
+In this lesson, we'll get familiar with these tools. In the next lesson, we'll install them and start using them. By the end of this course, you'll be using all these tools together to build amazing websites!
+
+Let's get started! 🚀
+
+## Terminal
+
+### We Can Interface with our Computers 💻 In Many Ways
+
+The operating system is the program (series of instructions) that runs when you turn on your computer. It handles inputs (keyboard, mouse, camera, network connections) and outputs (monitor, speakers, network connections), manages shared access to computing resources and memory, and reads and writes data to the file system on behalf of any number of simultaneously running applications (web browser, code editor, terminal emulator, music player, etc). We interact with the computer through the operating system, usually by typing, touching or clicking.
+
+Computers can receive user input through either a command line interface (terminal emulator) or a graphical user interface (GUI). In a command line interface (AKA "console", "command line", "terminal", or "shell"\), the user types commands using the keyboard to tell the computer to take an action. The computer will display the results of the operation by writing text to the screen.
+
+<figure className="my-4 flex justify-center">
+  <div>
+    <Image
+      src="https://file.notion.so/f/f/f260517f-b741-4b93-b79a-5aebc1ddfab7/cfc55036-be58-4da2-99d4-9a4c3cfd21c6/Untitled.png?table=block&id=2e522f34-836d-4d97-809a-b42bd8fd270d&spaceId=f260517f-b741-4b93-b79a-5aebc1ddfab7&expirationTimestamp=1737007200000&signature=8VBNc8IvhseFwukSOIMYBjwam5iKVv50Cuvsw7WHj8g&downloadName=Untitled.png"
+      alt="Example terminal commands - `ls -a` and `mkdir Code`"
+      width="600"
+      height="400"
+    />
+    <figcaption>Commands, arguments and flags are **delimited** by a 'space.'</figcaption>
+  </div>
+</figure>
+
+<section className="flex justify-between">
+  <Bq
+    quote="When I was a child, I used a computer by looking at the pictures. When I grew up, I learned to
+    read and write."
+    author="William Shotts, Jr. Linux Command.org"
+  />
+
+  <Bq quote="Your entire computer can be accessed through the command line. You can do everything through the command line. It's the same computer you already know and love." author="Tania Rascia" authorUrl='https://www.taniarascia.com/me/' />
+</section>
+
+<Large>
+  From here on out, we'll use the terms `terminal`, `command-line`, and `CLI` interchangeably.
+</Large>
+
+### The Command Line Has a Shell 🐚 Program That Provides Some of the Commands We Need
+
+<Large>
+  When you first open up your terminal, you should verify that you are in your 'home' directory. You
+  should see a `~` in your command prompt somewhere. If you don't see that, you can always type `cd`
+  and press 'enter' to make sure that you are 'home.'
+</Large>
+
+<Image
+  src="https://file.notion.so/f/f/f260517f-b741-4b93-b79a-5aebc1ddfab7/9711980c-2613-44f3-a914-73d59f19cf71/Screenshot_2019-09-04_12.06.25.png?table=block&id=42c29334-5193-4037-96ee-983d664f807b&spaceId=f260517f-b741-4b93-b79a-5aebc1ddfab7&expirationTimestamp=1737028800000&signature=s337VYugMEwBmRYIQS8OxSOQr1jQ_VJtcutl9z96z5A&downloadName=Screenshot_2019-09-04_12.06.25.png"
+  alt="Terminal prompt with a tilde"
+  width={678}
+  height={218}
+/>
+
+Here are some of the most common commands used in the terminal:
+
+- `pwd` - Print Working Directory (shows where you are) 📁
+- `ls` - List (shows what's in your current folder)
+- `cd` - Change Directory (move between folders)
+- `mkdir` - Make Directory (create a new folder) 📁
+- `touch` - Create a new file
+
+<Large>
+  🧠 Remember: that you can take advantage of 'auto-completion.' This means that you can just type
+  first few characters of a file or directory name and then press 'tab' and the command prompt will
+  try to complete the name or at least give you a list of possible choices.
+</Large>
+
+<Large>
+  🧠 Remember: that you can also hit the 'up arrow' to recall previously typed commands.
+</Large>
+
+#### What is a Directory?
+
+A directory is a folder. It's a place where you can store files. Directories can contain other directories, which can contain other directories, and so on. Directories can also contain files. Directories are sometimes called 'folders' because they can contain files.
+
+#### What is a 'home' directory?
+
+By 'home directory,' we mean the directory that holds all of your personal files. On most computers, there is something like a `My Documents` folder and/or a `Desktop` folder and/or a `Downloads` folder. These are all subdirectories of your 'home' directory.
+
+<Image src={macHome} alt="Home directory on a Mac" />
+
+## Visual Studio (VS) Code
+
+The text editor that we'll be using for this course is called Visual Studio Code (not Visual Studio, which is typically only available for Windows). It's a modular editor built for web development, maintained by Microsoft, and contributed to by a large Open Source community.
+
+Again, don't install this yet. We will install it in a particular way to ensure that it works well with the other tools we'll be using.
+
+### What's Open Source?
+
+Open Source software is software that is free to use, modify, and distribute. It's typically developed by a community of developers who contribute to the project. Open Source software is often more secure and reliable than proprietary software because the code is open to inspection by anyone.
+
+**Fun Fact:** The [original _Doom_ game](https://github.com/id-Software/DOOM) is fully open source! You can download the source code and modify it to your heart's content.
+
+## Git and GitHub
+
+### What is Git?
+
+Think of Git like a super-powered "Save" button for your code. But instead of just saving your current work, it:
+
+- Keeps a history of all your saves
+- Lets you go back to any previous save
+- Helps you work with others
+- Protects you from losing your work
+
+### The Basic Git Workflow
+
+- `git add` - Tell Git which files you want to save, like gathering up the papers you want to make copies of.
+- `git commit` - Save a snapshot of your work with a message. It's like putting those papers in a folder and labeling it. **Example:** "Add navigation menu to website"
+- `git push` - Send your work to GitHub (a website that stores your code). Like putting that folder in a safe place where others can see it too
+
+```bash
+# You just created a new webpage and want to save it
+git add index.html
+git commit -m "Create first version of homepage"
+git push
+```
+
+### Connecting to GitHub
+
+GitHub is a cloud-based repository service that just affords a place to store repos and collaborate - it is not directly associated with git.
+
+Technically, we could use git locally and then just send our entire folder to someone (including the hidden '.git') and they could access everything that way and/or we could set up an FTP server or even build our own 'private' GitHub - obviously these alternatives are far less convenient than just using GitHub.
+
+## What is NodeJS and npm?
+
+Originally, JavaScript could only run in web browsers. In 2009, NodeJS was created so JavaScript could run on computers too, not just in browsers. This was a big deal for web developers!
+
+### What is npm (Node Package Manager)?
+
+Think of npm like an app store for code:
+
+- Just like you install apps on your phone to add new features
+- `npm` lets you install pre-built code (called "packages") to add features to your websites
+
+### Real-World Example
+
+Let's say you want to add a date picker to your website (like when booking a flight):
+
+- Instead of coding a calendar from scratch (which would take days)
+- You can use `npm` to `install` a pre-built calendar that someone else made
+- Simple command: `npm install datepicker`
+- Now you have a professional calendar feature in minutes!
+
+Other things npm lets you easily add to your website:
+
+- Image sliders
+- Navigation menus
+- Form validators
+- Color pickers
+- Charts and graphs
+
+For this class, we'll just use npm to help us install some development tools. But it's good to know that npm can do a lot more! However, just like you don't want to clutter up your phone with too many apps, you don't want to clutter up your website with too many npm packages.
+
+## Conclusion
+
+<Large>
+  🧠 Remember: This is a lot of information to take in, but don't worry. We'll go through each tool
+  step-by-step, and you'll have plenty of opportunities to practice. The key is to stay curious and
+  keep experimenting. You've got this!
+</Large>
+
+## Assignment: Reflection on Developer Tools
+
+For your next assignment, I want you to reflect on the developer tools we discussed in this lesson. This will help you think about how these tools might fit into your development workflow and which ones you find most interesting.
+
+### Specific Points for the Assignment
+
+**Reflection Document (20 points)**
+
+- Write a reflection (200-300 words) on the developer tools discussed in this lesson. Include the following points:
+  - Which tools do you find most interesting and why?
+  - Do any of these tools make sense to you based on your current knowledge?
+  - Do you have any prior experience with any of these tools? If so, share your experience.
+  - How do you think these tools will be useful in your development workflow?
+  - Any concerns or questions you have about using these tools.
+
+### Grading Criteria
+
+- **Reflection Document (20 points)**
+
+  - Detailed and insightful reflection.
+  - Covers all required points: tools of interest, understanding based on current knowledge, prior experience, usefulness in workflow, concerns/questions.
+  - Clear writing with minimal grammatical errors.
+
+Please submit your reflection in Brightspace by Sunday, January 19 by midnight. This assignment is worth a total of 20 points.

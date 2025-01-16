@@ -85,4 +85,10 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+  img {
+    @apply mx-auto my-6;
+  }
+  figcaption {
+    @apply mx-auto max-w-prose text-center text-sm;
+  }
 }

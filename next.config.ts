@@ -7,6 +7,9 @@ const nextConfig: NextConfig = {
       mdxType: 'gfm',
     },
   },
+  images: {
+    remotePatterns: [{ protocol: 'https', hostname: 'file.notion.so', pathname: '/**' }],
+  },
   pageExtensions: ['mdx', 'tsx'],
 }
 

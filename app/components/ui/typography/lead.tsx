@@ -1,5 +1,9 @@
 import type TypographyProps from './typography.types'
 
 export default function Lead({ children, className }: TypographyProps) {
-  return <p className={`text-muted-foreground text-xl ${className ? className : ''}`}>{children}</p>
+  return (
+    <span className={`text-xl text-muted-foreground ${className ? className : ''}`}>
+      {children}
+    </span>
+  )
 }
