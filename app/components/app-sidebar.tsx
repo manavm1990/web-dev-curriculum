@@ -25,9 +25,9 @@ const NAV_ITEMS = [
     url: '/soft-skills',
   },
   { title: '1-2 Installing Software', url: '/installing-software' },
-  { title: '1-2 Mac/Linux Software', url: '/installing-software/mac' },
-  { title: '1-2 Windows Software', url: '/installing-software/windoze' },
-  { title: '1-2 File Systems', url: '/file-systems' },
+  // { title: '1-2 Mac/Linux Software', url: '/installing-software/mac' },
+  // { title: '1-2 Windows Software', url: '/installing-software/windoze' },
+  // { title: '1-2 File Systems', url: '/file-systems' },
 ] as const
 
 function checkForSectionChange(
