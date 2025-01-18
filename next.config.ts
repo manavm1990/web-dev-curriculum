@@ -8,7 +8,10 @@ const nextConfig: NextConfig = {
     },
   },
   images: {
-    remotePatterns: [{ protocol: 'https', hostname: 'file.notion.so', pathname: '/**' }],
+    remotePatterns: [
+      { protocol: 'https', hostname: 'file.notion.so', pathname: '/**' },
+      { protocol: 'https', hostname: 'd8n3.c1.e2-8.dev', pathname: '/**' },
+    ],
   },
   pageExtensions: ['mdx', 'tsx'],
 }
