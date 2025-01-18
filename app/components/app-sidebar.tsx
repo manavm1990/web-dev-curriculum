@@ -9,6 +9,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from '@/components/ui/sidebar'
 import { Link } from 'next-view-transitions'
 import { usePathname } from 'next/navigation'
@@ -44,6 +45,7 @@ function checkForSectionChange(
 
 export function AppSidebar() {
   const pathname = usePathname()
+  const { setOpen } = useSidebar()
 
   return (
     // TODO: Add collapsible sections when this 💩 gets too long!
@@ -61,6 +63,7 @@ export function AppSidebar() {
                       <Link
                         href={item.url}
                         className={pathname === item.url ? 'font-black text-sidebar-primary' : ''}
+                        onClick={() => setOpen(false)}
                       >
                         {item.title}
                       </Link>
