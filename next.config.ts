@@ -1,3 +1,4 @@
+import type { Options } from '@mdx-js/loader'
 import createMDX from '@next/mdx'
 import type { NextConfig } from 'next'
 
@@ -16,6 +17,10 @@ const nextConfig: NextConfig = {
   pageExtensions: ['mdx', 'tsx'],
 }
 
-const withMDX = createMDX({})
+const withMDX = createMDX({
+  options: {
+    rehypePlugins: [['rehype-slug', {}]] as Options['rehypePlugins'],
+  },
+})
 
 export default withMDX(nextConfig)
