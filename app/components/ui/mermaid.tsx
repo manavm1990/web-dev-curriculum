@@ -1,6 +1,6 @@
 'use client'
 
-import useMermaid from './hooks/use-mermaid'
+import useMermaid from '../hooks/use-mermaid'
 
 interface MermaidProps {
   chart: string
