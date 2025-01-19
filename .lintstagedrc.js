@@ -1,12 +1,16 @@
-const path = require("path");
+const path = require('path')
 
-const buildEslintCommand = (filenames) =>
-  `next lint --fix --file ${filenames
-    .map((f) => path.relative(process.cwd(), f))
-    .join(" --file ")}`;
+const buildEslintCommand = (filenames) => {
+  const files = filenames.map((f) => path.relative(process.cwd(), f)).join(' --file ')
+  return `next lint --fix --file ${files}`
+}
 
-const buildTscCommand = () => "tsc --noEmit --skipLibCheck";
+// Only type check the staged files and their related imports
+const buildTypeCheckCommand = (filenames) => {
+  const files = filenames.map((f) => path.relative(process.cwd(), f)).join(' ')
+  return `tsc --noEmit --incremental false ${files}`
+}
 
 module.exports = {
-  "*.{ts,tsx}": [buildEslintCommand, buildTscCommand],
-};
+  '*.{ts,tsx}': [buildEslintCommand, buildTypeCheckCommand, 'prettier --write'],
+}
