@@ -261,7 +261,7 @@ const SidebarTrigger = React.forwardRef<
       variant="ghost"
       size="icon"
       className={cn(
-        'fixed top-2 h-11 w-11 rounded-md bg-background/55 shadow-sm backdrop-blur transition-transform',
+        'fixed top-2 z-10 h-11 w-11 rounded-md bg-background/55 shadow-sm backdrop-blur transition-transform',
         open ? 'rotate-180' : '',
         className,
       )}
