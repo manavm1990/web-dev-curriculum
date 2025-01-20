@@ -71,7 +71,7 @@ function checkForSectionChange(
 
 export function AppSidebar() {
   const pathname = usePathname()
-  const { setOpen } = useSidebar()
+  const { toggleSidebar } = useSidebar()
 
   const [openCollapsible, setOpenCollapsible] = useCollapsible()
 
@@ -111,7 +111,7 @@ export function AppSidebar() {
                                   pathname === subItem.url && 'font-bold text-sidebar-primary',
                                 )}
                                 onClick={() => {
-                                  setOpen(false)
+                                  toggleSidebar()
                                 }}
                               >
                                 {subItem.title}
@@ -128,7 +128,7 @@ export function AppSidebar() {
                           pathname === item.url && 'font-bold text-sidebar-primary',
                         )}
                         onClick={() => {
-                          setOpen(false)
+                          toggleSidebar()
                         }}
                       >
                         {item.title}
