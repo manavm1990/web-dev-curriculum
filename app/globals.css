@@ -82,13 +82,28 @@ body {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
   img {
     @apply mx-auto my-6;
   }
+
   figcaption {
     @apply mx-auto max-w-prose text-center text-sm;
+  }
+
+  a {
+    @apply text-blue-500;
+  }
+
+  a + p {
+    @apply !mt-0;
+  }
+
+  ul {
+    @apply list-inside list-disc;
   }
 }
