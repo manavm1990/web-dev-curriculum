@@ -12,6 +12,7 @@ import P from '@/components/ui/typography/p'
 import Small from '@/components/ui/typography/small'
 import Table from '@/components/ui/typography/table'
 import type { MDXComponents } from 'mdx/types'
+import ExternalLink from '@/components/ui/external-link'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -27,6 +28,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ul: List,
     li: ListItem,
     strong: Large,
+    a: ExternalLink,
     Lead,
     Mermaid,
     ...components,
