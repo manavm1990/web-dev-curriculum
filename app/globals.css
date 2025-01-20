@@ -99,11 +99,25 @@ body {
     @apply text-blue-500;
   }
 
+  a {
+    @apply has-[[id]]:w-full;
+  }
+
   a + p {
     @apply !mt-0;
   }
 
   ul {
     @apply list-inside list-disc;
+  }
+
+  li > strong {
+    @apply !my-0;
+  }
+}
+
+@layer components {
+  [data-ntpc='YouTubeEmbed'] {
+    @apply relative mx-auto my-8 aspect-video w-full overflow-hidden;
   }
 }
