@@ -1,4 +1,12 @@
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
+import { YouTubeEmbed } from '@next/third-parties/google'
 import Image from 'next/image'
+import Large from '../../components/ui/typography/large'
 import Lead from '../../components/ui/typography/lead'
 
 # Installing Software on macOS
@@ -8,3 +16,240 @@ import Lead from '../../components/ui/typography/lead'
   Linux, there is an inherit assumption that you know what you are doing. But do reach out on Teams
   if you run into issues.
 </Lead>
+
+## Setting Up Your Development Environment
+
+Now that we understand what these tools do, let's install them on your computer. This process will take about an hour depending on your internet speed. By the end, you'll have a professional development environment ready for web development.
+
+**Prerequisites:**
+
+- A Mac running macOS 10.15 or later
+- At least 5GB of free disk space
+- A stable internet connection
+- A GitHub account (create one at github.com if you haven't already)
+
+## The Installation Process
+
+We'll install our tools in this order:
+
+1. Homebrew (to help install everything else)
+2. Warp (our modern terminal)
+3. VS Code (our code editor)
+4. Node.js (to run JavaScript)
+5. GitHub CLI (to connect with GitHub)
+
+This order matters! Each tool builds on the previous ones. Let's get started.
+
+## Package Manager - Homebrew
+
+Think of Homebrew like an app store for developer tools - it makes installing everything else much easier!
+
+### Installing Homebrew
+
+1. Open Terminal (press Cmd + Space, type "Terminal", press Enter)
+2. Copy and paste this command: `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
+3. Press Enter
+4. Type your password when asked (it won't show as you type - that's normal!)
+
+<figure>
+  <Image
+    src="https://d8n3.c1.e2-8.dev/swic/terminal.png"
+    alt="Terminal App with Homebrew install command"
+    width="1000"
+    height="500"
+  />
+  <figcaption>
+    Your Terminal App will probably look different, but the command should be the same!
+  </figcaption>
+</figure>
+
+<Large>
+  🎯 Quick Check: Type: `brew --version`. If you see a version number, Homebrew is ready! We'll use
+  it to install all our other tools.
+</Large>
+
+### Basic Homebrew Commands
+
+You'll use these throughout the course:
+
+`brew install` - Get a new tool
+`brew update` - Get latest tool list
+`brew upgrade` - Update installed tools
+
+**Note**: There was a cloned malware site floating around at the following address: `https://brewe.sh` (notice the extra `e`). Using their script could have installed malware on your computer. Always be aware and pay attention.
+
+### What is a script?
+
+A script is a file that contains a series of commands that are meant to be run in order. Scripts are used to automate tasks. In this case, the script is being used to install Homebrew on your computer.
+
+The script that you pasted in previously is a bash script. Bash is a shell that is used to run commands on your computer. The script is telling your computer to download and run the Homebrew installer. To do this, it uses the `curl` command to download the installer from the Homebrew website and the `bash` command to run the installer.
+
+## Install Warp Terminal
+
+There are many terminal emulators available for macOS. The one recommended for our class is the [Warp Terminal.](https://app.warp.dev/referral/2KPYGE)
+
+Upon visiting the website, you will be asked to sign up. The easiest way to do this is to sign up using your GitHub account.
+
+<Image
+  src="https://d8n3.c1.e2-8.dev/swic/Snip___Warp.png"
+  width={409}
+  height={663}
+  alt="Warp Terminal Sign Up"
+/>
+
+After signing in:
+
+- Download the Warp installer from the website - it should start automatically after signup.
+- Once downloaded, open the installer from your Downloads folder.
+- Follow the installation prompts to complete the initial installation. All of the default settings are fine.
+- After installing, open Warp by pressing Cmd + Space, typing Warp, and pressing Enter.
+
+To ensure Warp stays up to date through Homebrew in the future, run: `brew install warp`.
+
+This should be the last time that you ever open up the Terminal App, unless perhaps you end up teaching a class like this one! From now on, use Warp for all your terminal needs.
+
+<YouTubeEmbed videoid="mbNuLDx1fFQ" height={400} params="controls=0" />
+
+## Install Visual Studio Code (VS Code)
+
+Visual Studio Code is a code editor that is used by many developers. It is free and open-source. It has many features that make it a great code editor. It has syntax highlighting, code completion, and debugging features. It also has many extensions that add additional features to the code editor.
+
+To install Visual Studio Code, run the following command in your Warp Terminal: `brew install --cask visual-studio-code`.
+
+### What's a Cask?
+
+A cask is a way to install software on macOS using Homebrew. It is like a package for Homebrew. It contains the software that you want to install and any dependencies that it needs. When you run the `brew install --cask` command, Homebrew will download the cask and install the software on your computer.
+
+#### What is a Dependency?
+
+A dependency is software that is required by another piece of software. For example, if you want to install a code editor, it might require a text editor to be installed first. The text editor is a dependency of the code editor.
+
+### Add Visual Studio Code to Your Path
+
+For now, open up VS Code using the Spotlight Search (Cmd + Space) and typing `Visual Studio Code`. Once it's open, press `Cmd + Shift + P` to open the Command Palette. Type `Shell Command: Install 'code' command in PATH` and press `Enter`. This will add the `code` command to your PATH so that you can open VS Code from the Terminal.
+
+This is also shown in [their documentation.](https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line).
+
+Upon completion, you can close out VS Code.
+
+Why do we need to do this? Because we will be using VS Code to edit files from the Terminal, and it's much easier to open VS Code from the Terminal than it is to open it from the Finder.
+
+#### What's a Path?
+
+A path is a list of directories that the operating system uses to find software. When you run a command in the Terminal, the operating system looks in the directories listed in the PATH to find the software that you want to run. By adding the `code` command to your PATH, you are telling the operating system where to find the `code` command.
+
+## Install Node.js
+
+Node.js is a JavaScript runtime that is used to run JavaScript code on the server. It is built on the V8 JavaScript engine that is used in the Chrome web browser. It is used to build web applications, APIs, and command-line tools.
+
+To install Node.js, run the following command in your Warp Terminal: `brew install node`.
+
+### What's a JavaScript Runtime?
+
+A JavaScript runtime is a program that is used to run JavaScript code. It takes the JavaScript code that you write and executes it. It is like an interpreter for JavaScript code.
+
+## Install the GitHub CLI
+
+The GitHub CLI is a command-line tool that is used to interact with GitHub from the command line. Moreover, it's the easiest way to sync up your computer with your GitHub account.
+
+To install the GitHub CLI, run the following command in your Warp Terminal: `brew install gh`, just [as shown on their website.](https://cli.github.com/)
+
+## Authenticate GitHub CLI
+
+After installing the GitHub CLI, you need to authenticate it with your GitHub account. This will allow you to interact with your GitHub repositories directly from the command line.
+
+Before proceeding, make sure that you are logged into GitHub in your default web browser.
+
+To authenticate, run the following command in your Warp Terminal: `gh auth login`.
+
+You will be prompted to select a method for authentication. The easiest way is to authenticate using a web browser. Follow the on-screen instructions to complete the authentication process. Your experience should look similar to the following:
+
+```shell
+? Where do you use GitHub? GitHub.com
+? What is your preferred protocol for Git operations on this host? HTTPS
+? Authenticate Git with your GitHub credentials? Yes
+? How would you like to authenticate GitHub CLI? Login with a web browser
+
+! First copy your one-time code: 7516-60CE
+Press Enter to open https://github.com/login/device in your browser...
+```
+
+Upon visiting the provided URL, and assuming that your browser is logged into GitHub, you will be asked to enter the one-time code provided in the Terminal. After entering the code, you will be authenticated with your GitHub account.
+
+You shouldn't have to run this command again basically ever, but if it ever gets out of sync with your GitHub account, you can run `gh auth login` again to re-authenticate.
+
+## Install oh-my-zsh
+
+[Oh My Zsh](https://ohmyz.sh/) is an open-source, community-driven framework for managing your Zsh configuration. It comes bundled with a ton of helpful functions, helpers, plugins, and themes. To install Oh My Zsh, run the following command in your Warp Terminal: `sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`.
+
+### Install autojump
+
+There are a lot of plugins available for Oh My Zsh. One of the most useful plugins is `autojump`. `autojump` is a plugin that allows you to jump to directories that you have visited before. To install `autojump`, run the following command in your Warp Terminal: `brew install autojump`.
+
+Now, open up your `~/.zshrc` file in VS Code by running `code ~/.zshrc`.
+
+Scroll down to around line 70, where you should see a line that looks like this: `plugins=(git)`. Add `autojump` to the list of plugins, so it looks like this: `plugins=(git autojump)`. Save the file and close it.
+
+**Hint:** You can use the `Cmd + F` shortcut to search for the `plugins` line.
+**Hint:** You can use the `Cmd + S` shortcut to save the file.
+**Hint:** You can use the `Cmd + W` shortcut to close the file.
+
+<YouTubeEmbed videoid="lcae_gOd1Jc" height={400} params="controls=0" />
+
+### What's Zsh?
+
+Zsh is a shell that is used to run commands on your computer. It is like `bash`, but it has more features and is more customizable. Oh My Zsh is a framework that makes it easier to use Zsh by providing a lot of helpful functions, helpers, plugins, and themes.
+
+## Verifying Your Installation
+
+Let's make sure everything is working correctly. Open Warp and run these commands:
+
+```bash
+# Check Homebrew
+brew --version
+
+# Check VS Code
+code --version
+
+# Check Node.js
+node --version
+
+# Check GitHub CLI and authentication
+gh --version
+gh auth status
+```
+
+## Troubleshooting Common Issues
+
+Here are some common issues you might encounter:
+
+Command Not Found: If you see this error, try closing and reopening Warp.
+Permission Denied: You might need to run the command with sudo. Ask for help if you're unsure.
+GitHub Authentication Failed: Make sure you're logged into GitHub in your browser first.
+
+## Conclusion
+
+Congratulations! You've now set up a professional development environment on your Mac. Let's review what we've installed:
+
+- Homebrew: Your package manager for easily installing and updating software
+- Warp: A modern terminal for running commands
+- Visual Studio Code: Your main tool for writing and editing code
+- Node.js: The runtime that will let you run JavaScript on your computer
+- GitHub CLI: Your command-line interface to GitHub
+
+## Homework Assignment - 10 Points
+
+To verify that everything is installed correctly, open your Warp terminal and run these commands:
+
+1. `brew --version` (should show Homebrew version)
+2. `code --version` (should show VS Code version)
+3. `node --version` (should show Node.js version)
+4. `gh --version` (should show GitHub CLI version)
+5. `gh auth status` (should show you're logged in to GitHub)
+
+Take screenshots of each, or just one screenshot showing all of them, and submit them to the assignment on BrightSpace.
+
+<Large>
+  On Mac, you can take a screenshot of a selected area using Cmd + Shift + 4, or use Cmd + Shift + 5
+  for more screenshot options.
+</Large>
