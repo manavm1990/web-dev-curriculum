@@ -51,8 +51,8 @@ const NAV_ITEMS: NavItem[] = [
     title: '1-2 Dev XP Tools 🧰',
     submenu: [
       { title: 'Overview', url: '/dev-xp-tools' },
-      { title: 'Mac/Linux Software', url: '/installing-software/mac' },
-      { title: 'Windows Software', url: '/installing-software/windoze' },
+      { title: 'Mac/Linux Software', url: '/dev-xp-tools/mac' },
+      { title: 'Windows Software', url: '/dev-xp-tools/windoze' },
     ],
   },
 ] as const
