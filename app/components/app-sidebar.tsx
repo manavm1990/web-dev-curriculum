@@ -108,7 +108,7 @@ export function AppSidebar() {
                                 href={subItem.url}
                                 className={cn(
                                   'block rounded-md p-2 text-sm transition-colors hover:bg-sidebar-accent',
-                                  pathname === subItem.url && 'font-bold text-sidebar-primary',
+                                  pathname === subItem.url && 'font-bold text-green-400',
                                 )}
                                 onClick={() => {
                                   toggleSidebar()
