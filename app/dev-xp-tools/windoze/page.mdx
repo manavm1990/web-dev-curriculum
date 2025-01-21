@@ -1,0 +1,199 @@
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
+import { YouTubeEmbed } from '@next/third-parties/google'
+import Image from 'next/image'
+import { Separator } from '../../components/ui/separator'
+import Large from '../../components/ui/typography/large'
+import Lead from '../../components/ui/typography/lead'
+
+# Installing Software on Windows
+
+<Lead>
+  The following instructions will guide you through setting up your development environment on
+  Windows. If you run into any issues, please reach out on Teams for assistance.
+</Lead>
+
+## Why These Tools?
+
+Before we install anything, let's review what each tool does:
+
+- **Chrome** - The most popular browser for web development. Its Developer Tools help you inspect and debug websites.
+- **VS Code** - A powerful yet beginner-friendly code editor that helps you write code with features like syntax highlighting and error detection.
+- **GitBash** - Gives Windows users access to Git (for saving code history) and Unix-style commands that are common in web development.
+- **GitHub CLI** - Connects your computer to GitHub, making it easy to share and backup your code.
+- **Node.js** - Lets you run JavaScript code on your computer instead of just in the browser.
+
+## Setting Up Your Development Environment
+
+Now that we understand what these tools do, let's install them on your computer. This process will take about 45 minutes depending on your internet speed. By the end, you'll have a professional development environment ready for web development.
+
+**Prerequisites:**
+
+- A PC running Windows 10 or later
+- At least 5GB of free disk space
+- A stable internet connection
+- A GitHub account (create one at github.com if you haven't already)
+
+## The Installation Process
+
+We'll install our tools in this order:
+
+1. Chrome (our web browser) - You could use another one, but for consistency I recommend Chrome.
+1. VS Code (our code editor)
+1. GitBash (our terminal)
+1. GitHub CLI (to connect with GitHub)
+1. Node.js (to run JavaScript)
+
+This order matters! Each tool builds on the previous ones. Let's get started.
+
+## Install Google Chrome
+
+Google Chrome is a web browser that is used by many developers. It is fast, secure, and has many features that make it a great browser for web development.
+
+<YouTubeEmbed videoid="jW4RbDfi3SA" height={400} params="controls=0" />
+
+## Install Visual Studio Code (VS Code)
+
+Visual Studio Code is a code editor that is used by many developers. It is free and open-source. It has many features that make it a great code editor. It has syntax highlighting, code completion, and debugging features. It also has many extensions that add additional features to the code editor.
+
+**Note:** Don't install any extensions yet. We'll do that later.
+
+### Installing Visual Studio Code
+
+1. Download VS Code from [code.visualstudio.com](https://code.visualstudio.com/).
+2. Run the installer and follow the prompts.
+3. All of the default options are fine.
+
+<YouTubeEmbed videoid="JnD79zFNw8c" height={400} params="controls=0" />
+
+## Install GitBash
+
+💡 Watch the GitBash video carefully! Pay special attention to:
+
+- Choosing "Use Visual Studio Code" as your default editor (not Vim/Notepad)
+- Selecting "Checkout as-is, commit Unix-style line endings"
+
+<YouTubeEmbed videoid="5bkNbhTCMvE" height={400} params="controls=0" />
+
+<Separator />
+
+All of the remaining installs are shown in a single video below 👇🏾.
+
+## Install Node.js
+
+Node.js is a JavaScript runtime that is used to run JavaScript code on the server. It is built on the V8 JavaScript engine that is used in the Chrome web browser. It is used to build web applications, APIs, and command-line tools.
+
+### Installing Node.js
+
+1. Download Node.js LTS from [nodejs.org](https://nodejs.org/en/download/).
+2. Run the installer and follow the prompts.
+3. All of the default options are fine.
+
+## Install the GitHub CLI
+
+The GitHub CLI is a command-line tool that is used to interact with GitHub from the command line. Moreover, it's the easiest way to sync up your computer with your GitHub account.
+
+### Installing GitHub CLI
+
+1. Download GitHub CLI from [cli.github.com](https://cli.github.com/).
+2. Run the installer and follow the prompts.
+3. All of the default options are fine.
+
+<YouTubeEmbed videoid="nnR4ppiGnrc" height={400} params="controls=0" />
+
+## Authenticate GitHub CLI
+
+After installing the GitHub CLI, you need to authenticate it with your GitHub account. This will allow you to interact with your GitHub repositories directly from the command line.
+
+Before proceeding, make sure that you are logged into GitHub in your **default** web browser.
+
+To authenticate, run the following command in GitBash: `gh auth login`.
+
+You will be prompted to select a method for authentication. The easiest way is to authenticate using a web browser. Follow the on-screen instructions to complete the authentication process. Your experience should look similar to the following:
+
+```shell
+? Where do you use GitHub? GitHub.com
+? What is your preferred protocol for Git operations on this host? HTTPS
+? Authenticate Git with your GitHub credentials? Yes
+? How would you like to authenticate GitHub CLI? Login with a web browser
+
+! First copy your one-time code: 7516-60CE
+Press Enter to open https://github.com/login/device in your browser...
+```
+
+Upon visiting the provided URL, and assuming that your browser is logged into GitHub, you will be asked to enter the one-time code provided in GitBash. After entering the code, you will be authenticated with your GitHub account.
+
+You shouldn't have to run this command again basically ever, but if it ever gets out of sync with your GitHub account, you can run `gh auth login` again to re-authenticate.
+
+## Verifying Your Installation
+
+Let's make sure everything is working correctly. Open GitBash and run these commands:
+
+```bash
+# Check GitBash
+git --version
+
+# Check VS Code
+code --version
+
+# Check Node.js
+node --version
+
+# Check GitHub CLI and authentication
+gh --version
+gh auth status
+```
+
+## Common Problems and Solutions
+
+### Command Not Found
+
+Problem: GitBash doesn't recognize a command
+Solution: Close and reopen GitBash, then try again
+Still not working? Make sure you completed each installation
+
+### Permission Denied
+
+Problem: Windows blocks the program from running
+Solution: Right-click GitBash and select "Run as administrator"
+
+### GitHub Authentication Issues
+
+Problem: gh auth status shows "not logged in"
+Solution: Make sure you're logged into GitHub in Chrome or whichever you have set as your default browser first, then run gh auth login again
+
+### Need help? Reach out on Teams with:
+
+- What you were trying to do
+- What error message you saw (screenshot helps!)
+- What you've tried so far
+
+## Conclusion
+
+Congratulations! You've now set up a professional development environment on your Windows PC. Let's review what we've installed:
+
+- GitBash: Your terminal emulator for running commands
+- Visual Studio Code: Your main tool for writing and editing code
+- Node.js: The runtime that will let you run JavaScript on your computer
+- GitHub CLI: Your command-line interface to GitHub
+
+## Homework Assignment - 10 Points
+
+To verify that everything is installed correctly, open your GitBash terminal and run these commands:
+
+1. `git --version` (should show Git version)
+2. `code --version` (should show VS Code version)
+3. `node --version` (should show Node.js version)
+4. `gh --version` (should show GitHub CLI version)
+5. `gh auth status` (should show you're logged in to GitHub)
+
+Take screenshots of each, or just one screenshot showing all of them, and submit them to the assignment on BrightSpace.
+
+<Large>
+  On Windows, you can take a screenshot of a selected area using Win + Shift + S, or use the
+  Snipping Tool for more screenshot options.
+</Large>
