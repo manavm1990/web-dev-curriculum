@@ -1,0 +1,82 @@
+import { YouTubeEmbed } from '@next/third-parties/google'
+import Image from 'next/image'
+import Large from '../../components/ui/typography/large'
+
+# Files and Directories
+
+## Overview
+
+A website consists of many files: text content, code, stylesheets, media content, and so on. When you're building a website, you need to assemble these files into a sensible structure on your local computer, make sure they can talk to one another, and get all your content looking right before eventually putting them on a server for the world to see.
+
+## Manipulating files and folders
+
+There are many different ways to create and edit the files and folders contained on your computer. You can do it via your computer's command line/terminal using a series of text commands, which you'll learn more about in the next article. However, many people find it easier to start learning about file systems visually, which is what we'll discuss here. Modern operating systems (OSes) have a robust file system user interface (UI) that you can use to manipulate files and folders as needed.
+
+### File Explorer (Windows) or Finder (Mac)
+
+On macOS for example, you have the Finder program:
+
+<Image
+  src="https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Environment_setup/Dealing_with_files/finder.png"
+  alt="Finder"
+  width={1000}
+  height={531}
+/>
+
+Whereas Windows has the File Explorer:
+
+<Image
+  src="https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Environment_setup/Dealing_with_files/file-explorer.png"
+  alt="File Explorer"
+  width={396}
+  height={300}
+/>
+
+## Basic Structure
+
+Most modern operating systems have a Users folder, which contains a folder for each user account that exists on the system, also known as the user's Home folder. This is usually represented by a house icon to make it easier to find. In turn, the Home folder will contain other important standard folders (and files) relevant to that user in particular, such as Documents, Music, etc. There are a lot of other files and folders on your computer as well, but don't worry about those for now.
+
+The currently-logged-in user will by default only be able to access their own Home folder. This is a security feature to prevent users from accidentally or maliciously changing or deleting important system files.
+
+In the terminal, the Home folder is represented by a `~` symbol. For example, if you see a file path like `~/Documents`, that means the Documents folder inside the currently-logged-in user's Home folder.
+
+You should create project files relating to your work somewhere inside in your Home folder, perhaps inside Documents. This makes sense, as web page files are often referred to as documents.
+
+<Large>
+  If you start creating and editing files in other places on your system (for example, areas that
+  control the operating system or important applications), you might break something. For the
+  moment, stick to creating and editing files inside your Home folder.
+</Large>
+
+## Creating a Folder
+
+Let's create a new folder to store all of our web projects.
+
+In your file system UI, click on your Home folder, then double-click your Documents folder.
+
+On Windows, this can be done by selecting the New button in the File Explorer window and selecting Folder (or pressing 'Ctrl + Shift + N'), typing in `web-projects` as the name of the new folder icon that appears, and pressing 'Enter/Return.'
+
+On macOS, this can be done by selecting File > New Folder on the Finder menu (or pressing 'Cmd + Shift + N') — you'll see a new folder appear called untitled folder. Click on the folder name to start editing it, type in, 'web-projects', and press 'Enter/Return.'
+
+If you make a typo, you can edit the folder name to correct it (this also works with files):
+
+- On Windows, right-click the folder and select Rename.
+- On macOS, click the folder name once to select it, then click it again to edit it.
+
+## Using the Terminal to Navigate to Your New Folder 🚀
+
+Open up your terminal. Remember, for Mac, this means the Warp Terminal. For Windows, this means GitBash.
+
+Make sure that your **prompt** displays the `~` symbol, which indicates that you are in your Home folder. If you are not in your Home folder, you can navigate there by typing `cd` (which stands for "change directory"), and then pressing 'Enter/Return.'
+
+Here, `cd` without any other information (**arguments**) will take you to your Home folder. If you want to go to a specific folder, you can type `cd` followed by the path to that folder. For example, to navigate to the Documents folder, you would type `cd Documents` and press 'Enter/Return.'
+
+Once you are in your Home folder, you can navigate to your new `web-projects` folder by typing `cd web-projects` and pressing 'Enter/Return.'
+
+Verify where you are with the `pwd` command. This command stands for "print working directory" and will show you the full path to the folder you are currently in.
+
+Now, you can return home with...`cd`! 🏠
+
+And, let's try it again, and this time in one step like so: `cd ~/Documents/web-projects`.
+
+<YouTubeEmbed videoid="QwaxWnGhn6o" height={400} params="controls=0" />
