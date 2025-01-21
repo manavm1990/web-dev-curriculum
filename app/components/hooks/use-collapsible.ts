@@ -1,7 +1,10 @@
 import { useState } from 'react'
 
 export default function useCollapsible() {
-  const [openCollapsible, setOpenCollapsible] = useState(false)
+  const [isOpen, setIsOpen] = useState(true)
 
-  return [openCollapsible, setOpenCollapsible] as const
+  return {
+    isOpen,
+    setIsOpen,
+  } as const
 }
