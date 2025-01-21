@@ -1,3 +1,4 @@
+import ExternalLink from '@/components/ui/external-link'
 import Mermaid from '@/components/ui/mermaid'
 import Bq from '@/components/ui/typography/bq'
 import Code from '@/components/ui/typography/code'
@@ -7,12 +8,11 @@ import H3 from '@/components/ui/typography/headings/h3'
 import H4 from '@/components/ui/typography/headings/h4'
 import Large from '@/components/ui/typography/large'
 import Lead from '@/components/ui/typography/lead'
-import { List, ListItem } from '@/components/ui/typography/list'
+import { ListItem, Ol, Ul } from '@/components/ui/typography/list'
 import P from '@/components/ui/typography/p'
 import Small from '@/components/ui/typography/small'
 import Table from '@/components/ui/typography/table'
 import type { MDXComponents } from 'mdx/types'
-import ExternalLink from '@/components/ui/external-link'
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -25,7 +25,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     small: Small,
     table: Table,
     p: P,
-    ul: List,
+    ul: Ul,
+    ol: Ol,
     li: ListItem,
     strong: Large,
     a: ExternalLink,
