@@ -107,7 +107,7 @@ body {
     @apply !mt-0;
   }
 
-  p > strong {
+  p > * {
     @apply !my-0;
   }
 
