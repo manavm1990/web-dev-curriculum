@@ -111,11 +111,7 @@ body {
     @apply !my-0;
   }
 
-  ul {
-    @apply list-inside list-disc;
-  }
-
-  li > strong {
+  li > * {
     @apply !my-0;
   }
 }
