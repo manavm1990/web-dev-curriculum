@@ -32,22 +32,26 @@ Building websites is similar! We need different tools to help us:
   like your hardware store - where you get pre-built parts to use.
 
 <Mermaid chart={`
-graph TB
-    subgraph Your Computer
-    A[VS Code<br/>Where you write code] --> B[Terminal<br/>How you run commands]
-    B --> C[Git<br/>Saves your work]
-    end
-    
-    subgraph The Cloud
-    C --> D[GitHub<br/>Stores your code]
-    B --> E[npm<br/>Downloads tools]
+graph LR
+    subgraph "VS Code (Your Workshop)"
+        A[Write Code] -->|Save file| B[Edit Code]
+        B -->|Debug| A
     end
 
-    classDef local fill:#e1f5fe,stroke:#1e40af,stroke-width:2px
-    classDef cloud fill:#f3e5f5,stroke:#4f46e5,stroke-width:2px
+    subgraph "Git (Version Control)"
+        C[git add] -->|Stage changes| D[git commit]
+        D -->|Save snapshot| E[git push]
+        E -->|Upload to GitHub| F[Remote Repository]
+    end
 
-    class A,B,C local
-    class D,E cloud
+    B -->|Ready to save milestone| C
+
+    classDef default fill:#f8fafc,stroke:#6366f1,color:#000
+    classDef vscode fill:#1e1e1e,color:#f8fafc,stroke:#6366f1,stroke-width:2px
+    classDef git fill:#c7d2fe,stroke:#4f46e5,color:#000,stroke-width:2px
+
+    class A,B vscode
+    class C,D,E,F git
 
 `} />
 
@@ -220,6 +224,15 @@ Other things npm lets you easily add to your website:
 - Charts and graphs
 
 For this class, we'll just use npm to help us install some development tools. But it's good to know that npm can do a lot more! However, just like you don't want to clutter up your phone with too many apps, you don't want to clutter up your website with too many npm packages.
+
+## Common Tool Confusions
+
+Many new developers wonder about the relationships between our different tools. Here's a quick breakdown:
+
+- VS Code is your workspace - where you actually write and edit code
+- Git is your history keeper - saves different versions of your code
+- GitHub is your cloud storage - where your Git history lives online
+- Terminal is your command center - how you tell Git what to do
 
 ## Conclusion
 
