@@ -1,7 +1,7 @@
 import { ExternalLink } from 'lucide-react'
 import type TypographyProps from './typography.types'
 
-interface BqProps extends TypographyProps {
+interface BqProps extends Pick<TypographyProps, 'className'> {
   author?: string
   authorUrl?: string
   quote: string

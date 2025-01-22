@@ -11,6 +11,7 @@ import { Separator } from '../../components/ui/separator'
 import Bq from '../../components/ui/typography/bq'
 import Large from '../../components/ui/typography/large'
 import Lead from '../../components/ui/typography/lead'
+import CommandSyntax from '../components/command-line-syntax'
 
 # Installing Software on Windows
 
@@ -42,41 +43,7 @@ Now that we understand what these tools do, let's install them on your computer.
 - A stable internet connection
 - A GitHub account (create one at github.com if you haven't already)
 
-## Understanding Command Line Syntax
-
-<Lead>
-  Throughout this guide, you'll be using command line instructions. Command line syntax requires
-  spaces between commands and their flags. This is a fundamental rule that ensures your commands
-  work correctly.
-</Lead>
-
-<Mermaid chart={`
-graph TB
-    subgraph "✅ Correct Command"
-    A[git] --> |space| B[--version]
-    end
-    
-    subgraph "❌ Wrong Command"
-    C[git--version] --> D[ERROR!]
-    end
-
-    classDef correct fill:#e1f5fe,stroke:#1e40af,stroke-width:2px
-    classDef wrong fill:#fee2e2,stroke:#991b1b,stroke-width:2px
-
-    class A,B correct
-    class C,D wrong
-
-`} />
-
-<Bq>
-  Think of command line syntax like words in a sentence. Just like you need spaces between words to
-  make a sentence readable, you need spaces between parts of a command to make it executable.
-</Bq>
-
-<Large>⚠️ Commands won't work if you squish them together!</Large>
-
-- ❌ WRONG: `git--version`
-- ✅ RIGHT: `git --version`
+<CommandSyntax />
 
 ## The Installation Process
 
