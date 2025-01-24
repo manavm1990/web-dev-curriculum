@@ -19,7 +19,7 @@ Modern web applications demonstrate the transformative power of programming.
 
 A web page is like a single document you see in your browser. A website is a collection of these pages working together - like how Instagram has a home page, a profile page, and individual post pages.
 
-### Web Servers: The Digital Library Buildings
+### Web Servers
 
 A web server is a computer hosting one or more websites. "Hosting" means that all the web pages and their associated files are available on that computer. The web server will send web page files it is hosting to a user's browser when they attempt to load it.
 
@@ -29,24 +29,15 @@ While web servers store and deliver web content, users need tools to access and 
 
 <Mermaid
   chart={`graph LR
-    subgraph Server
-        H[HTML Files]
-        C[CSS Files]
-        J[JavaScript Files]
-        I[Images]
+    subgraph S[Web Server]
+      F[Files]
     end
-    
-    subgraph Browser[Web Browser]
-        P[Page Display]
+    subgraph B[Your Browser]
+      P[Web Page]
     end
-    
-    H --> P
-    C --> P
-    J --> P
-    I --> P
-    
-    style Server fill:#6366f1,stroke:#4f46e5,color:#f8fafc
-    style Browser fill:#818cf8,stroke:#4f46e5,color:#f8fafc`}
+    F-->P
+    style S fill:#6366f1,stroke:#4f46e5,color:#f8fafc
+    style B fill:#818cf8,stroke:#4f46e5,color:#f8fafc`}
 />
 
 #### Development Environment: Local Web Servers
@@ -66,8 +57,8 @@ This approach mirrors professional web development practices while providing a s
 
 <Mermaid
   chart={`graph LR
-    B[Browser] -->|1. Request| S[Web Server]
-    S -->|2. Sends Files| B
+    B[Your Browser]-->|Types website name|S[Web Server]
+    S-->|Sends back webpage|B
     style B fill:#6366f1,stroke:#4f46e5,color:#f8fafc
     style S fill:#6366f1,stroke:#4f46e5,color:#f8fafc`}
 />
@@ -115,15 +106,14 @@ This process happens so quickly that we rarely think about the complex infrastru
 In the coming lessons, we'll dive deeper into each of these technologies, starting with HTML—the fundamental language of web content.
 
 <Mermaid
-  chart={`%%{init: {'theme': 'base', 'themeVariables': { 'background': '#ffffff', 'primaryColor': '#6366f1', 'primaryTextColor': '#ffffff' }}}%%
-sequenceDiagram
-    participant Browser
-    participant Server
-    Browser->>+Server: 1. Request webpage
-    Server-->>-Browser: 2. Send HTML file
-    Browser->>+Server: 3. Request CSS/JS/images
-    Server-->>-Browser: 4. Send requested files
-    Note over Browser: 5. Browser assembles<br/>and displays page`}
+  chart={`sequenceDiagram
+    participant B as Your Browser
+    participant S as Web Server
+    B->>S: 1. You type website address
+    S-->>B: 2. Server sends HTML page 
+    B->>S: 3. Browser asks for images & styles
+    S-->>B: 4. Server sends those files
+    Note over B: 5. Your page appears!`}
 />
 
 # Assignment: Reflection (10 points)
