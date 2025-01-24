@@ -1,5 +1,5 @@
 import ExternalLink from '@/components/ui/external-link'
-import Mermaid from '@/components/ui/mermaid'
+import Mermaid from '@/components/mermaid'
 import Bq from '@/components/ui/typography/bq'
 import Code from '@/components/ui/typography/code'
 import H1 from '@/components/ui/typography/headings/h1'

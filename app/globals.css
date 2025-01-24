@@ -222,6 +222,10 @@
   li > * {
     @apply my-0!;
   }
+
+  li > ul {
+    @apply ml-6;
+  }
 }
 
 @layer components {

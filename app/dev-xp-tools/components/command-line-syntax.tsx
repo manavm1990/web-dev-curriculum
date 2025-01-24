@@ -1,4 +1,4 @@
-import Mermaid from '@/components/ui/mermaid'
+import Mermaid from '@/components/mermaid'
 import Bq from '@/components/ui/typography/bq'
 import H2 from '@/components/ui/typography/headings/h2'
 import Large from '@/components/ui/typography/large'

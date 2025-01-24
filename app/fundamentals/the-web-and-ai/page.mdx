@@ -1,0 +1,141 @@
+import Mermaid from '@/components/mermaid'
+
+# The Web: Building Modern Interactive Applications
+
+You've already learned how to build web pages with HTML and CSS. Now, we'll learn how to make those pages interactive using JavaScript. Think about websites you use every day - when you click a button and something happens, or when a form checks if you've filled it out correctly - that's JavaScript at work.
+
+## Today's Web Applications
+
+Modern web applications demonstrate the transformative power of programming.
+
+- A "like" button that changes color when clicked
+- A form that checks if your password is long enough
+- A menu that expands when you click it
+- A shopping cart that updates its total
+
+## Understanding the Web Platform
+
+### Web Page vs Website
+
+A web page is like a single document you see in your browser. A website is a collection of these pages working together - like how Instagram has a home page, a profile page, and individual post pages.
+
+### Web Servers: The Digital Library Buildings
+
+A web server is a computer hosting one or more websites. "Hosting" means that all the web pages and their associated files are available on that computer. The web server will send web page files it is hosting to a user's browser when they attempt to load it.
+
+Don't confuse websites and web servers. For example, if you hear someone say, "My website is not responding", it actually means that the web server is not responding and therefore the website is not available. More importantly, since a web server can host multiple websites, the term web server is never used to designate a website, as it could cause great confusion. In our previous example, if we said, "My web server is not responding", it means that multiple websites on that web server are not available.
+
+While web servers store and deliver web content, users need tools to access and navigate this vast network of information. This is where web browsers and search engines come in.
+
+<Mermaid
+  chart={`graph LR
+    subgraph Server
+        H[HTML Files]
+        C[CSS Files]
+        J[JavaScript Files]
+        I[Images]
+    end
+    
+    subgraph Browser[Web Browser]
+        P[Page Display]
+    end
+    
+    H --> P
+    C --> P
+    J --> P
+    I --> P
+    
+    style Server fill:#6366f1,stroke:#4f46e5,color:#f8fafc
+    style Browser fill:#818cf8,stroke:#4f46e5,color:#f8fafc`}
+/>
+
+#### Development Environment: Local Web Servers
+
+As you begin developing websites, you'll need a way to test your work. While production websites run on remote web servers, developers typically use local web servers during development. A local web server runs on your own computer, allowing you to test your web pages before deploying them to the internet.
+
+In this course, you'll use a development tool called Vite to create a local web server. This provides a controlled environment where you can:
+
+- Test your web pages as you build them
+- See immediate results of your code changes
+- Simulate how your website will behave when deployed
+- Debug and fix issues before publishing your work
+
+This approach mirrors professional web development practices while providing a safe environment for learning and experimentation.
+
+## How the Web Works: Understanding the Complete Picture
+
+<Mermaid
+  chart={`graph LR
+    B[Browser] -->|1. Request| S[Web Server]
+    S -->|2. Sends Files| B
+    style B fill:#6366f1,stroke:#4f46e5,color:#f8fafc
+    style S fill:#6366f1,stroke:#4f46e5,color:#f8fafc`}
+/>
+
+Now that we've explored the core components of the web, let's examine how they work together to deliver the seamless browsing experience we take for granted. Understanding this process illuminates the role of each component we've discussed:
+
+When you access a website, a carefully choreographed sequence of events occurs:
+
+1. Initial Request: You type a website address (URL) into your browser, such as "www.example.com"
+1. Browser-Server Communication: Your browser sends a request across the internet to the web server that hosts the website. This request essentially says, "Please send me the files for this page at this address."
+1. Server Processing: The web server receives this request and gathers the necessary files:
+   - The HTML file that structures the page
+   - CSS files that control its appearance
+   - JavaScript files that provide interactivity
+   - Any images or other media the page requires
+1. Response and Assembly: The server sends these files back to your browser, which then:
+   - Constructs the page structure from HTML
+   - Applies visual styles from CSS
+   - Executes JavaScript to enable interactive features
+
+<Mermaid
+  chart={`graph TD
+    W[Web Page] --> H[HTML]
+    W --> C[CSS]
+    W --> J[JavaScript]
+    H -->|Structure| D[Document Layout]
+    C -->|Style| V[Visual Design]
+    J -->|Interaction| I[Interactive Features]
+    style W fill:#6366f1,stroke:#4f46e5,color:#f8fafc
+    style H fill:#818cf8,stroke:#4f46e5,color:#f8fafc
+    style C fill:#818cf8,stroke:#4f46e5,color:#f8fafc
+    style J fill:#818cf8,stroke:#4f46e5,color:#f8fafc
+    style D fill:#c7d2fe,stroke:#4f46e5,color:#1e1b4b
+    style V fill:#c7d2fe,stroke:#4f46e5,color:#1e1b4b
+    style I fill:#c7d2fe,stroke:#4f46e5,color:#1e1b4b`}
+/>
+
+This process happens so quickly that we rarely think about the complex infrastructure making it possible. As you begin developing websites, understanding these mechanics will help you:
+
+- Structure your web pages effectively
+- Optimize your site's performance
+- Troubleshoot issues when they arise
+- Create better user experiences
+
+In the coming lessons, we'll dive deeper into each of these technologies, starting with HTML—the fundamental language of web content.
+
+<Mermaid
+  chart={`%%{init: {'theme': 'base', 'themeVariables': { 'background': '#ffffff', 'primaryColor': '#6366f1', 'primaryTextColor': '#ffffff' }}}%%
+sequenceDiagram
+    participant Browser
+    participant Server
+    Browser->>+Server: 1. Request webpage
+    Server-->>-Browser: 2. Send HTML file
+    Browser->>+Server: 3. Request CSS/JS/images
+    Server-->>-Browser: 4. Send requested files
+    Note over Browser: 5. Browser assembles<br/>and displays page`}
+/>
+
+# Assignment: Reflection (10 points)
+
+The web has revolutionized how we interact with information and each other. We've explored how web browsers, servers, and different technologies work together to create the interactive experiences we use every day.
+
+Take a few moments to reflect on what you've learned. In a thoughtful paragraph or two:
+
+- Consider how HTML, CSS, and JavaScript work together. How does understanding their distinct roles help you think about building web applications? What kinds of features would you need each technology for?
+
+- We discussed how web servers and browsers communicate. Explain how this knowledge might change the way you think about websites you use daily. For example, what happens when you click a link on a social media site or add an item to your shopping cart?
+
+- Local development environments like Vite will be important tools in your journey. How do you think being able to test your work locally will help you become a better developer? What advantages might this offer over directly editing files on a live website?
+
+Share your thoughts about these concepts and how they connect to your goals in web development. There are no wrong answers - focus on expressing your understanding and insights.
