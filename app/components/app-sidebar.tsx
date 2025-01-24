@@ -107,10 +107,9 @@ export default function AppSidebar() {
                       <Link
                         href={item.url}
                         className={cn(
-                          'block rounded-md p-2 text-sm hover:bg-sidebar-accent',
+                          'hover:bg-sidebar-accent block rounded-md p-2 text-sm',
                           pathname === item.url && 'font-bold text-green-400',
                         )}
-                        onClick={toggleSidebar}
                       >
                         {item.title}
                       </Link>
@@ -137,22 +136,22 @@ function CollapsibleNavItem({ item, pathname, onNavigate }: CollapsibleNavItemPr
 
   return (
     <Collapsible defaultOpen open={isOpen} onOpenChange={setIsOpen}>
-      <CollapsibleTrigger className="flex w-full items-center justify-between rounded-md p-2 text-sm transition-colors hover:bg-sidebar-accent">
+      <CollapsibleTrigger className="hover:bg-sidebar-accent flex w-full items-center justify-between rounded-md p-2 text-sm transition-colors">
         {item.title}
         <ChevronDown
-          className={`duration-400 h-4 w-4 shrink-0 transition-transform ease-[cubic-bezier(0.87,0,0.13,1)] ${
+          className={`h-4 w-4 shrink-0 transition-transform duration-400 ease-[cubic-bezier(0.87,0,0.13,1)] ${
             isOpen ? '' : 'rotate-180'
           }`}
         />
       </CollapsibleTrigger>
-      <CollapsibleContent className="overflow-hidden data-[state=closed]:animate-slide-up data-[state=open]:animate-slide-down">
-        <div className="ml-4 mt-1 space-y-1">
+      <CollapsibleContent className="data-[state=closed]:animate-slide-up data-[state=open]:animate-slide-down overflow-hidden">
+        <div className="mt-1 ml-4 space-y-1">
           {item.submenu.map((subItem) => (
             <Link
               key={subItem.url}
               href={subItem.url}
               className={cn(
-                'block rounded-md p-2 text-sm transition-colors hover:bg-sidebar-accent',
+                'hover:bg-sidebar-accent block rounded-md p-2 text-sm transition-colors',
                 pathname === subItem.url && 'font-bold text-green-400',
               )}
               onClick={onNavigate}
