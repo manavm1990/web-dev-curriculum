@@ -1,6 +1,7 @@
 import { FlatCompat } from '@eslint/eslintrc'
 import eslintConfigPrettier from 'eslint-config-prettier'
 import eslintPluginEslintComments from 'eslint-plugin-eslint-comments'
+import * as mdx from 'eslint-plugin-mdx'
 import eslintPluginUseEncapsulation from 'eslint-plugin-use-encapsulation'
 import { dirname } from 'path'
 import { fileURLToPath } from 'url'
@@ -14,6 +15,7 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends('next/core-web-vitals', 'next/typescript'),
+  mdx.flat,
   eslintConfigPrettier,
   {
     languageOptions: {
