@@ -18,7 +18,7 @@
       "severity": "warn"
     }
   ],
-  "eslint.validate": ["typescript", "typescriptreact"],
+  "eslint.validate": ["mdx", "typescript", "typescriptreact"],
   "files.autoSave": "onFocusChange",
   "html.autoClosingTags": true,
   "tailwindCSS.experimental.classRegex": [
