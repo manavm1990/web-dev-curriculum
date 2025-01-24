@@ -64,7 +64,7 @@ const NAV_ITEMS: NavItem[] = [
         url: '/fundamentals/how-computers-work',
       },
       { title: 'UTF-8', url: '/fundamentals/utf-8' },
-      { title: 'The Web', url: '/fundamentals/the-web-and-ai' },
+      { title: 'The Web', url: '/fundamentals/the-web' },
     ],
   },
 ] as const
