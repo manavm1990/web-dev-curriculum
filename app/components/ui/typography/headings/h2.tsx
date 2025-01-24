@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import { Link } from 'next-view-transitions'
 import type HeadingProps from './headings.types'
 import { createHeadingId } from './utils'
 
