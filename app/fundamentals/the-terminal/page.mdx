@@ -1,0 +1,100 @@
+import Mermaid from '@/components/mermaid'
+
+# The Terminal
+
+In your development process, you'll undoubtedly be required to run some commands in the terminal (or on the "command line" — these are effectively the same thing). This article provides an introduction to the terminal, the essential commands you'll need to enter into it, how to chain commands together, and how to add your own command line interface (CLI) tools.
+
+## Welcome to the terminal
+
+The terminal is a text interface for executing text-based programs. Much web development tooling usually requires that you'll have to pop open the command line and run some commands. This is because many tools are designed to be run from the command line, and it's often the quickest and most efficient way to interact with them.
+
+A large number of tools can be used by typing commands into the command line; many come pre-installed on your system, and a huge number of others are installable from package registries.
+
+One of the biggest criticisms of the command line is that it lacks hugely in user experience. Viewing the command line for the first time can be a daunting experience: a blank screen and a blinking cursor, with very little obvious help available on what to do.
+
+On the surface, they're far from welcoming but there's a lot you can do with them! The command line is a powerful tool that can help you be more productive and efficient in your work.
+
+## The terminal prompt
+
+When you open a terminal (Warp on Mac, GitBash on Windows), you'll see a prompt. This is where you type your commands. The prompt usually shows some information about your current location in the file system, and sometimes other information like the current time, the user you're logged in as, and the name of the computer you're using.
+
+## Basic built-in terminal commands
+
+Here are some basic terminal commands that you can use to navigate around your file system:
+
+- `ls` — list the contents of the current directory.
+- `cd` — change directory. For example, `cd my-folder` will move you into the `my-folder` directory.
+- `pwd` — print working directory. This will show you the full path of the directory you're currently in.
+- `mkdir` — make directory. For example, `mkdir my-folder` will create a new directory called `my-folder`.
+- `touch` — create a new file. For example, `touch index.html` will create a new file called `index.html`.
+
+## Creating a Project Structure
+
+Let's see how these commands work together to create a project:
+
+<Mermaid
+  chart={`graph TD
+    A[Home Directory] -->|cd Dev| B[Dev Directory]
+    B -->|mkdir first-website| C[first-website Created]
+    C -->|cd first-website| D[Inside first-website]
+    D -->|touch index.html| E[index.html Created]
+    D -->|touch styles.css| F[styles.css Created]
+    D -->|mkdir images| G[images/ Created]
+    
+    H[How to go back] -->|cd ..| I[Goes up one level]
+    H -->|cd ~| J[Goes to Home]
+    
+    style A fill:#c7d2fe,stroke:#4f46e5
+    style B fill:#c7d2fe,stroke:#4f46e5
+    style C fill:#c7d2fe,stroke:#4f46e5
+    style D fill:#c7d2fe,stroke:#4f46e5
+    style E fill:#818cf8,stroke:#4f46e5
+    style F fill:#818cf8,stroke:#4f46e5
+    style G fill:#c7d2fe,stroke:#4f46e5
+    style H fill:#c7d2fe,stroke:#4f46e5,stroke-width:2
+    style I fill:#c7d2fe,stroke:#4f46e5
+    style J fill:#c7d2fe,stroke:#4f46e5`}
+/>
+
+## Chaining commands
+
+You can chain commands together using the `&&` operator. This allows you to run multiple commands in sequence. For example, `cd my-folder && ls` will move you into the `my-folder` directory and then list the contents of that directory.
+
+## A slightly more complex example
+
+Here's a slightly more complex example of chaining commands together. This command will create a new directory called `my-folder`, move into that directory, create a new file called `index.html`, and then list the contents of the directory:
+
+```bash
+mkdir my-folder && cd my-folder && touch index.html && ls
+```
+
+## Terminal Practice Exercise
+
+Create the following project structure in your Dev folder:
+
+```shell
+my-portfolio/
+├── index.html
+├── styles/
+│ ├── main.css
+│ └── reset.css
+├── images/
+│ └── profile/
+└── scripts/
+└── main.js
+```
+
+Steps:
+
+1. Navigate to your Dev folder
+2. Create the project folder
+3. Create all necessary directories
+4. Create all necessary files
+5. Use `ls` to verify your structure
+6. Practice moving between directories using `cd`
+
+Extra Challenge:
+
+- Create a backup of your index.html file using `cp`
+- Rename main.css to style.css using `mv`
+- Use `cat` to add some HTML boilerplate to your index.html
