@@ -57,7 +57,14 @@ const NAV_ITEMS: NavItem[] = [
   },
   {
     title: '2-1 Fundamentals',
-    submenu: [{ title: 'Files and Directories', url: '/fundamentals/files-and-directories' }],
+    submenu: [
+      { title: 'Files and Directories', url: '/fundamentals/files-and-directories' },
+      {
+        title: 'How Computers Work',
+        url: '/fundamentals/how-computers-work',
+      },
+      { title: 'UTF-8', url: '/fundamentals/utf-8' },
+    ],
   },
 ] as const
 
