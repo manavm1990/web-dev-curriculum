@@ -13,6 +13,7 @@ const nextConfig: NextConfig = {
       { protocol: 'https', hostname: 'file.notion.so', pathname: '/**' },
       { protocol: 'https', hostname: 'd8n3.c1.e2-8.dev', pathname: '/**' },
       { protocol: 'https', hostname: 'developer.mozilla.org', pathname: '/**' },
+      { protocol: 'https', hostname: 'media3.giphy.com', pathname: '/**' },
     ],
   },
   pageExtensions: ['mdx', 'tsx'],
