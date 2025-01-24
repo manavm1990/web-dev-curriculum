@@ -1,7 +1,10 @@
 import { YouTubeEmbed } from '@next/third-parties/google'
+import { Separator } from '@/components/ui/separator'
 
 # How Computers Work
 
+<section className="md:flex gap-8 ">
+<div>
 People often think of computers as complex machines, but at their core, they are built on simple principles. Understanding how computers work can help you appreciate the technology that powers our daily lives.
 
 We often hear things about 0s and 1s, or binary. But what does that mean?
@@ -10,9 +13,13 @@ The following video from none other than Todd McLeod explains the concept of bin
 
 Note that the video mentions the Go programming language, but the concepts are universal. And, yes, Go is a fantastic language, not sure that it's the 'best programming language' as Todd suggests, but it is a great one.
 
-Without further ado, here is the video:
+</div>
 
-<YouTubeEmbed videoid="mOu1N7uTXyg" height={400} params="controls=0" />
+<YouTubeEmbed videoid="mOu1N7uTXyg" height={240} className="bg-red-500" />
+
+</section>
+
+<Separator className="mt-6 hidden md:block" />
 
 ## Assignment: Reflection (10 points)
 

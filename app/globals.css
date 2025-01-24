@@ -196,11 +196,11 @@
   }
 
   img {
-    @apply mx-auto my-6;
+    @apply my-6;
   }
 
   figcaption {
-    @apply mx-auto max-w-prose text-center text-sm;
+    @apply max-w-prose text-sm;
   }
 
   a {
@@ -226,6 +226,6 @@
 
 @layer components {
   [data-ntpc='YouTubeEmbed'] {
-    @apply relative mx-auto my-8 aspect-video w-full overflow-hidden;
+    @apply my-3 aspect-video max-w-screen md:m-8;
   }
 }

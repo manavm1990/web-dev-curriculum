@@ -8,7 +8,7 @@ import H3 from '@/components/ui/typography/headings/h3'
 import H4 from '@/components/ui/typography/headings/h4'
 import Large from '@/components/ui/typography/large'
 import Lead from '@/components/ui/typography/lead'
-import { ListItem, Ol, Ul } from '@/components/ui/typography/list'
+import { LI, OL, UL } from '@/components/ui/typography/list'
 import P from '@/components/ui/typography/p'
 import Small from '@/components/ui/typography/small'
 import Table from '@/components/ui/typography/table'
@@ -25,9 +25,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     small: Small,
     table: Table,
     p: P,
-    ul: Ul,
-    ol: Ol,
-    li: ListItem,
+    ul: UL,
+    ol: OL,
+    li: LI,
     strong: Large,
     a: ExternalLink,
     Lead,

@@ -1,6 +1,6 @@
 import { YouTubeEmbed } from '@next/third-parties/google'
 import Image from 'next/image'
-import P from '../../components/ui/typography/p'
+import { Separator } from '@/components/ui/separator'
 
 # UTF-8
 
@@ -16,6 +16,7 @@ In other words, UTF-8 is critical to bride the gap between understandable human 
 
 In the following video, Tom Scott AKA Computerphile explains how UTF-8 works. He does a great job of breaking down the concept in a way that's easy to understand.
 
+<div className="md:flex gap-8 justify-between">
 <YouTubeEmbed videoid="MijmeoH9LT4" height={400} params="controls=0" />
 
 <figure>
@@ -30,6 +31,7 @@ In the following video, Tom Scott AKA Computerphile explains how UTF-8 works. He
     **Fun Fact:** Even the Klingon language from Star Trek is included in the Unicode standard! 🖖🏾
   </figcaption>
 </figure>
+</div>
 
 ## Assignment: Reflection (10 points)
 
