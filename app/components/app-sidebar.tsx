@@ -66,6 +66,7 @@ const NAV_ITEMS: NavItem[] = [
       { title: 'UTF-8', url: '/fundamentals/utf-8' },
       { title: 'The Web', url: '/fundamentals/the-web' },
       { title: 'The Terminal', url: '/fundamentals/the-terminal' },
+      { title: 'VS Code', url: '/fundamentals/vs-code' },
     ],
   },
 ] as const

@@ -1,4 +1,5 @@
 import Mermaid from '@/components/mermaid'
+import { YouTubeEmbed } from '@next/third-parties/google'
 
 # The Terminal
 
@@ -27,6 +28,7 @@ Here are some basic terminal commands that you can use to navigate around your f
 - `pwd` — print working directory. This will show you the full path of the directory you're currently in.
 - `mkdir` — make directory. For example, `mkdir my-folder` will create a new directory called `my-folder`.
 - `touch` — create a new file. For example, `touch index.html` will create a new file called `index.html`.
+- `cat` — view the contents of a file. For example, `cat index.html` will show you the contents of the `index.html` file, provided that it exists.
 
 ## Creating a Project Structure
 
@@ -56,7 +58,24 @@ Let's see how these commands work together to create a project:
     style J fill:#c7d2fe,stroke:#4f46e5`}
 />
 
-## Chaining commands
+Watch and follow along with these 3️⃣ videos in order to create a project structure:
+
+<div className="md:flex gap-4 [&_figcaption]:text-center">
+<figure>
+  <YouTubeEmbed videoid="UnPvIENeMF8" width={400} params="controls=0" />
+  <figcaption>1</figcaption>
+</figure>
+
+<figure>
+  <YouTubeEmbed videoid="B3Z7hfV2pJw" width={400} params="controls=0" />
+  <figcaption>2</figcaption>
+</figure>
+
+<figure>
+  <YouTubeEmbed videoid="wnbpfgKYvQ4" width={400} params="controls=0" />
+  <figcaption>3</figcaption>
+</figure>
+</div>
 
 You can chain commands together using the `&&` operator. This allows you to run multiple commands in sequence. For example, `cd my-folder && ls` will move you into the `my-folder` directory and then list the contents of that directory.
 
@@ -64,11 +83,11 @@ You can chain commands together using the `&&` operator. This allows you to run 
 
 Here's a slightly more complex example of chaining commands together. This command will create a new directory called `my-folder`, move into that directory, create a new file called `index.html`, and then list the contents of the directory:
 
-```bash
-mkdir my-folder && cd my-folder && touch index.html && ls
-```
+`mkdir my-folder && cd my-folder && touch index.html && ls`
 
-## Terminal Practice Exercise
+We could have replicated all that you saw in the videos ☝️ with: `mkdir Dev && cd Dev && mkdir SWIC && cd SWIC && mkdir throwaway && cd throwaway && touch index.html && touch styles.css && mkdir images`. Go nuts!
+
+## Terminal Practice Exercise - 20 points
 
 Create the following project structure in your Dev folder:
 
@@ -93,8 +112,15 @@ Steps:
 5. Use `ls` to verify your structure
 6. Practice moving between directories using `cd`
 
-Extra Challenge:
+### Optional Extra Challenge (5 extra credit points):
 
-- Create a backup of your index.html file using `cp`
+You can use AI or otherwise research the commands mentioned and try these out:
+
+- Create a backup of your `index.html` file using `cp`
 - Rename main.css to style.css using `mv`
-- Use `cat` to add some HTML boilerplate to your index.html
+
+## Deliverables
+
+- A screenshot of your project structure in the terminal
+- A screenshot of your `history` showing the commands that you used to create the project structure. You could use your mouse to highlight the commands that you used. Or, you could just create a quick video. No voice or face necessary, just show the work you did in the terminal.
+- A few sentences reflecting on your experience with the terminal. What did you find easy? What did you find challenging? Do you have any tips for others who are new to the terminal?
