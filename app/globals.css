@@ -211,6 +211,10 @@
     @apply has-[[id]]:w-full;
   }
 
+  p {
+    @apply xl:max-w-9/10 xl:pr-16;
+  }
+
   a + p {
     @apply mt-0!;
   }

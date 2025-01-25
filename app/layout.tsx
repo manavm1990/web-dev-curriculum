@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
+import { ViewTransitions } from 'next-view-transitions'
 import { Geist, Geist_Mono } from 'next/font/google'
 import AppSidebar from './components/app-sidebar'
 import { SidebarProvider, SidebarTrigger } from './components/ui/sidebar'
 import './globals.css'
-import { ViewTransitions } from 'next-view-transitions'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -28,7 +28,9 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html lang="en" className="dark">
-        <body className={`${geistSans.variable} ${geistMono.variable} p-8 antialiased`}>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} p-8 antialiased xl:container xl:mx-auto`}
+        >
           <SidebarProvider>
             <AppSidebar />
             <main>
