@@ -1,7 +1,7 @@
 {
   "css.validate": false,
-  "editor.autoClosingBrackets": "always",
-  "editor.autoClosingComments": "always",
+  "editor.autoClosingBrackets": "beforeWhitespace",
+  "editor.autoClosingComments": "beforeWhitespace",
   "editor.bracketPairColorization.enabled": true,
   "editor.codeActionsOnSave": {
     "addMissingImports": "explicit",
