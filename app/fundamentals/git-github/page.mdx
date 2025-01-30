@@ -1,0 +1,300 @@
+import { YouTubeEmbed } from '@next/third-parties/google'
+import Image from 'next/image'
+import Link from 'next/link'
+import Mermaid from '../../components/mermaid'
+import Large from '../../components/ui/typography/large'
+
+# Git and GitHub
+
+## Introduction to Version Control
+
+Version control is a system that helps you manage changes to your project's files over time. It allows you to keep track of different versions of your project, collaborate with others, and revert to previous versions if needed. Git is one of the most popular version control systems used by developers.
+
+## Imagine This...
+
+You've just started at an internship for the City of Columbia. You've been tasked with creating a system to match volunteers with local area volunteer opportunities.
+
+Unfortunately, even though you are an intern, there's nobody around to actually mentor or teach you how to do this. You're on your own.
+
+No worries, you create a new project in your favorite code editor and start coding away. You're making great progress and you're feeling good about your work.
+
+However, as the project grows and there are more and more files and directories, stuff starts to break. Since you're new and haven't learned how to architect a project properly to make things modular and extendible, it turns into a bit of a 'whack-a-mole' situation.
+
+One thing starts working but then another thing breaks. You fix that and then something else breaks. It's a never-ending cycle of fixing one thing and breaking another.
+
+So, you start getting something working and just right and then you make a copy of your whole project. You start adding notes in the name such as `columbia-working-nav-bar` or `columbia-database-connection`. You end up doing this over and over again and you have almost 50 copies of the directory.
+
+Oh, and whenever something does break, you have to open up multiple previous copies of the project and sift through the code and try to surgically copy and paste the right things together and just cross your fingers that it works 🤞🏾.
+
+And then, one day, several months after this nightmarish first experience working on a real project (which does get launched BTW!) you hear about Git.
+
+And, because of your hands on experience with making copies of the project, adding notes to all of the names, and trying to surgically copy and paste code from one version to another, you're able to pick up Git right away.
+
+You realize that what Git essentially does under the hood is keep track of all of the changes you make to your project and allows you to easily switch between different versions of your project. And, it does this in a much more efficient and seamless manner than you were doing manually.
+
+<Large>We Use Git to Track Changes to Our Projects Over Time</Large>
+
+## What is Git?
+
+`git` is a version control system that tracks changes to the files in our project over time. The concept is that we take 'snapshots' of our project after completing a 'logical unit of work', and attach a clear commit message that describes what was just completed. This is typically done in the imperative tense by convention (e.g. 'Add navigation menu' or 'Fix non-functional login form.', etc.).
+
+To help us maintain, back up, and share our codebases, we're going to use `git` (the command-line tool) and GitHub (the online repository). These tools are fundamental parts of the web developer's workflow, and you'll be using them *every day* for the rest of your programming career!
+
+`git` works a bit like a Time Machine, in the sense that you'll be able to revert to any saved state within a directory. So if you mangle your site's directory structure, you can always use `git` to revert back to simpler times. The important things to understand about `git` specifically:
+
+1. This is a CLI utility, so get ready for lots of text. All of our important files when programming will be text, so it's only natural that we'd be navigating between save states (called 'commits') using text as well.
+2. Arbitrarily or automatically saving code is NOT a feature of git, and it shouldn't be. You only want to save meaningful chunks of code (e.g. a feature), not broken pieces here and there. Otherwise, there's no way to revert back to a useful save-state!
+3. Because of point #2, 'saving' your progress with git is handled a bit differently. You are in charge of 'staging' your commits, and 'committing' changes only when you are ready. This is a good thing, as it forces you to think about what you're saving and why.
+
+## Git Operations Overview
+
+Before we dive deeper into how Git works, let's visualize how Git operations flow between your computer and GitHub:
+
+<Mermaid
+  chart={`
+graph TD
+    A[Your Computer] --> B[Local Operations]
+    B --> C[Save in Editor]
+    B --> D[Git Commands]
+    D --> E[git add]
+    D --> F[git commit]
+    
+    G[Internet] --> H[Remote Operations]
+    H --> I[GitHub Website]
+    H --> J[git push/pull]
+    
+    style A fill:#f0f0f0
+    style G fill:#f0f0f0
+    style B fill:#e1bee7
+    style H fill:#e1bee7
+`}
+/>
+
+This diagram shows the key distinction between operations that happen on your computer (local) and those that involve GitHub (remote). When you're first starting with Git, most of your work will focus on the local operations - saving files, adding them to Git's staging area, and committing your changes.
+
+## Understanding Git's Three States
+
+Imagine you're preparing to send a package to a friend:
+
+- Your working directory is like your room - where you gather items
+- The staging area is like your packing table - where you decide what goes in the package
+- The repository is like your shipping log - recording what you've sent and when
+
+## Saving Files vs. Committing Changes
+
+It's important to understand the difference between saving files in your code editor and committing changes in Git. When you save a file in your editor (e.g., VS Code), you are only saving the changes to your local file system. Git, on the other hand, tracks changes to your files over time and allows you to create snapshots (commits) of your project at different points in time.
+
+## Open up That Terminal!
+
+Again, on Mac, that's Warp, and on Windows that, Git Bash. As always, verify that you are in your home directory by looking for the `~` symbol. If you're not, type `cd` and hit enter to get there.
+
+Verify that you have `git` installed by typing `git --version` (or `git -v`) into your terminal. You should see some numbers (e.g. `version 2.39.5`).
+
+With that command, you just told your terminal that you want to run a `git` command, and that you are using a special flag or option, `--version`.
+
+### Configure Git
+
+The following commands just need to be done once on your computer. They set up your name and email address for `git` to use when you make commits.
+
+`git config --global user.name "FirstName LastName"` Replace `FirstName` and `LastName` with your actual first and last name. Be mindful that the quotation marks are necessary.
+
+Next: `git config --global user.email "your.email@example.com"` Use the ✉️ that's associated with your GitHub account. That should be your SWIC 🧑‍🎓 ✉️.
+
+`git config --global core.editor "code --wait"` This command tells `git` to use Visual Studio Code as the default text editor.
+
+#### What Just Happened?
+
+You just told `git` who you are. This is important because every time you make a commit, `git` will attach your name and email to it. This is how `git` keeps track of who made what changes to the project.
+
+Note that this configuration only exists on your local machine. `git` is just a program that runs on your computer, and is different from GitHub, which is a website that hosts your code online.
+
+More specifically, we told our terminal to run the `git` program, and specifically the `config` command. From there we told that command that we want to apply these configurations globally (i.e. for all projects on this computer), and we passed in the specific settings and values.
+
+---
+
+For the rest of the lesson only run the commands as shown in the videos to follow along. The commands are case-sensitive and must be typed exactly as shown.
+
+The other examples are just to show you what the output might look like. Don't run those. Just read and understand them.
+
+---
+
+## `git init`
+
+<Large>
+  Git should always be initialized for a specific project. DO NOT initialize Git on 'higher-level
+  directories' such as `~` or `Dev` or `Documents` or anything like that. If you accidentally do
+  this, reach out to your instructor ASAP before proceeding.
+</Large>
+
+That being said, realistically you will rarely ever use `git init`. Usually, you'll be starting with a template or some type of baseline repository where all of the initialization has already been done for you :).
+
+In the following video, we will be working with the `throwaway` or similar directory (e.g. `my-portfolio`) that you should have created during the <Link href="/fundamentals/the-terminal">_Terminal Fundamentals_</Link> lesson.
+
+This video will:
+
+1. Use `git init` to initialize a new Git repository.
+1. This will create a `.git` directory in your project directory and enable Git tracking.
+
+<YouTubeEmbed videoid="XzBDoMttpr0" height={400} />
+
+## `git status`
+
+The `git status` command is used to check the status of your project. It will tell you which files are being tracked by Git, which files are not being tracked, and which files have been modified since the last commit.
+
+You should run this command regularly, especially while just picking up the nuances of Git. It will help you understand what's going on with your project and what you need to do next.
+
+Here's some examples of what this command the subsequent output might look like:
+
+```bash
+git status
+On branch main
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   index.html
+```
+
+```bash
+git status # After making changes
+On branch main
+Changes not staged for commit:
+        modified:   index.html
+```
+
+<Large>
+  Whenever interacting with Git commands such as `status`, your terminal may not immediately return
+  you back to your prompt. Usually, just pressing `q` will exit the command and return you to your
+  prompt.
+</Large>
+
+## `git add`
+
+To start actively tracking changes to a file, we must first add it to the **staging area.** This is done with the `git add` command.
+
+This staging area is sort of like a rough draft. We capture some of the changes we've made to our project. And, we can then `add` more changes to the staging area, either from the same file or from different files.
+
+Here's an example of what our `status` might look like after adding.
+
+```bash
+git status # After git add
+On branch main
+Changes to be committed:
+        modified:   index.html
+```
+
+<Large>
+  Don't mix up saving a file in VS Code with adding a file to the staging area. They are two
+  different things!
+</Large>
+
+## `git commit`
+
+Once we have added all of the changes we want to the staging area, we can then commit those changes to the repository. This is done with the `git commit` command.
+
+When we commit changes, we are essentially taking a snapshot of our project at that moment in time. We can then revert back to that snapshot at any time in the future.
+
+Here's an example of what our `git status` might look after doing a commit.
+
+```bash
+git status # After git commit
+On branch main
+nothing to commit, working tree clean
+```
+
+<Large>
+  Remember, you can't commit changes to your project without first adding them to the staging area.
+</Large>
+
+One additional thing we can do is to use the `-m` flag to add a message to our commit. This message should be in the imperative tense and should describe what changes were made in the commit.
+
+For example, `git commit -m "Add navigation menu"`. This message will help us and others understand what changes were made in the commit.
+
+---
+
+<YouTubeEmbed videoid="Pa_kzLIFLtI" height={400} />
+
+## `git diff`
+
+This command is used to see the differences between the current state of the project and the last commit. This is useful for seeing what changes have been made to the project since the last commit.
+
+You probably won't use this too much. Depending on your terminal output, it can be difficult to read. But, it's good to know that it's there.
+
+## `git log`
+
+This command is used to see a list of all of the commits that have been made to the project. This is useful for seeing what changes have been made to the project over time.
+
+You'll probably use this almost as much as `git status` to keep track of what Git's tracking.
+
+<YouTubeEmbed videoid="PzQJy0IYx6Y" height={400} />
+
+## Putting it all Together
+
+This basic workflow pattern tends to continue throughout your programming career. You'll be making changes to your project, adding those changes to the staging area, committing those changes to the repository, and then repeating the process.
+
+<div className='grid grid-cols-1 gap-4 md:grid-cols-2 items-center'>
+<Image src="/git.png" alt="Diagram of the Git workflow" width={686} height={396} />
+
+<YouTubeEmbed videoid="ufiJQlPGtOw" width={550} />
+</div>
+
+## GitHub
+
+Thus far, our work is wholly contained on our local computer. If we wanted to share this work, we could go 'old school' and email the files to someone. But, that's not very efficient.
+
+Instead, we can use GitHub to host our code online. This allows us to share our code with others, collaborate with others on projects, and keep a backup of our code in case something happens to our local computer.
+
+Whenever we talk about getting our code onto GitHub, a few other terms will surface. First, there's the concept of a 'remote repository'. This is a repository that exists on a server somewhere, and is not on your local computer.
+
+In our local repository we will establish a remote connection and give it a name, usually `origin`. This will maintain a connection between our local repository and the remote repository on GitHub.
+
+However, this doesn't automatically mean that all of our code and commits will automatically sync up with GitHub like a cloud service. We still have to push our code to GitHub to get it there.
+
+**Note:** In the video, I mention the possibility of keeping the repo private. 🙅🏾‍♀️. You'll need to send me a link for verification as part of the assignment 👇🏾, so keep it public.
+
+<YouTubeEmbed videoid="BZY--aQdoyw" height={400} />
+
+## Git vs. Cloud Services
+
+Unlike cloud services like Google Docs, where changes are automatically saved and synced, Git requires you to manually stage and commit changes. This gives you more control over what changes are saved and when they are saved. GitHub, on the other hand, is an online service that hosts your Git repositories, allowing you to share and collaborate on your code with others.
+
+With something like Google Docs, if you need to retrieve a previous version, it may be difficult to find the exact version you're looking for. With Git, you can easily revert to any previous commit in your project's history as long as you did a good job capturing those snapshots and writing good commit messages.
+
+<Large>Commit early, commit often!</Large>
+
+## Summary
+
+- `git` is a version control system that tracks changes to the files in our project over time. It's a terminal program that we install on our computer.
+- We use `git` to track changes to our projects over time. The general process is to work, save the work, use `git add` and then use `git commit` to capture a snapshot of our project to add to our log.
+- We can use `git status` to check the status of our project, `git add` to add changes to the staging area, and `git commit` to commit changes to the repository.
+- We can use `git diff` to see the differences between the current state of the project and the last commit, and `git log` to see a list of all of the commits that have been made to the project.
+- We can use GitHub to host our code online. This allows us to share our code with others, collaborate with others on projects, and keep a backup of our code in case something happens to our local computer.
+
+Git is the local program. GitHub is the online service (others include GitLab and BitBucket) that hosts our code online.
+
+## Git Fundamentals Assessment (30 points)
+
+### Part 1: Technical Implementation (20 points)
+
+First, run: `git config --list`. This will ensure that you <Link href="/fundamentals/git-github#configure-git">configured Git</Link> correctly.
+
+Take a screenshot of the output.
+
+Submit evidence that you completed the in-class Git tutorial videos by providing:
+
+- Screenshot(s) showing your terminal command history (12 points). Or a `git log` screenshot would also suffice.
+- The URL to your GitHub repository (8 points)
+
+### Part 2: Reflection (10 points)
+
+Write a reflection about your experience learning and implementing Git version control. Your reflection should mainly address the following questions:
+
+- What was your experience learning Git?
+- What was the most challenging part of learning Git?
+- What was your initial reaction to learning about version control and Git?
+- What surprised you or interested you the most?
+
+And, add anything else you'd like to share about your experience learning Git. If it's really good, I'll probably steal it and use it in future lessons!
+
+## Additional Git Learning with MicroSoft Learnings (10 points)
+
+Complete the following [Microsoft Learn module](https://learn.microsoft.com/en-us/learn/modules/intro-to-git/) on Git. Take a screenshot of the completion badge and submit it as evidence.
