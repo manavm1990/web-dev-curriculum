@@ -3,6 +3,7 @@ import { ViewTransitions } from 'next-view-transitions'
 import { Geist, Geist_Mono } from 'next/font/google'
 import AppSidebar from './components/app-sidebar'
 import { SidebarProvider, SidebarTrigger } from './components/ui/sidebar'
+import Footer from './dev-xp-tools/components/footer'
 import './globals.css'
 
 const geistSans = Geist({
@@ -33,11 +34,14 @@ export default function RootLayout({
         >
           <SidebarProvider>
             <AppSidebar />
-            <main>
-              <SidebarTrigger />
+            <div className="flex min-h-screen flex-col">
+              <main>
+                <SidebarTrigger />
 
-              {children}
-            </main>
+                {children}
+              </main>
+              <Footer />
+            </div>
           </SidebarProvider>
         </body>
       </html>
