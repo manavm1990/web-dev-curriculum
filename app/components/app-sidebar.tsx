@@ -68,6 +68,7 @@ const NAV_ITEMS: NavItem[] = [
       { title: 'The Terminal', url: '/fundamentals/the-terminal' },
       { title: 'VS Code', url: '/fundamentals/vs-code' },
       { title: 'Version Control', url: '/fundamentals/git-github' },
+      { title: 'Markdown', url: '/fundamentals/md' },
     ],
   },
 ] as const

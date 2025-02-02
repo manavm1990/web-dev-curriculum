@@ -1,0 +1,88 @@
+import { YouTubeEmbed } from '@next/third-parties/google'
+import Large from '../../components/ui/typography/large'
+
+# Markdown
+
+Most of these curriculum is being written in Markdown. Markdown is a lightweight markup language with plain text formatting syntax. It is designed so that it can be converted to HTML and many other formats using a tool by the same name. Markdown is often used to format readme files, for writing messages in online discussion forums, and to create rich text using a plain text editor.
+
+## HTML vs Markdown
+
+### HTML
+
+You're already familiar with HTML. It's a markup language. The purpose of HTML is to 'mark up' various pieces of text with angle brackets and various tags to distinguish their roles.
+
+<Large>The role of HTML is not to style things. Unfortunately, many people do things such as use `<br>` tags to create space between elements instead of CSS 💄 margins and padding. Or, folks even misuse heading tags to 'make things bigger'. 🙅🏾‍♀️ Keep in mind the roles of HTML and CSS 💄 as part of the the Holy Trinity of Web Development.</Large>
+
+HTML is specifically written to be rendered in a web browser. Opening an HTML file in a text editor will only show you the raw code.
+
+### Markdown
+
+Markdown, like HTML is also a markup language. However, Markdown can be rendered in VS Code, GitHub and many other places. In fact, a web browser by itself can't render Markdown. It needs to be converted to HTML first.
+
+Markdown features many fewer tags than HTML, so it's much simpler. It's also easier to read in its raw form.
+
+Generally, styling is handled by the Markdown engine, so the writer doesn't have to worry about it. This is why you'll see a lot of Markdown files with very little styling.
+
+## Why Markdown, Precisely?
+
+Markdown is a great way to write content that will be rendered in multiple places. For example, this curriculum is written in Markdown, but it's rendered in a web browser, in VS Code, and in GitHub.
+
+The most immediate use of Markdown pertains to README files. When you create a new project on GitHub, you'll be prompted to create a `README.md` file. That `.md` indicates a Markdown file. This file will be rendered on the front page of your repository. It's a great way to introduce your project to the world.
+
+Beyond this much documentation is written in Markdown and even supersets of Markdown such as MDX. However, in this course, we will stick with the basics of just Markdown.
+
+Specifically, we'll focus on GitHub flavored Markdown, which enhances basic Markdown.
+
+If you are interested in seeing the MDX source code for this entire curriculum, you can click the 'View Source' 🔗 in the footer 👇🏾. However, note that this is using MDX and not just MD, so what we are learning here doesn't cover what you see in the source.
+
+<Large>
+  It's actually not uncommon to use Markdown for things, but then to mix in some HTML right in the
+  same file. This is because Markdown is a subset of HTML, so you can mix and match. That is, HTML
+  can go into Markdown, but not the other way around.
+</Large>
+
+## Markdown in VS Code
+
+In the following video, we'll create a new directory and practice writing Markdown in VS Code. We'll also see how Markdown is rendered in VS Code.
+
+<YouTubeEmbed videoid="GQVB2oRkrQE" height={400} />
+
+Relevant Shortcuts:
+
+- `Cmd + Shift + V` - Open Command Palette
+- `Cmd + K, V` - Open Preview to the Side
+- `Cmd + B` - Toggle Sidebar
+- `Cmd + \` - Split Editor
+
+For Windows users, replace `Cmd` with `Ctrl`.
+
+Remember that the 'ultimate shortcut' is to use the Command Palette. You can access it by pressing `Cmd + Shift + P` on a Mac or `Ctrl + Shift + P` on Windows.
+
+## Assignment - 30 points
+
+### GitHub Markdown Tutorial - 20 points
+
+<Large>
+  Your deliverable is going to be a `README.md` file in a GitHub repository. This file should
+  contain a variety of Markdown content, basically everything that's shown in this [this GitHub
+  Markdown tutorial](https://guides.github.com/features/mastering-markdown/).
+</Large>
+
+Note that to receive full credit, you must make all of the shown examples your own. Don't just copy/paste what they have, but take this opportunity to include content that's relevant and unique to you.
+
+That also makes it more interesting and fun for me to grade! ;)
+
+This video will refresh you on setting up the Git repository and connecting it to GitHub with `gh repo create`.
+
+<YouTubeEmbed videoid="06Tv0LAZvsU" height={400} />
+
+### Learn Markdown - 10 points
+
+Work through this [Markdown tutorial](https://www.markdowntutorial.com/). This is a great way to get a more in-depth understanding of Markdown.
+
+For this deliverable, you just do it in the browser and send a screenshot of the completion screen.
+
+### Deliverables
+
+1. `README.md` file in a GitHub repository with a variety of Markdown content.
+2. Screenshot of the completion screen of the Markdown tutorial.
