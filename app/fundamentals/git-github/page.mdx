@@ -2,6 +2,7 @@ import { YouTubeEmbed } from '@next/third-parties/google'
 import Image from 'next/image'
 import Link from 'next/link'
 import Mermaid from '../../components/mermaid'
+import { Separator } from '../../components/ui/separator'
 import Large from '../../components/ui/typography/large'
 
 # Git and GitHub
@@ -266,6 +267,38 @@ With something like Google Docs, if you need to retrieve a previous version, it 
 
 <Large>Commit early, commit often!</Large>
 
+## 🫷🏾Working with the Remote
+
+We just created the repo and established a connection with GitHUb. We even saw our work on GitHub. 👍🏾
+
+But, how do we keep that up? How do we make even more changes and get them up to GitHub?
+
+### `git remote -v`
+
+First, let's verify that we have a connection to GitHub. We can do this with the `git remote -v` command. This will show us the remote connections we have established.
+
+Again, here, we are telling our terminal to run the `git` program, and specifically the `remote` command. From there we are passing in the `-v` flag, which stands for 'verbose'.
+
+```shell
+git remote -v
+origin	git@github.com:manavm1990/throwaway.git (fetch)
+origin	git@github.com:manavm1990/throwaway.git (push)
+```
+
+### `git push`
+
+To get our changes up to GitHub, we use the `git push` command. This will push our changes to the remote repository on GitHub.
+
+```shell
+git push origin main
+```
+
+Here, we are telling our terminal to run the `git` program, and specifically the `push` command. From there we are passing in the `origin` and `main` arguments. The `origin` argument tells `git` where to push the changes to, and the `main` argument tells `git` which branch to push.
+
+<Separator />
+
+<YouTubeEmbed videoid="bVi7UAcEtyc" height={400} />
+
 ## Summary
 
 - `git` is a version control system that tracks changes to the files in our project over time. It's a terminal program that we install on our computer.
@@ -303,3 +336,5 @@ And, add anything else you'd like to share about your experience learning Git. I
 ## Additional Git Learning with MicroSoft Learnings (10 points)
 
 Complete the following [Microsoft Learn module](https://learn.microsoft.com/en-us/learn/modules/intro-to-git/) on Git. Take a screenshot of the completion badge and submit it as evidence.
+
+<Separator />
