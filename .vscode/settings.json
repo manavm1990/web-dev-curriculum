@@ -30,5 +30,5 @@
   "typescript.updateImportsOnFileMove.enabled": "always",
   "typescript.validate.enable": true,
   "typescript.tsdk": "node_modules/typescript/lib",
-  "cSpell.words": ["Gnrc", "lcae", "Mijmeo", "ntpc", "Qwax", "Rascia", "Shotts", "wnbpfg"]
+  "cSpell.words": ["Etyc", "Gnrc", "lcae", "Mijmeo", "ntpc", "Qwax", "Rascia", "Shotts", "wnbpfg"]
 }
