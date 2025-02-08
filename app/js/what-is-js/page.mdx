@@ -1,0 +1,170 @@
+import { Separator } from '@/components/ui/separator'
+import { YouTubeEmbed } from '@next/third-parties/google'
+import Image from 'next/image'
+
+# What is JavaScript (JS) 🚀?
+
+## Learning Objectives
+
+By the end of this lesson, you will be able to:
+
+- Explain what JavaScript does and its role in web development
+- Understand where and how JavaScript is used in real websites
+- Recognize why we're learning JavaScript fundamentals before React
+- Get familiar with the basic tools we'll use in this course
+
+## What JavaScript Does
+
+JavaScript is the programming language that makes websites interactive. Let's start with what that means in practical terms.
+
+Every time you interact with a website - clicking buttons that change content without reloading the page, seeing notifications appear, or watching maps update in real-time - you're experiencing JavaScript in action.
+
+## Real-World Applications
+
+JavaScript powers many of the applications you use daily. The technology behind platforms like Netflix, Facebook, and LinkedIn relies heavily on JavaScript. When you scroll through Instagram, message friends on Discord, or code in Visual Studio Code, you're using applications built with JavaScript.
+
+## A Brief History & Evolution
+
+JavaScript was created by Brendan Eich in 1995, remarkably in just 10 days! 🏃 Despite its name, JavaScript isn't related to Java - the naming was primarily a marketing decision. Think of it like this: Java is to JavaScript what car is to carpet! 🚗
+
+**A Historical Note:** In the past, jQuery dominated web development as the primary way to make
+websites interactive. While you'll still encounter jQuery in older websites and/or with large behemoth corporations that just move very slowly with their technology, know that modern JavaScript
+provides better tools for building web applications.
+
+This course focuses on current best practices
+that prepare you for modern frameworks like React.
+
+## Our Course Approach
+
+React currently dominates the job market for web development. However, jumping directly into React can make it feel like magic - mysterious things happening behind the scenes that you don't quite understand. This course deliberately focuses on JavaScript fundamentals that will demystify React when you learn it later.
+
+To be clear, we won't be covering React in this course, as that warrants a whole separate course (e.g. 277). Instead, we'll focus on JavaScript basics, which will make learning React much easier.
+
+## Professional Development Practices
+
+This course introduces you to authentic development practices used in the software industry. We use Git and GitHub for version control and collaboration, just like professional development teams do. Your GitHub profile serves as a valuable professional portfolio, showcasing your coding journey and capabilities to potential employers.
+
+In the software industry, no professional development team manages projects by exchanging Zip files - period. Version control through Git and GitHub (or similar) represents the professional standard for managing code. When applying for development positions, employers expect to see your GitHub profile and/or deployed projects showcasing your work, not a collection of Zip files.
+
+Our development environment incorporates these industry-standard tools:
+
+VS Code: Our professional code editor, enhanced with:
+
+- ESLint: Catches potential errors and enforces consistent code style
+- Prettier: Automatically formats our code to look clean and professional
+
+Vite: Provides a development server for running our JavaScript applications
+
+Git and GitHub: Building on your previous experience with Markdown, we'll continue using professional version control practices. This reflects how actual development teams track changes, collaborate, and maintain code.
+
+## What's Next
+
+In the following lessons, we'll:
+
+- Write our first JavaScript code
+- Learn fundamental programming concepts
+- Understand how to manipulate web pages
+- Build interactive features that respond to user actions
+
+## JavaScript Introduction: Your Learning Journey
+
+After reading the introduction to JavaScript, reflect on these questions that connect the material to your own learning path. Write thoughtful responses using complete sentences.
+
+**Note:** All work must be written in Markdown. You will submit your work in Brightspace as a GitHub Gist 🔗...
+
+<div className='md:grid md:grid-cols-4 lg:grid-cols-3 gap-4 items-center'>
+
+<div className="col-span-full lg:col-span-1">
+  <YouTubeEmbed videoid="XDhXi5RlsTY" />
+</div>
+
+<figure className="col-span-2 flex flex-col items-center justify-center text-center lg:col-span-1">
+  <Image
+    src="https://d8n3.c1.e2-8.dev/swic/save-gist.png"
+    alt="Save Secret Gist"
+    width="588"
+    height="328"
+    className="max-w-xs"
+  />
+  <figcaption className="text-center *:pr-0">
+    Once you are finished click the, "Save Secret Gist" button.
+  </figcaption>
+</figure>
+
+<figure className='flex flex-col col-span-2 items-center lg:col-span-1 text-center'>
+<Image
+  src="https://d8n3.c1.e2-8.dev/swic/share-gist.png"
+  alt="Share Gist"
+  width="836"
+  height="402"
+    className='max-w-xs'
+/>
+<figcaption>Share the link (no embed!) in Brightspace.</figcaption>
+</figure>
+</div>
+
+<Separator className="mt-4" />
+
+### Understanding Modern Web Development (100-150 words)
+
+The lesson explained that JavaScript makes websites interactive. Looking at both your own favorite websites and the examples from the lesson:
+messaging or Netflix's continuous scrolling). First describe exactly what happens on screen when you use this feature, then explain why this kind of instant interactivity matters for the user experience.
+
+Think about websites you used 5-10 years ago compared to today. How have they changed in terms of what you can do without the page reloading? Why do you think websites have moved in this direction?
+
+### Thinking Like a Developer (100-150 words)
+
+For the interactive feature you described above, try to map out how you think it might work. Write pseudocode (plain English steps) that outlines what needs to happen when a user interacts with this feature. Consider:
+
+- What needs to happen when the user first loads the page?
+- What triggers the interaction (click, scroll, typing)?
+- What changes need to happen on the screen?
+- What information might need to be saved or updated?
+
+Example format for a "Like" button:
+
+```plaintext
+When the page loads:
+    Check if user has already liked this post
+    If yes, show filled heart icon
+    If no, show empty heart icon
+
+When user clicks heart icon:
+    If heart was empty:
+        Change heart to filled
+        Add 1 to like counter
+        Save that this user liked the post
+    If heart was filled:
+        Change heart to empty
+        Subtract 1 from like counter
+        Remove this user's like from the post
+When the page loads:
+    Check if user has already liked this post
+    If yes, show filled heart icon
+    If no, show empty heart icon
+
+When user clicks heart icon:
+    If heart was empty:
+        Change heart to filled
+        Add 1 to like counter
+        Save that this user liked the post
+    If heart was filled:
+        Change heart to empty
+        Subtract 1 from like counter
+        Remove this user's like from the post
+```
+
+### Tools and Your Development Process (50-100 words)
+
+The lesson introduces several professional development tools (VS Code, Git/GitHub, etc.).
+
+1. Looking at the tools described in the lesson, what do you think will be most challenging for you personally as you learn to use them? Why?
+
+2. The lesson emphasizes using industry-standard tools from the start rather than simpler alternatives. How do you feel about this approach for your learning? What do you see as the benefits and potential difficulties?
+
+### Submit Your Response
+
+- Focus on your own thoughts and connections to the material
+- Support your answers by referencing specific points from the lesson
+- Include clear, step-by-step pseudocode for your chosen feature
+- Submit as a text file

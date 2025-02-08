@@ -70,6 +70,7 @@ const NAV_ITEMS: NavItem[] = [
       { title: 'Version Control', url: '/fundamentals/git-github' },
       { title: 'Markdown', url: '/fundamentals/md' },
       { title: 'Web Standards', url: '/fundamentals/web-standards' },
+      { title: 'What is JS?', url: '/js/what-is-js' },
     ],
   },
 ] as const
