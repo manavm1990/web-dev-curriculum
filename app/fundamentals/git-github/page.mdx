@@ -121,11 +121,25 @@ The other examples are just to show you what the output might look like. Don't r
 
 ## `git init`
 
-<Large>
+<div className='grid grid-cols-1 gap-4 md:grid-cols-3 items-center'>
+<Large className='col-span-2'>
   Git should always be initialized for a specific project. DO NOT initialize Git on 'higher-level
   directories' such as `~` or `Dev` or `Documents` or anything like that. If you accidentally do
   this, reach out to your instructor ASAP before proceeding.
 </Large>
+
+<figure>
+  <Image
+    src="https://d8n3.c1.e2-8.dev/swic/do-not-do-this.png"
+    alt="Example of entering 'git init' in the home directory"
+    width={580}
+    height={88}
+  />
+  <figcaption className="text-center font-black text-red-500 uppercase">
+    ⚠️ Don't do this! ☝️ 🙅🏾‍♀️
+  </figcaption>
+</figure>
+</div>
 
 That being said, realistically you will rarely ever use `git init`. Usually, you'll be starting with a template or some type of baseline repository where all of the initialization has already been done for you :).
 
@@ -212,7 +226,7 @@ For example, `git commit -m "Add navigation menu"`. This message will help us an
 
 ---
 
-<YouTubeEmbed videoid="Pa_kzLIFLtI" height={400} />
+<YouTubeEmbed videoid="Pa_kzLIFLtI" width={400} />
 
 ## `git diff`
 
@@ -226,7 +240,7 @@ This command is used to see a list of all of the commits that have been made to 
 
 You'll probably use this almost as much as `git status` to keep track of what Git's tracking.
 
-<YouTubeEmbed videoid="PzQJy0IYx6Y" height={400} />
+<YouTubeEmbed videoid="PzQJy0IYx6Y" height={200} />
 
 ## Putting it all Together
 
@@ -235,7 +249,7 @@ This basic workflow pattern tends to continue throughout your programming career
 <div className='grid grid-cols-1 gap-4 md:grid-cols-2 items-center'>
 <Image src="/git.png" alt="Diagram of the Git workflow" width={686} height={396} />
 
-<YouTubeEmbed videoid="ufiJQlPGtOw" width={550} />
+<YouTubeEmbed videoid="ufiJQlPGtOw" width={450} />
 </div>
 
 ## GitHub
