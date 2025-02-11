@@ -3,7 +3,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Mermaid from '../../components/mermaid'
 import { Separator } from '../../components/ui/separator'
+import H3 from '../../components/ui/typography/headings/h3'
 import Large from '../../components/ui/typography/large'
+import P from '../../components/ui/typography/p'
+import H4 from '../../components/ui/typography/headings/h4'
 
 # Git and GitHub
 
@@ -117,18 +120,20 @@ For the rest of the lesson only run the commands as shown in the videos to follo
 
 The other examples are just to show you what the output might look like. Don't run those. Just read and understand them.
 
----
+<Separator className="my-4" />
 
 ## `git init`
 
-<div className='grid grid-cols-1 gap-4 md:grid-cols-3 items-center'>
-<Large className='col-span-2'>
+<section className='grid grid-cols-1 gap-4 md:grid-cols-3 items-center'>
+<H3 className='col-span-full mb-0'>Warning</H3>
+<H4 className='col-span-full mb-0'>Do Not Initialize Git in the Wrong Directory</H4>
+
+<Large className="col-span-2">
   Git should always be initialized for a specific project. DO NOT initialize Git on 'higher-level
-  directories' such as `~` or `Dev` or `Documents` or anything like that. If you accidentally do
-  this, reach out to your instructor ASAP before proceeding.
+  directories' such as `~` or `Dev` or `Documents` or anything like that.
 </Large>
 
-<figure>
+<figure className="col-span-1">
   <Image
     src="https://d8n3.c1.e2-8.dev/swic/do-not-do-this.png"
     alt="Example of entering 'git init' in the home directory"
@@ -139,7 +144,16 @@ The other examples are just to show you what the output might look like. Don't r
     ⚠️ Don't do this! ☝️ 🙅🏾‍♀️
   </figcaption>
 </figure>
-</div>
+
+<P className="col-span-full">
+  If you accidentally do this, you will need to run the following command from the same directory
+  where you ran `git init`: `rm -rf .git`. This will revert the directory back into a normal
+  directory instead of a giant Git repo. You should probably reach out to your instructor ASAP
+  before proceeding.
+</P>
+
+<Separator className='col-span-full' />
+</section>
 
 That being said, realistically you will rarely ever use `git init`. Usually, you'll be starting with a template or some type of baseline repository where all of the initialization has already been done for you :).
 
