@@ -4,9 +4,9 @@ import Link from 'next/link'
 import Mermaid from '../../components/mermaid'
 import { Separator } from '../../components/ui/separator'
 import H3 from '../../components/ui/typography/headings/h3'
+import H4 from '../../components/ui/typography/headings/h4'
 import Large from '../../components/ui/typography/large'
 import P from '../../components/ui/typography/p'
-import H4 from '../../components/ui/typography/headings/h4'
 
 # Git and GitHub
 
@@ -148,8 +148,9 @@ The other examples are just to show you what the output might look like. Don't r
 <P className="col-span-full">
   If you accidentally do this, you will need to run the following command from the same directory
   where you ran `git init`: `rm -rf .git`. This will revert the directory back into a normal
-  directory instead of a giant Git repo. You should probably reach out to your instructor ASAP
-  before proceeding.
+  directory instead of a giant Git repo. Then, review the{' '}
+  <Link href="/fundamentals/the-terminal">_Terminal Fundamentals_</Link> lesson to understand how to
+  navigate directories.
 </P>
 
 <Separator className='col-span-full' />
