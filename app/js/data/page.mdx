@@ -1,0 +1,251 @@
+import { YouTubeEmbed } from '@next/third-parties/google'
+import Image from 'next/image'
+
+# Data in JS
+
+Now that you understand how computers process information at a low level, let's explore how JavaScript helps us work with different types of data in our programs. Every piece of information in your program – whether it's text, numbers, or more complex data – needs to be represented in a way JavaScript can understand.
+
+## Strings
+
+Strings are characters contained inside single ('') or double ("") quotation marks. JS works with the words just as they are shown.
+
+```js
+// Using `""` - double quotation marks
+"Manav";
+
+// Using `''` - single quotation marks
+'Manav'
+
+"Hello, world";
+'My name';
+'It was the best of times, it was the blurst of times...';
+
+// Generally, prefer double quotes so you can use possessive apostrophes.
+"Manav's";
+
+// You can also use single quotes if you prefer, but it's messier.
+'Manav\'s'; // Have to add an escape `\` character before the apostrophe. 👎🏾
+
+// However, don't mix up the 2 else your code will surely break! 🙅🏾‍♀️
+"Manav' // Notice that this code is not recognized as a valid string.
+```
+
+Summarily, quotation marks tell JS to not evaluate the text as code. This is for humans to read, not the computer.
+
+## Numbers
+
+Numbers in JavaScript don't need quotation marks. A number like `23` is treated differently from `"23"` (a string). This distinction becomes important when you want to perform calculations:
+
+```js
+// Numbers ready for math
+23 // Can be used in calculations
+42.5 - // Decimals work too!
+  100 // Negative numbers
+
+// The same numbers as strings - not ready for math!
+;('23') // JavaScript sees this as text
+;('42.5') // Also text
+;('-100') // Still just text
+```
+
+JavaScript treats all numbers the same way - whether they're whole numbers or decimals. While some languages make you think about different number types, JavaScript keeps it simple with just one "number" type.
+
+<YouTubeEmbed videoid="y0fI8xDivEg" />
+
+## Create Data and Store It On the Memory Heap
+
+To interact and give instructions to a computer, everything we do is in terms of data and memory. Data must be created and then stored in a computer's memory for **future access.**
+
+In the previous video, we were creating data, but...as soon as it was created it was essentially useless and destroyed. Under the hood, JS Automatically manages memory usage. If it notices some unreferenced or unused 'loose' data, the data will be targeted for garbage collection.
+
+This feature of JS regarding automatic memory management and garbage collection is common in almost any modern, high-level programming language.
+
+How do we create these references to data in the memory heap? We use variables.
+
+## Variables
+
+Some programming lessons describe variables as being boxes or containers of data. This is not wholly accurate.
+
+A better analogy comes from the book _Eloquent JavaScript_ by Marijn Haverbeke. Variables are like tentacles, not boxes. They do not contain data; they grasp it - two tentacles can grasp the same piece of data. It's like an 🐙.
+
+---
+
+**Extra Credit Side Quest Opportunity:** 🎮
+
+Read any part of [the aforementioned book.](https://eloquentjavascript.net/) Create a video presentation of what you learn. You can create slides, share some code snippets, or even just talk about what you learned. Your video must show your face and must have you talking (no AI 🤖 generated 💩). Keep the length between 3-8 minutes. Send the video to your instructor for 5-10 extra points.
+
+More importantly, this could be something you share as part of your portfolio. It's a great way to show off your skills and knowledge to potential employers.
+
+---
+
+### Declaring Variables
+
+The defacto standard for creating variables on most teams is to use the `const` keyword.
+
+<YouTubeEmbed videoid="i495pbazgyE" />
+
+## Primitive Data Types vs. Objects
+
+Strings and numbers are 2️⃣ of JS' 7️⃣ different **primitive data types.** In this course, we will cover only 5️⃣ total primitives, and 2️⃣ of those are practically the same thing.
+
+Primitive data types are called "primitives" because they represent the most basic forms of data that JS can work with. They are the building blocks of all other data types in JS.
+
+Primitive data types are discreet data points. They represent a single value, not a collection of values.
+
+For instance, we could copy and paste the entirety of _Moby Dick,_ or _It_ or _Harry Potter_ into a single string and it would still be treated as a single value.
+
+Likewise, the `13234234` is still one single value. The individual digits don't matter.
+
+Many times, this is insufficient. Enter objects. Objects are something like a bag or basked. In fact, likening an object to a box or container is more of a fair analogy. The object is like a grocery bag containing pairs of keys/properties and their associated values.
+
+<div className="grid grid-cols-1 md:grid-cols-2 items-center">
+<YouTubeEmbed videoid="-lgyyWQdUis" />
+
+<figure>
+  <Image
+    src="https://d8n3.c1.e2-8.dev/swic/o.png"
+    alt="Visual of an object showing keys attached to values."
+    width={321}
+    height={105}
+  />
+  <figcaption>
+    The video mentions, 'properties.' These are more correctly known as, 'keys' 🔑.
+  </figcaption>
+  <small>The above image is taken from Free Code Camp from their course, "fundamentals of Computer 💻 Science"</small>
+</figure>
+</div>
+
+```JS
+const caco = {
+  name: "Cacodemon",
+  type: "Demon",
+  health: 400,
+  attack: 40,
+  defense: 20,
+  description: "A floating, one-eyed demon with a large mouth that shoots fireballs."
+};
+```
+
+```js
+const book = {
+  title: 'Eloquent JavaScript',
+  author: 'Marijn Haverbeke',
+  pages: 472,
+  isDigital: true,
+  description: 'A modern introduction to programming',
+}
+```
+
+### Is `const` Short for...Constant?
+
+No. `const` is short for 'constant reference.' The value of the data can change, but the reference to the data cannot.
+
+However, primitives are **immutable.** Once they are created, there isn't any direct way to 'change' them. They have to be replaced with a new value.
+
+So, this won't work. `const name = "Manav"` followed by `name = "John"` will throw an error.
+
+However, objects are **mutable.** You can change the properties of an object, but you can't change the reference to the object.
+
+```JS
+const caco = {
+  name: "Cacodemon",
+  type: "Demon",
+  health: 40,
+  attack: 40,
+  defense: 20,
+  description: "A floating, one-eyed demon with a large mouth that shoots fireballs."
+};
+
+// TODO: Fix the health value by throwing away `40` and replacing it with `400`.
+caco.health = 400; // This is fine.
+```
+
+Again, when it comes to primitives, they are immutable. So, here: `// TODO: Fix the health value by throwing away `40`and replacing it with`400`, we didn't 'change' the value of `40`to`400`. We replaced the value of `40`with`400`.
+However, in doing so, we did manage to 'change' the value of `caco.health`from`40`to `400`.
+
+<YouTubeEmbed videoid="dTjPOkWG87M" />
+
+## `let`
+
+`let` is another keyword for creating variables. It's not as common as `const`, but it's still used. `let` is used when you know the value of the variable will need to be reassigned.
+
+```JS
+let name = "Manav";
+
+name = "John";
+```
+
+## Boolean Values
+
+A Boolean value is the simplest form of data in JavaScript – it can only be `true` or `false`. Remember, no quotation marks, else it's not a boolean, it's a...string!
+
+Think of it as a simple switch that's either on or off. We use Booleans when we need to track game states, check conditions, or make yes/no decisions in our code.
+
+```js
+const isGameOver = false
+const hasWeapon = true
+const isHealthLow = caco.health < 100 // This evaluates to false since health is 400
+```
+
+`caco.health < 100` is saying, "Is the health of the Cacodemon less than 100?" Since the health is 400, the answer is `false`.
+
+## Null and Undefined
+
+JavaScript has two different ways to represent "nothing," which can be confusing at first. Let's understand both using our octopus 🐙 analogy:
+
+`undefined` is like an octopus tentacle reaching out but grasping nothing at all. This happens with: `let weapon; // A tentacle reaching into empty space`
+
+Note, that: `const weapon` will not work. If we use `const`, we must assign a value immediately.
+
+`null` is like an octopus tentacle deliberately holding onto an empty box marked "nothing." We use it when we want to explicitly say something has no value: `let weapon = null; // A tentacle holding a box labeled "nothing"`
+
+Having two different ways to represent "nothing" is one of JavaScript's peculiar design choices. While other programming languages typically use just one way to represent emptiness, JavaScript maintains both `null` and `undefined` for historical reasons.
+
+As a best practice, when you need to explicitly indicate that something is empty, use `null`. Let JavaScript handle `undefined` on its own - it's the language's default "empty" state, but not one we should typically assign ourselves. In other words:
+
+```JS
+let playerStatus = null; // Good: Explicitly setting something as empty
+
+// Good: Explicitly setting something as empty
+let weapon = null;
+
+// Less Good: Letting a variable be undefined
+let weapon;
+
+// Also Good: Checking if something exists
+if (player.weapon === null) playerStatus = "Game over, man! Game over!";
+```
+
+`if (player.weapon === null)` says, "If the player's weapon is explicitly set to `null`, then the player's status is 'Game over...'" 🎮.
+
+See that `===`? That's a **comparison operator.** Don't confuse 😕 that with `=` where we are asking JS to do an assignment.
+
+Use `=` to assign a value to a variable. Use `===` to compare two values.
+
+### A Slightly More Morbid Analogy
+
+Someone that is 'dead inside' may be considered `null`. They are empty, but they are still there. They just feel nothing.
+
+Someone that is dead 💀 has an absence of any feeling. They are `undefined`. They have been reassigned.
+
+## Assignment - 30 Points
+
+### BrightSpace Deliverables
+
+1. Screenshots. 10 points.
+1. MicroSoft Training completion screenshot. 10 points.
+1. A 🔗 to a GitHub Gist containing an MD document. Share as a 'shared link,' **not** as an 'Embed.' The link should straightaway lead to the Gist. 10 points.
+
+#### Screenshots
+
+You will emulate codes demonstrated throughout this lesson. You will create **your own** variables, strings, numbers, and objects using just the 'Console' tab in your browser's DevTools. You will take screenshots of your code and the results of your code.
+
+#### MicroSoft Training
+
+[Finish this](https://learn.microsoft.com/en-us/training/modules/web-development-101-if-else/
+
+#### GitHub Gist MD Reflection
+
+This is open-ended. Now that you have seen some JS code, what are your feelings/thoughts about it? How does it compare with any other code you have seen, such as HTML/CSS? What do you think about the idea of 'variables' and 'objects'? Where do you think this is going? What do you anticipate as the next steps in your learning journey?
+
+Focus on your own thoughts and impressions of the lesson. Support your answers by referencing specific points from the lesson materials.
