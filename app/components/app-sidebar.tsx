@@ -75,8 +75,9 @@ const NAV_ITEMS: NavItem[] = [
   {
     title: '3-2 JS Basics',
     submenu: [
-      { title: 'What is JS?', url: '/js/what-is-js' },
-      { title: 'Data in JS', url: '/js/data' },
+      { title: 'What is JS?', url: '/js-programming/what-is-js' },
+      { title: 'Data in JS', url: '/js-programming/data' },
+      { title: 'Arrays', url: '/js-programming/arrays' },
     ],
   },
 ] as const
