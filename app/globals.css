@@ -149,6 +149,14 @@
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Sugar High theme colors - All dark. */
+    --sh-class: #66b3ff; /* Brighter blue for dark theme */
+    --sh-string: #7ee787; /* Brighter green for strings */
+    --sh-comment: #8b949e; /* More visible comments */
+    --sh-keyword: #ff7b72; /* Brighter red for keywords */
+    --sh-function: #d2a8ff; /* Purple for functions */
+    --sh-number: #79c0ff; /* Light blue for numbers */
   }
   .dark {
     --background: 240 10% 3.9%;
@@ -229,6 +237,26 @@
 
   li > ul {
     @apply ml-6;
+  }
+
+  /* Code block styles */
+  pre {
+    @apply relative overflow-x-auto rounded-lg;
+  }
+
+  /* Improve line height for code blocks */
+  code {
+    @apply leading-relaxed;
+  }
+
+  /* Add subtle gradient to code blocks */
+  .group:hover pre::after {
+    @apply opacity-100;
+  }
+
+  pre::after {
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-zinc-950/5 to-transparent opacity-0 transition-opacity duration-500;
+    content: '';
   }
 }
 
