@@ -1,0 +1,337 @@
+import Mermaid from '@/components/mermaid'
+import Bq from '@/components/ui/typography/bq'
+import Image from 'next/image'
+import Large from '../../components/ui/typography/large'
+import P from '../../components/ui/typography/p'
+
+# Arrays
+
+In our last lesson, we worked with variables to store individual pieces of information - things like strings, numbers, and objects. Variables are great at their job: holding onto one specific piece of data. But that's also their limitation - each variable can only hold one thing at a time.
+
+<div className="md:grid mt-8 grid-cols-2">
+    <div>
+    <P>Think about how information is organized in everyday life. Take a grocery shopping list, for example. When we write one down on paper or in a spreadsheet, we naturally create a structure: there's a title at the top that tells us what this list is for, and below it are related pieces of information - in this case, the items we need to buy. Each item is a separate piece of data, but they're all part of the same list.</P>
+
+    <P>This is exactly how arrays work in JavaScript! Just like our grocery list has multiple items organized under one heading, an array lets us group related information together under one name. Each item in our list has its own line or position, just like each piece of data in an array has its own index number.</P>
+    </div>
+
+  <figure>
+    <Image
+      src="https://d8n3.c1.e2-8.dev/swic/grocery.png"
+      alt="Grocery List"
+      width={412}
+      height={282}
+    />
+    <small>
+      The above image is taken from Free Code Camp from their course, _Fundamentals of Computer
+      Science_. The image is used for educational purposes only.
+    </small>
+  </figure>
+</div>
+
+## Understanding Arrays: Lists of Data
+
+Let's translate that grocery list we see into JavaScript:
+
+```javascript
+const groceryList = ['Apples', 'Bananas', 'Toilet Paper', 'Cliff Bars', 'Bacon', 'Eggs']
+```
+
+Notice how this mirrors the structure in our image - all these items are related (they're all things we need to buy), and they're grouped together under a single name (groceryList). Just like in our spreadsheet-style list where each item occupies its own row, in our array each item has its own position.
+
+The big advantage here is organization. Just as it would be confusing to have six separate pieces of paper each with one grocery item written on it, it would be messy to have six separate variables for our grocery items. Arrays give our data structure and keep related information together, making it easier to work with and understand.
+
+<Large>
+  We are allowed to add and remove things from our 'grocery bag.' But...we are not allowed to throw
+  our bag away and grab a whole new bag. That part is 'constant,' but not the items 'in the bag.'
+</Large>
+
+## Review: Variable Declaration
+
+Recall that whenever we write a **statement** to declare a variable the following happens from right to left, even though we usually type it from left to right:
+
+1. The right side of the `=` sign is evaluated first. This will be some data. Here, it's an array of strings. We can tell this by the square brackets `[]` and the strings inside them. Note that unlike some other programming languages, this is just an array. The fact that it has strings or whatever else inside is irrelevant to JavaScript. It's just an array.
+1. The `=` is an **assignment operator.** It assigns the value of the right side to the variable on the left side.
+1. The left side of the `=` is the **variable name.** This is where the value from the right side is stored. In this case, it's `groceryList`. We write these in camelCase, which is a common naming convention in JavaScript.
+1. The `const` keyword is a **variable declaration.** It tells JavaScript that this variable is a constant assignment. This means that the value assigned to `groceryList` cannot be changed later in the program. However arrays like other objects in JS are mutable. The items inside of the array can be changed.
+
+## Accessing Array Items
+
+To access an item in an array, we use the array's name followed by square brackets containing the index number of the item we want. For example, to get the first item in our grocery list, we would write: `groceryList[0]`. This is because arrays in JavaScript are **zero-indexed**, meaning the first item is at position 0, the second item is at position 1, and so on.
+
+<Large>
+  To access an item in that array, we need to remember to subtract 1 because arrays are '0-based.'
+  Also, this means that the last item will always be 1 less than the total length of the array.
+</Large>
+
+```javascript
+// First, our grocery list array
+const groceryList = ['Apples', 'Bananas', 'Toilet Paper', 'Cliff Bars', 'Bacon', 'Eggs']
+
+// Getting items from specific positions
+// Remember: JavaScript starts counting at 0!
+groceryList[0] // Shows: "Apples"     (first item)
+groceryList[1] // Shows: "Bananas"    (second item)
+groceryList[2] // Shows: "Toilet Paper" (third item)
+```
+
+The number in square brackets is called an "index." Think of it like a shelf number in a library - it tells us exactly where to find the item we want. Just like library shelf numbers start at 1, array indexes in JavaScript start at 0.
+
+### Accessing Parts of an Array That Don't Exist❗
+
+What happens when we try to access parts of an array that don't exist? JavaScript handles this situation gracefully:
+
+```javascript
+const colors = ['red', 'blue', 'green']
+
+colors[5] // Shows: undefined
+colors[-1] // Shows: undefined
+colors[3] // Shows: undefined
+
+// Think about what's happening here:
+// - We have 3 items in our array (positions 0, 1, and 2)
+// - When we ask for position 5, JavaScript doesn't crash
+// - Instead, it tells us "there's nothing there" with undefined
+```
+
+This behavior is like looking for a book on a library shelf. If we look at shelf number 5 but there are only books on shelves 0, 1, and 2, we don't get an error message - we just find an empty shelf. JavaScript's undefined is like that empty shelf - it tells us "there's nothing here" rather than crashing our program.
+
+## Review: 2️⃣ Categories of Data in JavaScript
+
+1. **Primitives:** These are the basic building blocks of JavaScript. They are simple values like numbers, strings, and booleans. They are immutable, meaning they cannot be changed. When you change a primitive value, you're actually creating a new value in memory.
+1. **Objects:** These are more complex data structures that can hold multiple pieces of data. They are mutable, meaning they can be changed. When you change an object, you're changing the original object in memory.
+
+## Review: Objects are Collections of 🔑/Value pairs
+
+Objects are a way to store multiple pieces of data together. They are made up of key/value pairs, where each key is a unique identifier for a piece of data, and each value is the data itself. For example:
+
+```javascript
+const person = {
+  name: 'John Doe',
+  age: 30,
+  isStudent: true,
+}
+```
+
+All of the 🔑 keys within `person` are in fact strings. Since that's a given in JS, we don't need to actually wrap them in quotes, but we could have done so:
+
+```javascript
+const person = {
+  name: 'John Doe',
+  age: 30,
+  isStudent: true,
+}
+```
+
+Nevertheless, notice that pairs of keys and values are separated by colons `:` and each pair is separated by commas `,`.
+
+And how about those values? We managed to use an example of each of the three most useful primitives in JavaScript: a string, a number, and a boolean 👔.
+
+Notice that only the string is wrapped in quotes. The number and boolean are not. `'30'` is a string, `30` is a number. `'true'` is a string and `true` is a boolean.
+
+In fact, what we have done just now is to create a custom object or **object literal.** Built in objects in JS are called objects and custom objects are called object literals, but we usually just say 'object.'
+
+So, what about Arrays? 🤔
+
+## Everything in JavaScript is an Object Except Primitives...
+
+...and even some of them can behave like objects temporarily.
+
+We will return to this mantra at multiple points in the course. Hopefully, 🤞🏾, by the end of the course you will be able to fully explain what this means.
+
+For now, just remember that arrays (and basically everything else in JS) are a special type of object.
+
+## Arrays vs. Objects
+
+<Large>
+  Arrays and Objects are both indexed collection/composite types. The difference is in the data type
+  of the 🔑s, and thereby, how we access them. Arrays use numbers. Objects use strings.
+</Large>
+
+In addition, with objects, we pick our own custom names of the keys, as strings. In arrays, JS just auto-increments with numbers.
+
+<div className="grid-cols-2 md:grid md:w-3xl items-center">
+  <figure>
+    <Image src="https://d8n3.c1.e2-8.dev/swic/arr.png" alt="Array" width={350} height={350} />
+    <figcaption>JS starts at index 0 and auto-increments for each item</figcaption>
+  </figure>
+
+    <figure>
+        <Image src="https://d8n3.c1.e2-8.dev/swic/obj.png" alt="Object" width={350} height={350} />
+        <figcaption>All of the keys/properties inside an object must be unique. Values might be the same though.</figcaption>
+        </figure>
+
+</div>
+
+<small>
+  The above images are taken from Free Code Camp from their course, _Fundamentals of Computer
+  Science_. The images are used for educational purposes only.
+</small>
+
+## Arrays are Objects
+
+Remember our earlier statement that "everything in JavaScript is an object except primitives"? Now we can see this in action! Since arrays are objects in JavaScript, they come with some built-in properties.
+
+One particularly useful property is `length`, which tells us how many items are in our array:
+
+```javascript
+const groceryList = ['Apples', 'Bananas', 'Toilet Paper', 'Cliff Bars', 'Bacon', 'Eggs']
+groceryList.length // Shows: 6
+
+const person = {
+  name: 'John Doe',
+  age: 30,
+}
+
+person.name // Shows: 'John Doe'
+groceryList.length // Shows: 6
+```
+
+Notice how we use the same dot notation to access both the `name` property of our `person` object and the `length` property of our array. This reinforces what we learned earlier - arrays are really just a special type of object in JavaScript, with their own unique properties that help us work with the data they contain.
+
+## Quick Practice: Put Your Knowledge to Work!
+
+Let's combine what we've learned so far. Open your browser console and try this:
+
+1. Create an array called `scores` with three numbers: 85, 92, and 78
+2. Check the length of your array
+3. Change the middle score to 95
+4. Look at each score individually using their index numbers
+
+Your console interactions might look like this:
+
+```javascript
+const scores = [85, 92, 78]
+scores.length // Shows: 3
+scores[1] = 95
+scores[0] // Shows: 85
+scores[1] // Shows: 95
+scores[2] // Shows: 78
+```
+
+**Think about it:** Why did we use index `1` to throw away `92` and replace it with `95` for the middle score? Let's break it down:
+
+- Position 0: First score (85)
+- Position 1: Second/middle score (92, now 95)
+- Position 2: Third score (78)
+
+Even though this is the "second" item in our list, we access it with index 1 because arrays are zero-based. This is why understanding zero-based indexing is so important!
+
+<Large>Capture your work in a screenshot and save it for your assignment submission. 👇🏾</Large>
+
+## Examples
+
+Here are some examples of arrays:
+
+```javascript
+const emptyArray = []
+const numbers = [1, 2, 3, 4, 5]
+const strings = ['apple', 'banana', 'cherry']
+const mixed = [1, 'apple', true, { name: 'John Doe' }]
+```
+
+Look at that last one: `[1, 'apple', true, { name: 'John Doe' }]`. We have a number, a string, a boolean, and an object all in one array. This is a great example of how arrays can hold multiple types of data together. However, in reality, it's not a great practice to mix types in an array. It's better to keep them consistent.
+
+When we create arrays, it's important to think about the kind of data they'll hold. While JavaScript allows us to mix different types of data in an array, doing so often makes our code more complex and harder to work with.
+
+```javascript
+// Less ideal - mixed types make operations more complex
+const mixedList = [1, 'two', true, [3, 4]]
+
+// If we wanted to add all numbers in this array:
+// We'd need to check each item's type first
+// We'd need to decide what to do with non-numbers
+// We'd need to handle the nested array specially
+
+// Better - consistent types make our intentions clear
+const numberList = [1, 2, 3, 4]
+const stringList = ['one', 'two', 'three', 'four']
+
+// Now our purpose is clear:
+// numberList is for mathematical operations
+// stringList is for text operations
+```
+
+When we keep our array types consistent, we're making our code's intention clearer. Think about our grocery list example - it's a list of strings because we're storing item names. If we suddenly put a number or boolean in there, it would feel out of place, just like finding a pencil in your grocery bag!
+
+```javascript
+const groceryList = ['Apples', 'Bananas', 'Toilet Paper', 'Cliff Bars', 'Bacon', 'Eggs']
+
+// If we want the last item, we need position 5:
+groceryList[5] // "Eggs"
+
+// Why 5? Let's count:
+// Apples      - position 0
+// Bananas     - position 1
+// Toilet Paper- position 2
+// Cliff Bars  - position 3
+// Bacon       - position 4
+// Eggs        - position 5
+```
+
+```javascript
+// Storing test scores
+const testScores = [95, 88, 76, 92, 85]
+
+// Getting a specific score
+const firstScore = testScores[0] // 95
+const thirdScore = testScores[2] // 76
+```
+
+<Mermaid
+  chart={`
+graph LR
+    A[Array: colors] --- B["["]
+    B --- C["'red'"]
+    C --- D["'blue'"]
+    D --- E["'green'"]
+    E --- F["]"]
+    
+    G[Indices] --- H[0]
+    H --- I[1]
+    I --- J[2]
+    
+    C -.- H
+    D -.- I
+    E -.- J
+`}
+/>
+
+## Assignment - 30 Points
+
+### BrightSpace Deliverables (10 points each)
+
+1. **Console Screenshots**
+2. **Microsoft Training** completion screenshot
+3. **GitHub Gist** MD document. Well-formatted with code examples and explanations. You will not get full credit if you don't render your MD preview. This was covered in [the video](https://youtu.be/XDhXi5RlsTY) from a previous lesson.
+
+### Console Screenshots
+
+In addition to the Quick Practice from earlier, create your own meaningful examples demonstrating:
+
+- Array creation and access
+- Working with different data types
+- Object creation and property access
+- Understanding undefined values
+
+### Microsoft Training
+
+Complete [this Microsoft Learn module about Arrays.](https://learn.microsoft.com/training/modules/web-development-101-arrays/)
+
+### GitHub Gist Reflection
+
+Create a new MD document reflecting on:
+
+1. Arrays vs individual variables
+2. Zero-based indexing in programming
+3. Arrays vs objects in JavaScript
+4. Extending the person object example
+5. JavaScript's undefined behavior
+
+Remember to format your code examples with triple backticks in your markdown document.
+
+<Bq
+  quote="You can create fenced code blocks by placing triple backticks ``` before and after the code block. We recommend placing a blank line before and after code blocks to make the raw formatting easier to read. To preserve your formatting within a list, make sure to indent non-fenced code blocks by eight spaces."
+  author="Fenced Code Blocks"
+  authorUrl="https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks#fenced-code-blocks"
+/>
