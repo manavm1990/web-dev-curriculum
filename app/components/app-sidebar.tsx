@@ -101,7 +101,7 @@ export default function AppSidebar() {
 
   return (
     <Sidebar>
-      <SidebarContent>
+      <SidebarContent className="pb-8">
         <SidebarGroup>
           <SidebarGroupLabel>Table of Contents</SidebarGroupLabel>
           <SidebarGroupContent>
