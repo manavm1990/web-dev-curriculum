@@ -1,0 +1,144 @@
+import { YouTubeEmbed } from '@next/third-parties/google'
+import Image from 'next/image'
+import Link from 'next/link'
+
+# First Things First
+
+We need to make sure that you are familiar with the Node JavaScript template repo that we will be using for the next few lessons.
+
+Up until now, we have just been 🏃🏾‍♂️ JS Code using the REPL environment in the browser's console.
+
+Now, we will be using NodeJS. This is JS outside of any browser. It leverages the V8 engine that Chrome uses to run JS code. This is the same engine that powers the browser's console, but we 'plugs in' to our computer's operating system and we run it via the terminal.
+
+From a high level, Node works by modeling our operating system with a bunch of built in objects. Recall that everything in JS is an object except primitives.
+
+Objects are the fundamental data structure that allows JS to do anything useful. Node provides a bunch of objects that allow us to interact with the file system, the network, and other things that are not available in the browser. But, that's all more than we need to get started.
+
+## Fork the Node JavaScript Template Repo
+
+Start by [forking](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo#forking-a-repository) the [Node JavaScript template repo](https://github.com/swic-web-development/js-node-template) to your GitHub account.
+
+Basically, as long as you are logged into your GitHub account, you just need to click the 'Fork' button in the upper right corner of the repo page.
+
+<Image src="https://d8n3.c1.e2-8.dev/swic/fork.png" alt="Forking a repo" width="296" height="96" />
+
+Forking this repo will create your own independent copy of this repo on **your** GitHub account. This will allow you to make changes to the code without affecting the original repo.
+
+## Clone Your Forked Repo
+
+Now that you have your own copy of the repo, you need to [clone](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository?tool=webui#cloning-a-repository) it to your local machine. This will allow you to make changes to the code and push those changes back to your GitHub repo.
+
+You will want to clone by using the GitHub CLI option. This will allow you to clone the repo and automatically set up the remote for you.
+
+<Image
+  src="https://d8n3.c1.e2-8.dev/swic/clone.png"
+  alt="Cloning a repo"
+  width="448"
+  height="260"
+/>
+
+Basically, click that 'copy' icon. **Make sure** that you are in your `Dev` directory (or similar) in your terminal before running the command. **DO NOT** clone into an existing repo. If your command prompt shows `main` or `master` you are in the wrong place. Use `cd` to navigate to the correct directory. We covered this in <Link href="/fundamentals/the-terminal">our lesson on the command line.</Link>
+
+## Navigate into Your Repo
+
+Once you have cloned the repo, navigate into the directory by running `cd` followed by the name of your cloned repo. Remember that you need a space in between the command `cd` and the argument (the name of the repo).
+
+You can also run `ls` to list the contents of the directory you are in. Make a note of your cloned repo name.
+
+In all likelihood, it will just be `js-node-template`. So, you will end up running `cd js-node-template`.
+
+## Install Dependencies
+
+Now that you are in your cloned repo, you need to install the dependencies. Run `npm install` to install the dependencies. This will create a `node_modules` directory in your repo.
+
+### Dependencies?
+
+Dependencies are packages that your project relies on to work. They are listed in a special file called `package.json`. When you run `npm install`, Node will look at this file and install all the packages listed in it.
+
+In this case, the only dependency is `biome`.
+
+```json
+"devDependencies": {
+    "@biomejs/biome": "1.9.4"
+  }
+```
+
+### Biome?
+
+Our original plan for the course was to roll with ESLint which helps us find and fix issues with our code along with Prettier which helps with formatting our code.
+
+Those tools are the workhorse of the industry and I use them extensively in all of my projects.
+
+However, a new player has entered the game. Biome is a tool that acts as a replacement for both ESLint and Prettier. It is a single tool that does the job of both, and purports to do it faster and better. We shal see! 🤞🏾.
+
+## Open the Project in VS Code
+
+Now that you have the project cloned and the dependencies installed, open the project in VS Code. You can do this by running `code .` in the terminal. This will open the project in a new VS Code window and will start you off in the root of the project.
+
+## Install the Biome Extension
+
+We did not install this yet. But, we have a special file in this repo called `.vscode/extensions.json`. This file tells VS Code to install the Biome extension when you open the project. This is a one-time thing.
+
+You will see a notification in the bottom right corner of the window. Click 'Install' to install the extension.
+
+If you miss it, you can always click on the extensions icon in the sidebar (or 'ctrl/command' + 'shift' + 'x') and search for Biome. Click 'Install' to install the extension.
+
+We learned how to install extensions in <Link href="/fundamentals/vs-code#extensions-and-themes">our lesson on VS Code</Link>.
+
+## Verify that Biome is Working
+
+Note that Biome does sometimes throw up some false errors in the bottom right. The most important thing is to open up the file `src/index.js`. You can use 'ctrl/command' + 'p' and type `index.js` to find it.
+
+You will see some 'bad' code: `var x = 3;`. Biome should show some squiggly lines under the `var` and the `;`. This is because Biome is enforcing modern JavaScript standards.
+
+<Image src="https://d8n3.c1.e2-8.dev/swic/bad-code.png" alt="Bad code" width="409" height="32" />
+
+If anything is amiss, try exiting out of VS Code and coming back in with `code .` in the terminal. If it's still not working, verify your steps in the videos below. Then, proceed with posting your questions in our Teams group, "Online Class," sooner rather than later!
+
+## Videos
+
+The following video covers most of the materials from above ☝️. Watch it to get a better understanding of what you need to do to get started with the Node JavaScript template repo.
+
+<YouTubeEmbed videoid="9rhFM21xxxg" />
+
+### Getting Familiar with Biome and VS Code
+
+We have a few settings configured. For instance, our code should automatically save as soon as we leave the file view.
+
+Don't mess with or change anything at this time. Just get familiar with the setup and work in `src/index.js`.
+
+<YouTubeEmbed videoid="J7mZypflkYE" />
+
+### 🏃🏾‍♂️ and 'Printing' Code
+
+Unlike in the REPL environment in the browser console, we will have to manually run our code with Node and include `console.log` to see some output in our terminal.
+
+We run our code from the terminal with `node src/index.js`. This will execute the code in `src/index.js`.
+
+<YouTubeEmbed videoid="u8G60gPIwTc" />
+
+## Assignment - 20 Points
+
+### Gist MD Reflection - 10 Points
+
+As usual, you will write your reflection in Markdown. You will submit your work in Brightspace as a GitHub Gist 🔗.
+
+As [has been previously communicated,](https://youtu.be/XDhXi5RlsTY) you must save your file as an MD file (not the default 'txt'). You should then see a preview of the rendered MarkDown as you type.
+
+Make sure it looks nice and is well-formatted, with proper headings, paragraphs, lists, etc. That will count as part of your grade.
+
+In your reflection provide feedback on your experience with the Node JavaScript template repo. How do you feel about it? What are your thoughts on Biome? Did you struggle with getting started? What did you find easy? What did you find difficult? What did you get out of the videos?
+
+How's your Copilot experience so far? I personally don't like the new toolbar that keeps popping up, as I expressed in the video. But, I'm sure it will get better with time.
+
+### Video Teach-Back - 10 Points
+
+Now, record a video in which you replicate some of the same examples that you did in the REPL environment in the browser console. You will need to write your code in VS Code and show the output in the terminal. Basically, how it was covered in this lesson.
+
+Your demo should variables, strings, numbers, object literals, arrays, etc. Some of the things from the previous JS lessons. The only difference is that you will be writing this in VS code and running it in the terminal.
+
+You will do this in a live video. You don't need to go overboard. About 5 minutes or so is a good length. Just show me what you have learned so far and confirm that you know how to work with VS Code and Node and that Biome is working as it should.
+
+Be sure to record your screen so I can actually see what you are doing. It's preferable to simultaneously show your face also, but not required.
+
+Note that we are not incorporating Git in this Assignment. Future Assignments definitely will!
