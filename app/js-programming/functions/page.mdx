@@ -1,0 +1,306 @@
+import { YouTubeEmbed } from '@next/third-parties/google'
+
+# Functions and Methods
+
+Before starting this lesson, you should navigate back to your `js-node-template` repository. As you proceed through this lesson, you should type out the examples shown and actively run them in your terminal. Capture Screenshots of your work.
+
+Just keep using `src/index.js` for this practice.
+
+## Objects Review
+
+> Everything in JavaScript is an object, except primitives, and even those can sometimes behave like objects.
+
+As mentioned previously, we will return time and time again to this mantra. The goal is for it to make sense by the time this course is over. For now, let's just briefly review objects, or object literals, more properly.
+
+Recall that we have already created our own custom objects, or object literals, like so:
+
+```javascript
+const student = {
+  name: 'Sarah',
+  course: 'JavaScript',
+  grade: 95,
+}
+```
+
+Objects are collections of key-value pairs. In the example above, `name`, `course`, and `grade` are keys, and `'Sarah'`, `'JavaScript'`, and `95` are their corresponding values.
+
+We can access these values using dot notation:
+
+```javascript
+console.log(student.name) // Sarah
+console.log(student.course) // JavaScript
+console.log(student.grade) // 95
+```
+
+## Methods
+
+Now, let's talk about methods. Methods are functions that are attached to objects. We can attach a function to an object like so:
+
+```javascript
+const student = {
+  name: 'Sarah',
+  course: 'JavaScript',
+  grade: 95,
+  displayInfo() {
+    return `${this.name} is taking ${this.course} and expects to earn ${this.grade}%`
+  },
+}
+```
+
+### Methods syntax
+
+We can differentiate a **method** from a regular property in an object by the parentheses at the end of the key-value pair. In this case, `displayInfo()` is a method.
+
+There are actually a few different ways to define methods, but in this example, simply notice that we are using braces `{}` to wrap the method's code block.
+
+### More `{}`⁉️
+
+Yes, braces have multiple meanings in JavaScript. Note that the outermost braces are actually defining the `student` object itself. Then, they are braces used to delineate the method's code block.
+
+### What is `this`?
+
+`this` is a special keyword in JavaScript that refers to the object that the method is attached to. In this case, `this` refers to the `student` object.
+
+---
+
+<YouTubeEmbed videoid="G9J8FlTjUyw" height={400} />
+
+---
+
+## Functions
+
+Again, we have been using `console.log()` to output information to the terminal. This accesses the built-in `console` object and uses its `log()` method. Under the hood, it's similar to our custom `displayInfo()` method.
+
+Note that `log()` by itself will not work. `log()` is a method attached to the `console` object. We access it using dot notation.
+
+Functions on the other hand, exist in the **global scope.** They don't need to be dependent on an object, usually making them more versatile.
+
+### `displayStudentInfo()`
+
+What if we wanted to use `displayInfo()` for multiple students? As it stands, we would need to copy/paste that function into each student object.
+
+Rather than doing that, we can create a function that can be used for any student:
+
+```javascript
+/**
+ * Note that realistically, we would take these individual student objects
+ * and put them in an array.
+ *
+ * For now, we will just use them as individual objects for simplicity.
+ */
+const student1 = {
+  name: 'Sarah',
+  course: 'JavaScript',
+  grade: 95,
+}
+const student2 = {
+  name: 'John',
+  course: 'Python',
+  grade: 88,
+}
+const student3 = {
+  name: 'Alice',
+  course: 'C++',
+  grade: 92,
+}
+
+function displayStudentInfo(student) {
+  return `${student.name} is taking ${student.course} and expects to earn ${student.grade}%`
+}
+```
+
+We have just created a function with the `function` keyword. After the keyword, we have the function name, `displayStudentInfo`.
+
+Note that we started this name with a verb, `display`, to indicate that this function will be displaying information. This is a common convention in programming. We also named it `displayStudentInfo` instead of just `displayInfo`. Since ths function is not attached to a specific object, we want to be clear that it is displaying student information.
+
+#### Parameters
+
+In the parentheses, we have `student`. This is a **parameter**. Parameters are placeholders for the data that the function will use. In this case, `student` is a parameter that will represent the student object that we pass in.
+
+#### `return`
+
+Yeah, more `{}`, similar to what we did with the method. The code block between the braces is what our function does. In this case, it returns a formatted string.
+
+In general, every function you ever write should do perform one specific task and it should explicitly `return` a value.
+
+#### Calling the Function
+
+To use the function, we simply call it and pass in the student object we want to display:
+
+```javascript
+console.log(displayStudentInfo(student1))
+console.log(displayStudentInfo(student2))
+console.log(displayStudentInfo(student3))
+```
+
+---
+
+<YouTubeEmbed videoid="7cg0jA_RVcE" height={400} />
+
+---
+
+### Single Object Parameter vs Multiple Parameters
+
+In the example above, we passed in a single object as a parameter. This is a common pattern in JavaScript. It allows us to pass in a single
+object that contains all the data we need.
+
+However, we can also pass in multiple
+parameters. For example:
+
+```javascript
+function displayStudentInfo(name, course, grade) {
+  return `${name} is taking ${course} and expects to earn ${grade}%`
+}
+
+console.log(displayStudentInfo('Sarah', 'JavaScript', 95))
+console.log(displayStudentInfo('John', 'Python', 88))
+console.log(displayStudentInfo('Alice', 'C++', 92))
+```
+
+Note that if your function requires more than 2️⃣ parameters to do its job, you should probably rewrite it to take an object instead. This will make your code more readable and maintainable.
+
+Just taking a look back at `displayStudentInfo(student)`, we can see that it is much clearer what the function is doing. We don't have to remember the order of the parameters or what they represent.
+
+### Another Example
+
+```javascript
+/**
+ * FUNCTION DECLARATION
+ * Call it 'add2Nums' or whatever you want - BTW, functions usually do something, so it's nice to name them starting with a verb
+ * Specify 2 PARAMETERS - 'x' and 'y'.
+ * The ARGUMENTS that this function will receive will be bound to 'x' and 'y' respectively. This is essentially what we have been doing with 'const,' but the fxn. manages this for us.
+ */
+function add2Nums(x, y) {
+  return x + y
+}
+
+// INVOKE/EXECUTE/RUN the function with the ARGUMENTS 200 and 300 - ARGUMENT 200 will be bound to 'x' while we are running 'add2Nums'
+// Whatever data comes back, bind it to the variable 'sum'
+const sum = add2Nums(200, 300)
+```
+
+## Functions Assignment - 15 Points
+
+First, submit your screenshots showing the 'practice work' ☝️ above.
+
+Before starting the assignment:
+
+1. Commit your practice work in index.js:
+
+```bash
+git add src/index.js
+git commit -m "Add function practice examples"
+git push origin main
+```
+
+Then, create a new file called `functions.js` in your `src` directory. Write functions that make all of the following tests pass:
+
+```javascript
+// HINT: To multiply in JS, use the '*' operator
+
+// Test 1: Calculate order total
+const order = {
+  price: 10,
+  quantity: 2,
+}
+console.log(calculateTotal(order)) // Should print: 20
+
+// Test 2: Format a username
+console.log(formatUsername('John', 'Doe')) // Should print: "Doe, John"
+
+// Test 3: Combine two strings with a space between
+console.log(combineStrings('Hello', 'World')) // Should print: "Hello World"
+
+// Test 4: Calculate cart total with tax
+const cart = {
+  price: 100,
+  tax: 0.07,
+}
+console.log(calculateCartTotal(cart)) // Should print: 107
+
+// Test 5: Format a full name
+const nameInfo = {
+  firstName: 'John',
+  lastName: 'Doe',
+}
+console.log(buildFullName(nameInfo)) // Should print: "John Doe"
+
+// Test 6: Create a game character description
+const character = {
+  name: 'Hero',
+  weapon: 'Sword',
+  level: 1,
+}
+console.log(createCharacterDescription(character)) // Should print: "Level 1 Hero wielding a Sword"
+```
+
+Work through these one at a time. Remember to run your code with `node src/functions.js` to see the output and confirm that it looks correct.
+
+After completing each one, make an appropriate commit before moving on to the next. So, if done correctly, you will have made a minimum of 6️⃣ commits.
+
+Also, note that you can just use the text from the comment to write your commit message. For example, after finishing the first task, you would do:
+
+```bash
+git add src/functions.js
+git commit -m "Calculate order total"
+```
+
+After you have finished all of the tasks, don't forget to push your code to GitHub.
+
+Yes! We could start them thinking about the logical structure of the game even before they have all the programming tools. This builds problem-solving skills and helps them see why they need certain programming concepts.
+
+## Think Like a Developer: Planning a DOOM Deathmatch System - 10 points
+
+This part will be done using a GitHub Gist with well-formatted Markdown. Don't forget to add the `.md` extension to your file and to properly share the link in Brightspace.
+
+Let's plan how a deathmatch scoring system might work, without writing any code yet.
+
+### The Scenario
+
+You're helping develop DOOM's multiplayer deathmatch mode. Players compete in an arena, scoring points (frags) by eliminating other players. Your job is to track player information and scores.
+
+### Think Through These Questions
+
+What information do we need to track for each player?
+
+- Think about: names, scores, weapons, status
+
+What happens when one player eliminates another?
+
+- What information needs to change?
+- Who gets points?
+- What happens to the eliminated player?
+
+How would you display the current match standings?
+
+- What information is most important to show?
+- How would you order the players?
+
+What kinds of calculations might we need?
+
+- Think about: kill/death ratios, win percentages
+
+### Write It Out
+
+Try writing step-by-step instructions (like a recipe) for:
+
+What happens when a new player joins the match?
+What happens when one player eliminates another?
+How you would determine the match winner?
+
+## Submission Requirements
+
+Submit to Brightspace:
+
+Screenshots showing:
+
+- Your practice work from this lesson in `src/index.js`.
+- Your terminal output showing you ran the code
+
+A link to your GitHub repository containing:
+
+- The committed practice work in index.js
+- The completed `src/functions.js` with all 6 test cases passing
+- A commit history showing at least 6 separate commits for the test cases
+
+A link to your Gist with the DOOM deathmatch planning.
