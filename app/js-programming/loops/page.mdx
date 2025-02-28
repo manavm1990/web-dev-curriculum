@@ -1,0 +1,312 @@
+import { YouTubeEmbed } from '@next/third-parties/google'
+
+# JavaScript Loops and Arrays
+
+**Note:** To get full assignment points, make sure to include answers to any of the questions interspersed throughout the lesson in your reflection document assignment 👇🏾.
+
+```javascript
+console.log("Let's learn about ➿ loops.")
+console.log("Let's learn about ➿ loops.")
+console.log("Let's learn about ➿ loops.")
+console.log("Let's learn about ➿ loops.")
+console.log("Let's learn about ➿ loops.")
+console.log("Let's learn about ➿ loops.")
+```
+
+Or we could just write:
+
+```javascript
+for (let i = 0; i < 6; i++) {
+  console.log("Let's learn about ➿ loops.")
+}
+```
+
+Same output, much less repetition in our code. That's the power of loops!
+
+Now...let's learn about loops. 😄
+
+## Introduction to Loops
+
+In programming, we often need to perform the same operation multiple times. Most of the time, even more important things than just printing out, "Let's learn about loops!"
+
+Loops provide an efficient way to repeat code without having to write it over and over again. They are essential for processing collections of data, automating repetitive tasks, and creating game mechanics that need to run continuously.
+
+Think about a DOOM DeathMatch scenario: after each match, you need to update statistics for all players. Without loops, you would need to write the same code for each player. With loops, you can process each player's data with just a few lines of code.
+
+## For Loops
+
+The `for` loop is the most commonly approach when one...first learns about loops. It provides precise control over the iteration process through three key components:
+
+1. **Initialization**: Sets up a counter variable (typically named `i` - for index)
+2. **Condition**: Determines when the loop should stop
+3. **Iteration**: Updates the counter at the end of each loop
+
+For the last part, iteration, it can take a few different forms. Ultimately, what we want is to increment our 'loop counter,' usually by 1.
+
+```javascript
+let counter = 0
+
+/**
+ * Take the value of counter.
+ * Add `1` to it.
+ * Assign the result back to `counter`.
+ */
+counter = counter + 1
+
+// Or, more succinctly
+counter += 1
+
+// Or, even more succinctly
+counter++
+```
+
+### Basic For Loop Syntax
+
+```javascript
+// for (some initial condition; some ending condition; some increment interval)
+for (let i = 0; i < 5; i++) {
+  // Applying template literal interpolation to print the dynamic value of `i`
+  console.log(`Loop iteration: ${i}`)
+}
+```
+
+This basic loop will output:
+
+```
+Loop iteration: 0
+Loop iteration: 1
+Loop iteration: 2
+Loop iteration: 3
+Loop iteration: 4
+```
+
+The execution follows this pattern:
+
+1. Set `i = 0` (initialization, runs once at the start)
+2. Check if `i < 5` (condition)
+3. If true, run the code block
+4. Increment `i` by 1 (`i++`)
+5. Check the condition again
+6. Repeat until the condition is false
+
+### Looping Through Arrays
+
+Since you've already learned about arrays, let's see how `for` loops can help us work with collections of data. Arrays and loops are natural partners in JavaScript.
+
+```javascript
+const weapons = [
+  'Fist/Chainsaw', // 1
+  'Pistol', // 2
+  'Shotgun', // 3
+  'Chaingun', // 4
+  'Rocket Launcher', // 5
+  'Plasma Rifle', // 6
+  'BFG 9000', // 7
+]
+
+// Print each weapon with its inventory position
+for (let i = 0; i < weapons.length; i++) {
+  console.log(`Weapon ${i + 1}: ${weapons[i]}`) // Why `i + 1`? 🤔
+}
+```
+
+Output:
+
+```
+Weapon 1: Fist/Chainsaw
+Weapon 2: Pistol
+Weapon 3: Shotgun
+Weapon 4: Chaingun
+Weapon 5: Rocket Launcher
+Weapon 6: Plasma Rifle
+Weapon 7: BFG 9000
+```
+
+This loop accesses each element in the weapons array by its index (`i`). The condition `i < weapons.length` ensures we stop after processing the last item. What happens if we don't stop at `weapons.length`? 🤔
+
+### Working with Objects in Arrays
+
+In game development, we often work with arrays of objects that represent entities like players or items. Let's see how to process player data:
+
+```javascript
+const players = [
+  { name: 'DoomGuy', kills: 25, deaths: 5 },
+  { name: 'Slayer', kills: 18, deaths: 7 },
+  { name: 'Marine', kills: 12, deaths: 12 },
+]
+
+// Calculate and display kill/death ratio for each player
+for (let i = 0; i < players.length; i++) {
+  const player = players[i]
+  const killDeathRatio = (player.kills / Math.max(1, player.deaths)).toFixed(2)
+
+  console.log(
+    `${player.name}: ${player.kills} kills, ${player.deaths} deaths, K/D ratio: ${kdRatio}`,
+  )
+}
+```
+
+### We Break Down the Above Code Across These Videos
+
+Hold on to your hats! We're about to dive into the world of loops and array processing in JavaScript. 🎩🚀
+
+<YouTubeEmbed videoid="wlk0wotN_pc" height={400} />
+
+<YouTubeEmbed videoid="T8RriL6GoOY" height={400} />
+
+<YouTubeEmbed videoid="WXdr5GJYBb8" height={400} />
+
+## While Loops
+
+The `while` loop executes a block of code as long as a specified condition is true. They're especially useful when you don't know in advance how many iterations will be needed.
+
+### Basic While Loop Syntax
+
+```javascript
+let count = 0
+
+while (count < 5) {
+  console.log(`While loop count: ${count}`)
+  count++
+}
+```
+
+This produces the same output as our first for loop example, but the structure is different. While loops are particularly useful for scenarios where the termination condition isn't based on a simple counter.
+
+### Game-Related Example
+
+Let's simulate a player taking damage until they run out of health:
+
+```javascript
+let playerHealth = 100
+let roundCount = 0
+
+while (playerHealth > 0) {
+  // Random damage between 5 and 25
+  const damage = Math.floor(Math.random() * 21) + 5
+  playerHealth -= damage
+
+  roundCount++
+  console.log(
+    `Round ${roundCount}: Player took ${damage} damage. Health remaining: ${Math.max(0, playerHealth)}`,
+  )
+}
+
+console.log(`Game over! Player survived ${roundCount} rounds.`)
+```
+
+In this example, we don't know in advance how many rounds it will take for the player's health to reach zero, making a `while` loop the appropriate choice.
+
+<YouTubeEmbed videoid="YWZIpCg9sU8" height={400} />
+
+### Avoiding Infinite Loops
+
+One risk with while loops is creating an infinite loop that never terminates:
+
+```javascript
+// DON'T DO THIS!
+let score = 100
+while (score > 0) {
+  console.log(`Current score: ${score}`)
+  // Oops! Nothing changes score, so this loop will run forever
+}
+```
+
+Always ensure that:
+
+1. The loop condition will eventually become false
+2. There's code inside the loop that affects the condition
+3. You test your loops thoroughly
+
+## JavaScript Loops - Practice Assignment
+
+### Overview
+
+This assignment will help you practice implementing JavaScript loops and working with arrays. You'll write code that demonstrates your understanding of different loop types and apply them to solve practical problems.
+
+### Part 1: Coding Practice (20 points)
+
+Create a new JavaScript file named `loops-practice.js`. In this file, implement the following exercises. For each exercise, include detailed code comments that explain what your code is doing and why you approached the problem the way you did.
+
+#### Exercise 1: Basic Loop Practice (5 points)
+
+Write a `for` loop that counts from 1 to 10 and outputs each number to the console. Then, write a `while` loop that does the same thing. Include comments explaining the differences between these two approaches.
+
+#### Exercise 2: Array Iteration (5 points)
+
+Create an array of your favorite video games or movies (at least 5 items). Use a `for` loop to iterate through the array and output each item to the console along with its position in the list (e.g., "Item 1: Doom").
+
+#### Exercise 3: Working with Objects in Arrays (10 points)
+
+Create an array of at least three player objects similar to the example in the lesson. Each player should have a name, kills, and deaths property. Then:
+
+1. Use a loop to output each player's information
+2. Calculate and display the kill/death ratio for each player
+3. Determine and display which player has the best K/D ratio
+
+### Part 2: Code Commenting Guide
+
+Remember that good comments explain WHY, not just WHAT. Use comments to explain your thought process and any important decisions you made while writing your code.
+
+```javascript
+// Single-line comments use two forward slashes
+
+/* 
+   Multi-line comments 
+   use this syntax
+*/
+
+// EXAMPLE OF GOOD COMMENTING:
+// Calculate K/D ratio, using Math.max to prevent division by zero
+const killDeathRatio = (player.kills / Math.max(1, player.deaths)).toFixed(2)
+```
+
+### Part 3: Reflection (10 points)
+
+In a separate file named `loops-reflection.md`, write a reflection (200-300 words) that addresses the following:
+
+1. What was the most challenging concept about loops for you to understand? How did you overcome this challenge?
+
+2. The videos in the lesson demonstrated working with arrays of objects and calculating statistics like K/D ratios. What did you learn from these examples that wasn't immediately clear from the text portion of the lesson?
+
+3. How do you think loops will be useful in building web applications? Can you think of a specific example from a website you use where loops might be used?
+
+4. If you had to explain the difference between `for` loops and `while` loops to a classmate, what would you say?
+
+### Bonus Challenge (5 extra points)
+
+Implement a "player damage simulation" that continues until a player runs out of health, similar to the while loop example in the lesson. However, add these additional features:
+
+1. The player should have a chance to heal between rounds
+2. There should be a random chance that the player dodges the attack
+3. Output a summary of the battle when it's over (how many rounds, total damage taken, etc.)
+
+### Submission Requirements
+
+Use Git to continually `add` and `commit` your work. There should be at least one meaningful commit per part of the assignment. When you're finished, push your changes to your GitHub repository.
+
+Submit the link to your GitHub repo in BrightSpace. Your submission should include:
+
+1. `loops-practice.js` with your code solutions
+2. `loops-reflection.md` with your reflection
+3. Any additional files needed for the bonus challenge
+
+Your comments should be thorough and explain your thought process, not just describe what the code is doing. In lieu or in addition to writing code comments, you can just do a brief (3-5 minutes) video explaining your code and thought process.
+
+## Additional Notes
+
+### Git Review: Version Control for Your Assignment
+
+Remember to use Git throughout your development process, not just at the end.
+Make sure that you are running Git from your project directory.
+
+Here's a quick refresher on the essential Git commands you'll need:
+
+1. **Check your repository status**: `git status`.
+2. **Add changes to the staging area**: `git add <filename>` or `git add .` to add all changes.
+3. **Commit your changes**: `git commit -m "Add basic loop practice"`. Remember to write a meaningful commit message in the present tense.
+4. **Verify your remote repository connection**: `git remote -v`. This command shows the URLs that Git has stored as shortcuts for your remote repositories. You should see both fetch and push URLs pointing to your GitHub repository.
+5. **Push your changes** to GitHub: `git push origin main`.
+6. **Verify your commits on GitHub** by visiting your repository in your web browser. You may need to refresh the page to see your latest commits. Check that your files appear and look correct.
+
+Make at least one meaningful commit for each exercise in the assignment. Your commit messages should clearly describe what changes you've made.

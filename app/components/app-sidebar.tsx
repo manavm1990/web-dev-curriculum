@@ -81,6 +81,7 @@ const NAV_ITEMS: NavItem[] = [
       { title: 'Node and VS Code', url: '/js-programming/node-code' },
       { title: 'Strings', url: '/js-programming/strings' },
       { title: 'Functions', url: '/js-programming/functions' },
+      { title: 'Loops', url: '/js-programming/loops' },
     ],
   },
 ] as const
