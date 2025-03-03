@@ -44,11 +44,11 @@ const NAV_ITEMS: NavItem[] = [
     url: '/',
   },
   {
-    title: '1-1 Soft Skills',
+    title: 'Soft Skills',
     url: '/soft-skills',
   },
   {
-    title: '1-2 Dev XP Tools 🧰',
+    title: 'Dev XP Tools 🧰',
     submenu: [
       { title: 'Overview', url: '/dev-xp-tools' },
       { title: 'Mac/Linux Software', url: '/dev-xp-tools/mac' },
@@ -56,7 +56,7 @@ const NAV_ITEMS: NavItem[] = [
     ],
   },
   {
-    title: '2-1 Fundamentals',
+    title: 'Fundamentals',
     submenu: [
       { title: 'Files and Directories', url: '/fundamentals/files-and-directories' },
       {
@@ -73,7 +73,7 @@ const NAV_ITEMS: NavItem[] = [
     ],
   },
   {
-    title: '3-2 JS Basics',
+    title: 'JS Basics',
     submenu: [
       { title: 'What is JS?', url: '/js-programming/what-is-js' },
       { title: 'Data in JS', url: '/js-programming/data' },
@@ -83,6 +83,10 @@ const NAV_ITEMS: NavItem[] = [
       { title: 'Functions', url: '/js-programming/functions' },
       { title: 'Loops', url: '/js-programming/loops' },
     ],
+  },
+  {
+    title: 'Functional Programming',
+    submenu: [{ title: 'First Class Functions', url: '/functional/callbacks' }],
   },
 ] as const
 
