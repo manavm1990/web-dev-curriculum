@@ -77,49 +77,6 @@ const calcOrderCost = (order) => {
 
 `const calcOrderCost = (order) => order.quantity * order.priceEa`
 
----
-
-### ➿ Functions Review
-
-Given the following data:
-
-```javascript
-const backpackFullOfAmmo = [
-  { item: 'bullets', quantity: 10, priceEa: 0.5 },
-  { item: 'shotgun shells', quantity: 4, priceEa: 0.5 },
-  { item: 'rockets', quantity: 1, priceEa: 5.0 },
-  { item: 'energy cell units', quantity: 20, priceEa: 0.2 },
-]
-```
-
-How would we calculate the total value of the backpack?
-
-```text
-1. Start with a running total of 0.
-2. For each item in the backpack:
-  - Calculate the cost of the item by multiplying the quantity by the price each.
-  - Add the cost to the running total.
-3. Display the total value of the backpack.
-```
-
-```javascript
-let totalValue = 0
-
-for (let i = 0; i < backpackFullOfAmmo.length; i++) {
-  totalValue += calculateOrderCost(backpackFullOfAmmo[i])
-}
-
-console.log(totalValue)
-```
-
----
-
-<YouTubeEmbed videoid="GnMJ2wTCfYI" height={400} />
-
-The above video reviews loops and arrays and indices, but, most importantly, it reinforces what it means to **think like a developer.**
-
----
-
 ## Callback Functions
 
 <Lead>JS hereby declares that **Functions are first-class citizens...**</Lead>
@@ -272,3 +229,35 @@ console.log(doubledNumbers.join('\n'))
 ```
 
 <YouTubeEmbed videoid="0KevkxNlwG0" height={400} />
+
+## Assignment
+
+### Demonstrate the Demos - 10 points
+
+You should have your template repo cloned and ready to go. So, work through this whole lesson from top to bottom. As you finish each section, make sure to add and commit your changes.
+
+Meanwhile, have a GitHub Gist open. As you work through each part of the lesson, write a brief summary of what you learned in that section. This will be your reflection assignment. Use proper headings and bullet points to organize your thoughts.
+
+### Explore Array Callback Methods - 10 points
+
+Now that you have a good understanding of the `map` method, explore the other array callback methods on MDN by picking one of theses methods:
+
+- `filter`
+- `reduce` - ⚠️ this one is a bit more advanced!
+- `find`
+- `some`
+- `every`
+- `sort`
+
+Now, create a new file in your classroom repo called `array-callback-methods.md`. Create a demo of the method you chose and then create a 'teach back video.' In this video, you should explain the method you chose and how it works. You should also explain how it is similar to and different from the `map` method.
+
+Your video should be 3-5 minutes long.
+
+### Deliverables
+
+- A reflection assignment in a GitHub Gist.
+- Your classroom repo should have commits for each section of the lesson.
+- A new file in your classroom repo called `array-callback-methods.md` with a demo.
+- A 'teach back video' explaining the method you chose and how it works.
+
+To get full credit, you must have well-formatted markdown files and a video that is clear and easy to understand. Your repo should have clear, well-written commit messages.
