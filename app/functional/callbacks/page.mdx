@@ -1,0 +1,274 @@
+import Large from '@/components/ui/typography/large'
+import Lead from '@/components/ui/typography/lead'
+import { YouTubeEmbed } from '@next/third-parties/google'
+
+<Lead>
+  For the next few lessons, we are using [this updated template repo that you must access via GitHub
+  Classroom.](https://classroom.github.com/a/G0AOkrIv). This is the repo that you will use to follow
+  along in the videos and it's also the repo that you will use to submit your assignments.
+</Lead>
+
+- Upon clicking the above link, it should automatically fork the repo to your GitHub account for you. From there, you will clone the repo as before.
+- As always...as always...**DO NOT** clone this repo into another repo on your computer. Make sure that you are in your `Dev` directory or similar on your computer.
+- If you have any issues with the above link, please let me know ASAP.
+
+<YouTubeEmbed videoid="WMnqs6jDn6k" height={400} />
+
+# First-Class Functions and Callbacks in JavaScript
+
+<Large>
+  Everything in JS is an object, except primitives, and even those behave like objects sometimes.
+</Large>
+
+This means that even functions are objects! This is a powerful concept that allows us to pass functions as arguments to other functions, store them in variables, and return them from other functions. In this lesson, we'll explore how this concept enables **first-class functions** and **callbacks** in JavaScript.
+
+## Functions Are First-Class Citizens
+
+JS hereby declares that **Functions are first-class citizens.** JS hereby bestows upon them all of the rights and privileges afforded to all other data types in JS, including objects. Unlike what happens in other languages, we shall not discriminate against functions. They shall be treated as equals.
+
+### Storing Functions in Variables
+
+We can store numbers in variables, right? `const x = 3;`. We can store strings in variables, right? `const y = 'Hello';`. We can store objects in variables, right? `const z = { name: 'John' };`. Well, guess what? We can store functions in variables too!
+
+```javascript
+const greet = function () {
+  return 'Hello, world!'
+}
+```
+
+Now, just because we can do something doesn't meant that we should, and the above code is 🆗, but not typical. Instead, we usually only write our functions this way when we use a special syntax known as **arrow functions.**
+
+### Using Arrow Functions
+
+Arrow functions are a more concise way to write functions in JavaScript. They are especially useful when passing functions as arguments to other functions, which we'll see shortly.
+
+```javascript
+const greet = () => {
+  return 'Hello, world!'
+}
+```
+
+This is the same as the previous example, but with a more compact syntax. In fact, we can make it even more concise in a case like above where there is only a single statement in the function body: `const greet = () => 'Hello, world!'`.
+
+We will typically only do this if:
+
+- There is only a single statement in the function body.
+- The single statement is a return statement.
+
+#### Confused 😕❔
+
+If you don't like that succinct arrow function, no worries. You are free to write out your functions as full declarations as we have been doing. However, you are sure to see arrow functions in the wild, so it's good to know what they are.
+
+---
+
+<YouTubeEmbed videoid="iDrvbDkzERc" height={400} />
+
+The above video shows the progression of functions from full declarations to arrow functions.
+
+```javascript
+function calculateOrderCost(order) {
+  return order.quantity * order.priceEa
+}
+
+const calcOrderCost = (order) => {
+  return order.quantity * order.priceEa
+}
+```
+
+`const calcOrderCost = (order) => order.quantity * order.priceEa`
+
+---
+
+### ➿ Functions Review
+
+Given the following data:
+
+```javascript
+const backpackFullOfAmmo = [
+  { item: 'bullets', quantity: 10, priceEa: 0.5 },
+  { item: 'shotgun shells', quantity: 4, priceEa: 0.5 },
+  { item: 'rockets', quantity: 1, priceEa: 5.0 },
+  { item: 'energy cell units', quantity: 20, priceEa: 0.2 },
+]
+```
+
+How would we calculate the total value of the backpack?
+
+```text
+1. Start with a running total of 0.
+2. For each item in the backpack:
+  - Calculate the cost of the item by multiplying the quantity by the price each.
+  - Add the cost to the running total.
+3. Display the total value of the backpack.
+```
+
+```javascript
+let totalValue = 0
+
+for (let i = 0; i < backpackFullOfAmmo.length; i++) {
+  totalValue += calculateOrderCost(backpackFullOfAmmo[i])
+}
+
+console.log(totalValue)
+```
+
+---
+
+<YouTubeEmbed videoid="GnMJ2wTCfYI" height={400} />
+
+The above video reviews loops and arrays and indices, but, most importantly, it reinforces what it means to **think like a developer.**
+
+---
+
+## Callback Functions
+
+<Lead>JS hereby declares that **Functions are first-class citizens...**</Lead>
+
+We can pass strings into as function arguments, right?
+
+```javascript
+function greet(name) {
+  return `Hello, ${name}!`
+}
+
+console.log(greet('John'))
+```
+
+We can pass numbers into as function arguments, right?
+
+```javascript
+function double(num) {
+  return num * 2
+}
+
+console.log(double(3))
+```
+
+Well, guess what? We can pass functions into as function arguments too!
+
+```javascript
+function doSomethingWithNumber(number, callbackFunction) {
+  return callbackFunction(number)
+}
+
+function divideByTwo(num) {
+  return num / 2
+}
+
+function double(num) {
+  return num * 2
+}
+
+function triple(num) {
+  return num * 3
+}
+
+doSomethingWithNumber(42, double)
+doSomethingWithNumber(42, triple)
+doSomethingWithNumber(42, divideByTwo)
+```
+
+A callback function is a function that gets passed to another function and is executed later. This is a powerful concept that enables a wide range of functionality in JavaScript. This pattern might seem unusual at first, but it's the foundation of modern JavaScript's approach to array processing.
+
+---
+
+You can just follow along with this video and take notes to add to your reflection assignment.
+
+<YouTubeEmbed videoid="fs7wL-Vzl80" height={400} />
+
+---
+
+---
+
+We are skipping `forEach` and headed straight into `map`. `forEach` doesn't have any major intrinsic value or advantage as compared to `map`. `map` is more powerful and more flexible, and works in all the same ways as `forEach`.
+
+---
+
+## Introduction to the `map` Method
+
+The `map` works specifically on arrays. It leverages a callback function to transform each element of the array into a new element. The original array remains unchanged.
+
+Let's start with a simple example where we want to double each number in an array.
+
+First, think through the steps:
+
+1. Start with an array of numbers.
+2. For each number in the array:
+
+- Multiply the number by 2.
+
+3. Create a new array with the doubled numbers.
+
+Now, with an imperative loop:
+
+```javascript
+const numbers = [1, 2, 3, 4, 5]
+const doubledNumbers = []
+
+for (let i = 0; i < numbers.length; i++) {
+  doubledNumbers.push(numbers[i] * 2)
+}
+
+console.log(doubledNumbers)
+```
+
+And now, with the `map` method:
+
+```javascript
+const numbers = [1, 2, 3, 4, 5]
+
+const doubledNumbers = numbers.map(function (number) {
+  return number * 2
+})
+
+console.log(doubledNumbers)
+```
+
+---
+
+The below video uses the [same example as MDN does.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
+
+<YouTubeEmbed videoid="jPQ6pc_FTDk" height={400} />
+
+---
+
+## `map` Method Mechanics
+
+A few things to note about the `map` method:
+
+- The `map` method automatically iterates over each element in the array. There is no need to specify an index or length.
+- The `map` method creates a new array with the results of calling a provided function on every element in the calling array.
+- The `map` method does not change the original array. It returns a new array with the transformed elements.
+- We must be sure to return something from the callback function. If we don't, the new array will be filled with `undefined`, as a function that doesn't return anything returns `undefined` by default.
+
+<YouTubeEmbed videoid="xTXHHLx44x8" height={400} />
+
+## JS With a Dash of HTML
+
+The most common task for any UI is to take some data, usually an array of object literals and to render that data to the screen. This is usually done by using `map`. We take each piece of data and transform it into a string of HTML that we can then render in the browser.
+
+```javascript
+const numbers = [1, 2, 3, 4, 5]
+
+const doubledNumbers = numbers.map(function (number) {
+  return `<li>${number * 2}</li>`
+})
+
+// Join the array back into a string with a newline between each item
+console.log(doubledNumbers.join('\n'))
+```
+
+Again, for comparison, here's the same with an imperative loop:
+
+```javascript
+const numbers = [1, 2, 3, 4, 5]
+const doubledNumbers = []
+
+for (let i = 0; i < numbers.length; i++) {
+  doubledNumbers.push(`<li>${numbers[i] * 2}</li>`)
+}
+
+console.log(doubledNumbers.join('\n'))
+```
+
+<YouTubeEmbed videoid="0KevkxNlwG0" height={400} />
