@@ -86,7 +86,10 @@ const NAV_ITEMS: NavItem[] = [
   },
   {
     title: 'Functional Programming',
-    submenu: [{ title: 'First Class Functions', url: '/functional/callbacks' }],
+    submenu: [
+      { title: 'First Class Functions', url: '/functional/callbacks' },
+      { title: 'Array Methods', url: '/functional/array-methods' },
+    ],
   },
 ] as const
 

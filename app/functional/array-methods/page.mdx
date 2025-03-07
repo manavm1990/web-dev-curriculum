@@ -1,0 +1,671 @@
+import Mermaid from '@/components/mermaid'
+import Lead from '@/components/ui/typography/lead'
+
+# Array Methods
+
+Create a new file in the same repo from the last homework. Call it: `arrays-practice.js`. Keep this in the `src` directory.
+
+As you work through this lesson, you should code out the sections labeled **Code**. After each example, once you have verified the results and understood the code, **commit** your changes.
+
+This will help you keep track of your progress.
+
+And, if you don't understand, please ask questions sooner rather than later!
+
+All datasets, including for the homework can be found [here](https://gist.github.com/manavm1990/030b22a977103fbea8bfe46b893b5635) for your copy/paste convenience.
+
+<Lead>
+  This lesson builds upon our knowledge of callback functions, exploring powerful array methods.
+  This truly opens up a world of possibilities for manipulating and transforming data, leveraging a
+  declarative approach.
+</Lead>
+
+## Declarative vs Imperative
+
+As mentioned previously, a declarative approach is one in which we describe what we want to achieve, rather than how to achieve it. This is in contrast to an imperative approach, where we specify the exact steps to accomplish a task.
+
+Case and point, the difference between a `for` or `while` loop and the `map` method.
+
+### Imperative
+
+```javascript
+const numbers = [1, 2, 3, 4, 5]
+const doubled = []
+
+for (let i = 0; i < numbers.length; i++) {
+  doubled.push(numbers[i] * 2)
+}
+
+console.log(doubled)
+```
+
+### Declarative
+
+```javascript
+const numbers = [1, 2, 3, 4, 5]
+const doubled = numbers.map((number) => number * 2)
+
+console.log(doubled)
+```
+
+Note the difference. In the imperative example, we specify how to double the numbers, while in the declarative example, we simply state that we want to double the numbers, resulting in shorter, more readable code.
+
+Now, although the `map` method is a workhorse method that you will use often, it is not the only array method available. In fact, there are several powerful array methods that can help you manipulate and transform data in a declarative way.
+
+<Mermaid
+  chart={`
+graph LR
+    A[Original Array] --> |map| B[New Array with transformed values]
+    A --> |filter| C[New Array with subset of values]
+    A --> |reduce| D[Single accumulated value]
+    A --> |find| E[First matching element]
+    A --> |some| F[Boolean: at least one match?]
+    A --> |every| G[Boolean: all match?]
+    A --> |sort| H[Same array, reordered]
+`}
+/>
+
+## Array Methods and the Array Prototype
+
+Whenever you look up a new array method using MDN, you will see a header that mentions the `Array.prototype`.
+
+Now, a full discussion on this would delve into the inherent prototype-based Object-oriented nature of JavaScript. However, especially for an introductory course focused on preparing for leveraging React, this would simply not be a good use of time.
+
+Suffice to say, that whenever we create an array with `[]`, we are creating an **instance** of the `Array` prototype. In fact, the full, long way to create an array uses the `new` keyword: `const numbers = new Array(1, 2, 3, 4, 5)`. We just use `[]` because it is shorter and more convenient.
+
+Regardless, because this instance of the `Array` prototype is created, we have access to all of the methods that are defined on the `Array.prototype`. This includes methods like `map`, `filter`, `reduce`, and many more.
+
+That is the essence of prototype-based Object-oriented programming.
+
+> Everything in JavaScript is an object, except for primitives, and even some of those can be wrapped in an object, if needed.
+
+All of the prototypes in JavaScript, including Arrays derive from a top-level prototype called `Object.prototype`. This is the top of the prototype chain.
+
+That concludes are brief deviation into OOP in JavaScript. We'll continue on with learning practical applications of array methods.
+
+## `filter`
+
+The `filter` method creates a new array with all elements that pass the test implemented by the provided function.
+
+```javascript
+const numbers = [1, 2, 3, 4, 5]
+const oddNumbers = numbers.filter((number) => number % 2)
+
+console.log(oddNumbers) // [1, 3, 5]
+```
+
+Unlike a `map`, which uses the return value of the callback to populate the new array, `filter` uses the return value of the callback to determine whether or not to include the element in the new array.
+
+If the return value is truthy, the element is included in the new array. If the return value is falsy, the element is excluded from the new array.
+
+The term here is **predicate**. A predicate is a function that returns a boolean value (i.e. true or false).
+
+### What's Happening Here?
+
+The 🔑 here is to understand the callback function: `(number) => number % 2`. First, note that this is written using arrow syntax. Recall that it doesn't have to be, so let's write it the longer way for clarity. Taking, just the filter part that looks like:
+
+```javascript
+numbers.filter((number) => {
+  return number % 2
+})
+```
+
+#### What's that `%`?
+
+The `%` operator is the **modulus** operator. It returns the remainder of a division operation. For example, `5 % 2` returns `1`, because `2` goes into `5` two times, with a remainder of `1`. Similarly, `4 % 2` returns `0`, because `2` goes into `4` two times, with no remainder.
+
+#### Putting it Together
+
+So, the `filter` function, like the `map`, automatically iterates over the array from start to finish. In the callback function we specify a parameter or placeholder that will represent each individual item in the array.
+
+For clarity, this is usually the singular form of whatever we named the array. So, if the array is `numbers`, then we can reference each individual number as `number`: `(number) => {`.
+
+Now, being a callback function, we want to return a value. As mentioned earlier with regards to the `%`, this means that `return number % 2` will return `0` for even numbers and `1` for odd numbers.
+
+However, the `filter` will always **coerce** a number to a boolean. So, `0` becomes `false` and `1` becomes `true`. Therefore, the `filter` will include only the odd numbers in the new array.
+
+Note that, some folks would be more explicit here, by using the comparison operator `===`: `return number % 2 === 1`. Feel free to do this, but it is not necessary. As long as you understand `filter` and predicate functions, you will know that a filter's callback function will always coerce to a boolean.
+
+## `filter` Example
+
+Let's return to our Doom deathmatch data:
+
+```javascript
+const players = [
+  { name: 'DoomGuy', frags: 25, deaths: 0 },
+  { name: 'Slayer', frags: 25, deaths: 1 },
+  { name: 'Marine', frags: 12, deaths: 15 },
+  { name: 'Noob', frags: 0, deaths: 25 },
+]
+```
+
+Our task is to return a new array of players that have more frags than deaths.
+
+### Think Like a developer
+
+As usual, before worrying about code, we will outline our steps. We pretend that we have been sent back in time before there there are computers, and we have to do this manually with pencil and paper.
+
+1. Start at the top of `players`.
+1. Look at the first player's frags and deaths.
+1. If the frags are greater than the deaths, write down that player's information.
+1. If not, skip to the next player.
+1. Repeat until we reach the end of the array.
+
+### Code
+
+```javascript
+const players = [
+  { name: 'DoomGuy', frags: 25, deaths: 0 },
+  { name: 'Slayer', frags: 25, deaths: 1 },
+  { name: 'Marine', frags: 12, deaths: 15 },
+  { name: 'Noob', frags: 0, deaths: 25 },
+]
+
+const playersWithMoreFragsThanDeaths = players.filter((player) => {
+  // Additional `console.log` for clarity.
+  console.log(`We are now looking at this player: ${player.name}`)
+
+  return player.frags > player.deaths
+})
+
+console.log(playersWithMoreFragsThanDeaths)
+```
+
+```shell
+We are now looking at this player: DoomGuy
+We are now looking at this player: Slayer
+We are now looking at this player: Marine
+We are now looking at this player: Noob
+[
+  { name: 'DoomGuy', frags: 25, deaths: 0 },
+  { name: 'Slayer', frags: 25, deaths: 1 }
+]
+```
+
+And, we can shorten that filter with implicit return:
+
+```javascript
+const playersWithMoreFragsThanDeaths = players.filter((player) => player.frags > player.deaths)
+```
+
+```shell
+[
+  { name: 'DoomGuy', frags: 25, deaths: 0 },
+  { name: 'Slayer', frags: 25, deaths: 1 }
+]
+```
+
+## `reduce`
+
+The `reduce` method executes a reducer function (that you provide) on each element of the array, resulting in a single output value. We can say that the reducer reduces or distills the array into a single value. Now, that single value may well be yet another collection such as an array or an object. Nevertheless, we still call this a reducer.
+
+The `reduce()` method works by applying a "reducer" callback function to each element of the array, carrying forward an "accumulator" that holds the intermediate results. The final value of the accumulator after processing all elements is the result of the `reduce()` operation.
+
+Here's a simple example of using reduce() to sum up numbers in an array:
+
+```javascript
+const numbers = [1, 2, 3, 4, 5]
+const sum = numbers.reduce((accumulator, currentValue) => {
+  console.log(`Accumulator: ${accumulator}, Current Value: ${currentValue}`)
+
+  return accumulator + currentValue
+}, 0)
+
+console.log(sum) // 15
+```
+
+### What's Happening Here?
+
+🆗, `reduce` is a bit trickier than `map` or `filter`. First, note that the callback function actually requires 2️⃣ parameters: `(accumulator, currentValue) => {`
+
+One is referred to as the accumulator. This is the aggregation or amalgamation or the final single value that you are after. In the above example, it's nothing but the sum or total, `15`.
+
+The other is the current value. This is the current item in the array that we are iterating over, so that part is similar to `map` and `filter`.
+
+But, take a closer look at what we pass into `reduce`. There's actually 2️⃣ arguments.
+
+```javascript
+reduce((accumulator, currentValue) => {
+  console.log(`Accumulator: ${accumulator}, Current Value: ${currentValue}`)
+
+  return accumulator + currentValue
+}, 0)
+```
+
+So, what do think that `0` is? This is the initial value of the accumulator. In this case, we are starting with `0` because we are summing numbers. Technically, we don't **have to** pass in an initial value. If we don't, the first element of the array will be used as the initial value of the accumulator. However, this is not a good practice, because it can lead to unexpected results. Just always pass in an initial value.
+
+Summarily, the only difference with the `reduce` is that we need a placeholder to keep track of the running total, or accumulator as well as the current item in the array as we iterate over it. And, we need to pass in an initial value for the accumulator.
+
+Running the above code, we see:
+
+```shell
+# Note: The accumulator starts at `0`, the initial value previously mentioned.
+Accumulator: 0, Current Value: 1
+Accumulator: 1, Current Value: 2
+Accumulator: 3, Current Value: 3
+Accumulator: 6, Current Value: 4
+Accumulator: 10, Current Value: 5
+15
+```
+
+### `reduce` Example
+
+Using the same data:
+
+```javascript
+const players = [
+  { name: 'DoomGuy', frags: 25, deaths: 0 },
+  { name: 'Slayer', frags: 25, deaths: 1 },
+  { name: 'Marine', frags: 12, deaths: 15 },
+  { name: 'Noob', frags: 0, deaths: 25 },
+]
+```
+
+Our task is to find the total number of frags.
+
+### Think Like a developer
+
+1. Write down the number `0` to start the 🏃🏾‍♂️ total.
+2. Look at the first player's frags, `25`. Add `0 + 25 = 25`.
+3. Write down `25`.
+4. Look at the second player's frags, `25`. Add `25 + 25 = 50`.
+5. Write down `50`.
+6. Look at the third player's frags, `12`. Add `50 + 12 = 62`.
+7. Write down `62`.
+8. Look at the fourth player's frags, `0`. Add `62 + 0 = 62`.
+9. Write down `62`.
+10. We are done. The total number of frags is `62`.
+
+### Code
+
+```javascript
+const players = [
+  { name: 'DoomGuy', frags: 25, deaths: 0 },
+  { name: 'Slayer', frags: 25, deaths: 1 },
+  { name: 'Marine', frags: 12, deaths: 15 },
+  { name: 'Noob', frags: 0, deaths: 25 },
+]
+
+const totalFrags = players.reduce((total, player) => {
+  return total + player.frags
+}, 0)
+console.log(totalFrags)
+```
+
+`62`.
+
+And, again, we can shorten the callback with implicit return:
+
+```javascript
+const totalFrags = players.reduce((total, player) => total + player.frags, 0)
+
+console.log(totalFrags)
+```
+
+`62`.
+
+## `find`
+
+The `find` method returns the value of the first element in the provided array that satisfies the provided testing function. If no values satisfy the testing function, `undefined` is returned.
+
+So, it's similar to `filter`, but instead of iterating across the entire array and getting a new array of all of the 'passing items', it will return just the first matching item.
+
+```javascript
+const numbers = [1, 2, 3, 4, 5]
+
+const firstOddNumber = numbers.find((number) => number % 2)
+
+console.log(firstOddNumber) // 1
+```
+
+So, again, `find` will **not** necessarily iterate across the entire array. It will stop as soon as it finds a match.
+
+In this case, the first item is `1`, which is odd, so it returns `1` immediately, and stops iterating.
+
+## `find` Example
+
+Using the same data:
+
+```javascript
+const players = [
+  { name: 'DoomGuy', frags: 25, deaths: 0 },
+  { name: 'Slayer', frags: 25, deaths: 1 },
+  { name: 'Marine', frags: 12, deaths: 15 },
+  { name: 'Noob', frags: 0, deaths: 25 },
+]
+```
+
+Our task is to find the first player with more frags than deaths.
+
+### Think Like a developer
+
+1. Assume that there are no players with more frags than deaths until we prove otherwise. Start with `undefined`.
+2. Look at the first player's frags, `25`, and deaths, `0`. Since `25` is greater than `0`, we have found a player with more frags than deaths. Return that player.
+3. We are done. The first player with more frags than deaths is `DoomGuy`.
+
+### Code
+
+```javascript
+const players = [
+  { name: 'DoomGuy', frags: 25, deaths: 0 },
+  { name: 'Slayer', frags: 25, deaths: 1 },
+  { name: 'Marine', frags: 12, deaths: 15 },
+  { name: 'Noob', frags: 0, deaths: 25 },
+]
+
+const firstPlayerWithMoreFragsThanDeaths = players.find((player) => player.frags > player.deaths)
+
+console.log(firstPlayerWithMoreFragsThanDeaths) // { name: 'DoomGuy', frags: 25, deaths: 0 }
+```
+
+## `some`
+
+The `some` method tests whether at least one element in the array passes the test implemented by the provided function. It returns a boolean value.
+
+```javascript
+const numbers = [1, 2, 3, 4, 5]
+
+const hasOddNumber = numbers.some((number) => number % 2)
+
+console.log(hasOddNumber) // true
+```
+
+So, this is kind of similar to `filter`, except it will stop as soon as it encounters any item that passes the predicate test.
+
+In this case, the first item is `1`, which is odd, so it returns `true` immediately.
+
+## `some` Example
+
+Using the same data:
+
+```javascript
+const players = [
+  { name: 'DoomGuy', frags: 25, deaths: 0 },
+  { name: 'Slayer', frags: 25, deaths: 1 },
+  { name: 'Marine', frags: 12, deaths: 15 },
+  { name: 'Noob', frags: 0, deaths: 25 },
+]
+```
+
+Our task is to determine if there have been any frags.
+
+### Think Like a developer
+
+1. Assume that there are no frags until we prove otherwise. Start with `false`.
+2. Look at the first player's frags, `25`. Since `25` is greater than `0`, we have found a frag. Return `true`.
+3. We are done. There have been frags.
+
+### Code
+
+```javascript
+const players = [
+  { name: 'DoomGuy', frags: 25, deaths: 0 },
+  { name: 'Slayer', frags: 25, deaths: 1 },
+  { name: 'Marine', frags: 12, deaths: 15 },
+  { name: 'Noob', frags: 0, deaths: 25 },
+]
+
+const hasFrags = players.some((player) => player.frags)
+
+console.log(hasFrags) // true
+```
+
+Note that in our callback: `(player) => player.frags`, we are taking advantage of **implicit coercion.** We could have been more explicit by saying: `(player) => player.frags > 0`, but it is not necessary. Any non-zero number is coerced to `true`.
+
+## `every`
+
+The `every` method tests whether all elements in the array pass the test implemented by the provided function. It returns a boolean value.
+
+```javascript
+const numbers = [1, 2, 3, 4, 5]
+
+const allOddNumbers = numbers.every((number) => number % 2)
+
+console.log(allOddNumbers) // false
+```
+
+In this case, how far does `every` take the array? Well, it only goes until the second item, `2`. Since `2` is even, it returns `false` immediately, and it's done.
+
+## `every` Example
+
+Using the same data:
+
+```javascript
+const players = [
+  { name: 'DoomGuy', frags: 25, deaths: 0 },
+  { name: 'Slayer', frags: 25, deaths: 1 },
+  { name: 'Marine', frags: 12, deaths: 15 },
+  { name: 'Noob', frags: 0, deaths: 25 },
+]
+```
+
+Our task is to determine if all players have more frags than deaths.
+
+### Think Like a developer
+
+1. Assume that all players have more frags than deaths until we prove otherwise. Start with `true`.
+2. Look at the first player's frags, `25`, and deaths, `0`. Since `25` is greater than `0`, we have not proven otherwise. Continue.
+3. Look at the second player's frags, `25`, and deaths, `1`. Since `25` is greater than `1`, we have not proven otherwise. Continue.
+4. Look at the third player's frags, `12`, and deaths, `15`. Since `12` is not greater than `15`, we have proven otherwise. Return `false`.
+5. We are done. Not all players have more frags than deaths.
+
+### Code
+
+```javascript
+const players = [
+  { name: 'DoomGuy', frags: 25, deaths: 0 },
+  { name: 'Slayer', frags: 25, deaths: 1 },
+  { name: 'Marine', frags: 12, deaths: 15 },
+  { name: 'Noob', frags: 0, deaths: 25 },
+]
+
+const allPlayersHaveMoreFragsThanDeaths = players.every((player) => player.frags > player.deaths)
+
+console.log(allPlayersHaveMoreFragsThanDeaths) // false
+```
+
+## `sort`
+
+The `sort` method sorts the elements of an array in place and returns the sorted array. There is built-in default sorting, but it is not very useful. Outside of perhaps numbers, you will always want to write your custom sorting function.
+
+```javascript
+const numbers = [5, 3, 8, 1, 2]
+
+const sortedNumbers = numbers.sort((a, b) => a - b)
+console.log(sortedNumbers) // [1, 2, 3, 5, 8]
+```
+
+### What's Happening Here?
+
+Like, `reduce`, the `sort` callback function requires 2️⃣ parameters. Why? Because, just like in real life, we need to compare two things at a time to arrange them in the desired order.
+
+Ordinarily, it's good to be very explicity with naming our parameters. However, `a` and `b` are commonly used conventions for sorting. They just represent the next two items in the array.
+
+We can understand what's happening better by adding some logging.
+
+```javascript
+const numbers = [5, 3, 8, 1, 2]
+
+const sortedNumbers = numbers.sort((a, b) => {
+  console.log(`Now comparing a: ${a}, b: ${b}`)
+
+  return a - b
+})
+
+console.log(sortedNumbers)
+```
+
+```shell
+Now comparing a: 3, b: 5
+Now comparing a: 8, b: 3
+Now comparing a: 8, b: 5
+Now comparing a: 1, b: 5
+Now comparing a: 1, b: 3
+Now comparing a: 2, b: 5
+Now comparing a: 2, b: 3
+Now comparing a: 2, b: 1
+[ 1, 2, 3, 5, 8 ]
+```
+
+Note that doing: `return a - b` will sort in ascending order. If we want to sort in descending order, we can do: `return b - a`.
+
+## `sort` Example
+
+Using the same data:
+
+```javascript
+const players = [
+  { name: 'DoomGuy', frags: 25, deaths: 0 },
+  { name: 'Slayer', frags: 25, deaths: 1 },
+  { name: 'Marine', frags: 12, deaths: 15 },
+  { name: 'Noob', frags: 0, deaths: 25 },
+]
+```
+
+Our task is to sort the players by frags in descending order.
+
+### Think Like a developer
+
+1. Look at the first player's frags, `25`, and the second player's frags, `25`. Since they are equal, we don't need to do anything.
+2. Look at the second player's frags, `25`, and the third player's frags, `12`. Since `25` is greater than `12`, we need to swap them.
+3. Look at the third player's frags, `12`, and the fourth player's frags, `0`. Since `12` is greater than `0`, we need to swap them.
+4. We are done. The players are sorted by frags in descending order.
+
+### Code
+
+```javascript
+const players = [
+  { name: 'DoomGuy', frags: 25, deaths: 0 },
+  { name: 'Slayer', frags: 25, deaths: 1 },
+  { name: 'Marine', frags: 12, deaths: 15 },
+  { name: 'Noob', frags: 0, deaths: 25 },
+]
+
+const sortedPlayers = players.sort((a, b) => b.frags - a.frags)
+
+console.log(sortedPlayers)
+```
+
+```shell
+[
+  { name: 'DoomGuy', frags: 25, deaths: 0 },
+  { name: 'Slayer', frags: 25, deaths: 1 },
+  { name: 'Marine', frags: 12, deaths: 15 },
+  { name: 'Noob', frags: 0, deaths: 25 }
+]
+```
+
+Now, in this case, our data was already sorted, so not that much fun, but you get the point, hopefully 🤞🏾.
+
+## Assignment
+
+### Follow-Along Codes - 10 points
+
+As indicated at the beginning of this lesson ☝️, you should be coding along with this lesson. If you haven't already, create a new file in the same repo from the last homework. Call it: `arrays-practice.js`. Keep this in the `src` directory.
+
+### Breathe and Reflect - 20 points
+
+Take a moment to breathe and reflect on what you've learned so far. This is a lot of information to digest, and it's important to take a step back and let it sink in.
+
+Write up a **well-formatted** GitHub Gist using MD. Make sure that the filename ends in `.md` to get proper rendering. I prefer that you submit a separate Gist link, but if you prefer to keep it in your repo, that's fine too. Just make sure that it's clearly committed and I can tell which MD file to look at.
+
+I'd like to get your personal thoughts on all of these methods. What do you like? What do you not like? Which ones seem the most useful and/or the most powerful? What was most challenging?
+
+And, go back and think about web apps that you have interacted with. Try to identify 2-3 instances where you think one or more of these methods might be at play.
+
+Make it personal. Make it real. Make it relevant. You will need to write a fair amount to get the full 20 points. There's a lot of content here!
+
+**Note:** Do not submit a wall of text. This is not a text message. It's too be a well-formatted document leveraging the MD skills that you should have picked up weeks ago!
+
+### Coding Challenges - 30 points
+
+We both know that AI 🤖 can pretty much write the code for you, so you'll need to make sure that the reflection demonstrates your learning efforts ☝️.
+
+Here's the kicker, 5 points from each of these assignments is for your 'Think Like a Developer.' And, I'd like that to be handwritten. Snap a picture of a piece of paper or a whiteboard. You can use your phone or a tablet. Just make sure that I can read it.
+
+And, then for the coding part, make sure that you are writing well-written commit messages and that you include a bit of commentary to explain your thought process.
+
+#### Coding Challenge 1️⃣ - 10 points
+
+Given the following data:
+
+```javascript
+const backpackFullOfAmmo = [
+  { item: 'bullets', quantity: 10, priceEa: 0.5 },
+  { item: 'shotgun shells', quantity: 4, priceEa: 0.5 },
+  { item: 'rockets', quantity: 1, priceEa: 5.0 },
+  { item: 'energy cell units', quantity: 20, priceEa: 0.2 },
+]
+```
+
+How would we calculate the total value of the backpack?
+
+### Coding Challenge 2️⃣ - 20 points
+
+Given the following data:
+
+```javascript
+const monsters = [
+  // Deals 10-60 damage per bite
+  { name: 'Cacodemon', health: 400, damage: 35 },
+
+  // Deals 15-75 damage per claw/fireball
+  { name: 'Baron of Hell', health: 1000, damage: 45 },
+
+  // Deals 20-200 damage per rocket
+  { name: 'Cyberdemon', health: 4000, damage: 125 },
+
+  // Deals 5-50 damage per bite
+  { name: 'Hell Knight', health: 800, damage: 25 },
+
+  // Deals 10-100 damage per bite
+  { name: 'Imp', health: 200, damage: 20 },
+
+  // Deals 5-25 damage per bite
+  { name: 'Lost Soul', health: 100, damage: 10 },
+
+  // Deals 5-50 damage per bite
+  { name: 'Pinky', health: 300, damage: 15 },
+
+  // Deals 10-100 damage per bite
+  { name: 'Revenant', health: 500, damage: 30 },
+
+  // Deals 5-50 damage per bite
+  { name: 'Spectre', health: 200, damage: 20 },
+
+  // Deals 5-50 damage per bite
+  { name: 'Spider Mastermind', health: 2000, damage: 50 },
+
+  // Deals 5-50 damage per bite
+  { name: 'Vile', health: 1000, damage: 40 },
+
+  // Deals 5-50 damage per bite
+  { name: 'Zombie', health: 100, damage: 5 },
+
+  // Deals 5-50 damage per bite
+  { name: 'Zombieman', health: 200, damage: 10 },
+]
+```
+
+Your tasks are to:
+
+1. Use the map method to create a new array containing just the names of the monsters
+2. Use the filter method to find all monsters with health greater than 150
+3. Use the reduce method to calculate the total health of all monsters
+4. Use the sort method to arrange the monsters from highest damage to lowest
+
+## Conclusion
+
+In this lesson, we've explored several powerful array methods that enable a declarative approach to manipulating data. These methods will be essential tools in your programming toolkit, especially as we move toward building React applications.
+
+Key takeaways:
+
+- `map` transforms each element in an array
+- `filter` creates a subset of elements that match a condition
+- `reduce` combines all elements into a single value
+- `find` returns the first element that matches a condition
+- `some` and `every` test elements against a condition
+- `sort` rearranges elements in a specific order
+
+Complete the coding challenges and reflection assignment to solidify your understanding of these concepts. In our next lesson, we'll explore more advanced applications of these methods, including method chaining and how they're commonly used in React.
+
+Remember to commit your code regularly as you work through the challenges!
