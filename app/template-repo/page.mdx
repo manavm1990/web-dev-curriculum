@@ -1,0 +1,236 @@
+import { YouTubeEmbed } from '@next/third-parties/google'
+import Bq from '../components/ui/typography/bq'
+import Large from '../components/ui/typography/large'
+import Lead from '../components/ui/typography/lead'
+
+# Template Repo Details
+
+<Bq quote="Know your tools!" author="N. Alex Pearson" />
+
+In this series, I will show you how to build up a browser template repository. We will start from a completely empty directory (not even a repository) and end up with a fully functional template repository that can be used to create new projects.
+
+**⚠️ Warning:** This might be a long, boring 🥱 lesson. However, going through this once will empower you to create something like this for your own work, and it's good to, "know your tools."
+
+The good news is that all of the actual work has been done for you and you can get your very own fork of this template repository via [GitHub Classroom.](https://classroom.github.com/a/o_Uo8el-)
+
+The bad news is that you are expected to go through this lesson in detail and understand what is going on. You will be expected to write a detailed reflection about what you saw here and to demonstrate that you have a general understanding of what is going on.
+
+## Vite
+
+<YouTubeEmbed videoId="bruHEr1gqR8" height={400} />
+
+## JSON
+
+JavaScript Object Notation (JSON) is a portable data format that is easy to read and write. It is often used for configuration files and data exchange between a server and a client.
+
+<Large>All JSON is valid JavaScript, but not all JavaScript is valid JSON.</Large>
+
+JSON is consumed and used by virtually any modern programming language used for web development, including JavaScript, Python, Java, C#, Go, Rust, and many others. It is a lightweight data interchange format that is easy for humans to read and write and easy for machines to parse and generate.
+
+It's called JSON because this portable data format is based upon the same syntax used with JS objects, which we have already seen. The only thing is JS syntax is a bit more forgiving than JSON is.
+
+As an example, the following is a valid JSON object as well as valid JS code:
+
+```json
+{
+  "name": "N. Alex Pearson",
+  "age": 42,
+  "isStudent": false,
+  "courses": [
+    {
+      "name": "Web Development",
+      "grade": 95
+    },
+    {
+      "name": "Data Science",
+      "grade": 90
+    }
+  ]
+}
+```
+
+Here's the same thing as valid JS, but it is not valid JSON:
+
+```js
+{
+  name: "N. Alex Pearson",
+  age: 42,
+  isStudent: false,
+  courses: [
+    {
+      name: "Web Development",
+      grade: 95
+    },
+    {
+      name: "Data Science",
+      grade: 90
+    }
+  ]
+}
+```
+
+Here are the main differences between JSON and JS:
+
+- In JS the keys do not need to be in double quotes. They are implicit strings. No quotes of any kind needed. In JSON, the keys must be in double quotes; not even single quotes are allowed.
+- In JS, the values can be any valid JS value. In JSON, the values must be one of the following: a string, number, object, array, boolean, or null.
+- In JS, the last value can have a trailing comma. In JSON, the last value cannot have a trailing comma.
+
+## `package.json`
+
+Almost every single JS project will have a special **manifest file.** Actually, this is not even exclusive to JS. Every programming language has a manifest file. For example, Python has `requirements.txt`, Ruby has `Gemfile`, and Java has `pom.xml`. These files are used to manage dependencies and other project settings.
+
+In JS, the manifest file is called `package.json`. This file is used to manage dependencies, scripts, and other project settings. It is a JSON file that contains information about the project, such as the name, version, description, and dependencies.
+
+<YouTubeEmbed videoId="qz55ZRsornA" height={400} />
+
+## Vite files
+
+Vite has already installed some files into your project. We'll take a brief look at what these files are and how they fit into the overall structure of your application.
+
+<YouTubeEmbed videoId="zhKB5Rs7eYc" height={400} />
+
+## JS is Writing HTML for Us!
+
+In the `index.html` file that Vite generated for us, we can see only: `<div id="app"></div>`. However, when we run `npm run dev` and visit the local web server, we can see that somehow the HTML has changed. The `<div id="app"></div>` is now filled with a bunch of HTML. How did that happen? Well, JS has dynamically written the HTML for us. This is called **client-side rendering**. The JS code is running in the browser and is generating the HTML on the fly.
+
+<YouTubeEmbed videoId="dprkN7TuyIk" height={400} />
+
+<YouTubeEmbed videoId="6IFtqGX67SM" height={400} />
+
+### `document`.
+
+The `document` object is a global object that represents the HTML document that is currently being displayed in the browser. It is part of the DOM (Document Object Model) and provides methods and properties to manipulate the HTML document.
+
+<Large>
+  Note that `document` has absolutely no meaning outside of JS running client-side in the browser.
+  If you were to try this same code in our NodeJS template, `document` would mean nothing. It would
+  just cause an error!
+</Large>
+
+### `document.querySelector()`
+
+The `document.querySelector()` method is used to select an HTML element from the document. It takes a CSS selector as an argument and returns the first element that matches the selector.
+
+### `document.querySelector().innerHTML`
+
+The `innerHTML` property is used to **either get or set** the HTML content of an element. Whenever you combine `innerHTML` with the assignment property, `=`, you are setting or **mutating** the HTML content of the element.
+
+Alternatively, you can use `innerHTML` to get the HTML content of an element. This is done by simply using the `innerHTML` property without the assignment operator.
+
+### Putting it All Together
+
+So, the code: `document.querySelector('#app').innerHTML = '<h1>Hello World!</h1>';` is doing the following:
+
+1. Use `document` to get a reference to the HTML document.
+2. Use `querySelector()` to select the `<div id="app"></div>` element.
+3. Assuming that this element exists, use `innerHTML` to set the HTML content of the element to `<h1>Hello World!</h1>`.
+
+We can also leverage template literal interpolation to make this more dynamic:
+
+```js
+const name = 'N. Alex Pearson'
+
+document.querySelector('#app').innerHTML = `<h1>Hello ${name}!</h1>`
+```
+
+<YouTubeEmbed videoId="6IFtqGX67SM" height={400} />
+
+<Large>
+  JS loves ❤️ objects! Browsers loves JS. So, to love and support JS, the browser models much of its
+  capabilities as JS objects.
+</Large>
+
+<YouTubeEmbed videoId="qlY-e2UquVY" height={400} />
+
+<YouTubeEmbed videoId="_b3AfqY09QM" height={400} />
+
+#### `setupCounter`
+
+```js
+// OUTER FUNCTION
+export function setupCounter(element) {
+  let counter = 0 // Initialize the counter variable to `0`.
+
+  // INNER FUNCTION
+  const setCounter = (count) => {
+    // `count` is the new value to replace the previous value of `counter`.
+    counter = count
+
+    // Also update the rendered text in the browser.
+    element.innerHTML = `count is ${counter}`
+  }
+
+  // Every time the user clicks `element`, call the callback function...
+  element.addEventListener(
+    'click',
+
+    // CALLBACK FUNCTION.
+    () => setCounter(counter + 1),
+  )
+
+  // Before any clicks happen, set the counter to `0`.
+  setCounter(0)
+}
+```
+
+<YouTubeEmbed videoId="715WkriHFJQ" height={400} />
+
+## Improve our Developer Experience Further
+
+<YouTubeEmbed videoId="CCoLbTeZ5-g" height={400} />
+
+### ESLint
+
+Previously, we tried out Biome, which helped us with linting and formatting. Going forward, we will use ESLint to help with code quality.
+
+<Large>
+  While the Vite server is 🏃🏾‍♂️, you cannot run other commands from the terminal. Normally, you would
+  need to open up a new terminal tab to run other commands. Or, as we saw in the video, just use
+  'control+c' (yes, it's 'control' even on Mac!) to shut down the server.
+</Large>
+
+To get started with [ESLint](https://eslint.org/), we install it into our project: `npm init @eslint/config@latest`. This will ask a series of questions to help us set up ESLint. We will choose the following options:
+
+- How would you like to use ESLint? To check syntax, find problems, and enforce code style
+- What type of modules does your project use? JavaScript modules (import/export)
+- Which framework does your project use? None of these
+- Does your project use TypeScript? No
+- Where does your code run? Browser
+
+Then, let ESLint run `npm` to install what it needs to. Note that this will update `package.json` and add more to `node_modules`.
+
+### Prettier
+
+[Prettier](https://prettier.io/) is a code formatter that helps us keep our code clean and consistent. It is an opinionated code formatter, which means that it has a set of rules that it follows to format the code. This is great because it means that we don't have to worry about formatting our code ourselves. We can just write the code and let Prettier take care of the rest.
+
+There are 3️⃣ commands listed to [Get Started with Prettier:](https://prettier.io/docs/install)
+
+1. `npm install --save-dev --save-exact prettier`. The `--save-dev` just specifies that we will keep Prettier as a development dependency. The `--save-exact` just means that we want to install the exact version of Prettier that is listed in the command.
+1. `node --eval "fs.writeFileSync('.prettierrc','{}\n')"`. This creates a new file called `.prettierrc` in the root of our project. This file is used to configure Prettier. The `--eval` just means that we want to run the command in the terminal. Note that this could have been done simpler using `touch`.
+1. `node --eval "fs.writeFileSync('.prettierignore','node_modules\n')"` This creates a new file called `.prettierignore` in the root of our project. This file is used to specify files and directories that Prettier should ignore. In this case, we are telling Prettier to ignore the `node_modules` directory.
+
+## `.vscode` folder
+
+Recall, that in the `.gitignore`, we removed 🔥 `.vscode`. We want to have this directory added to our code repository. But, what purpose will `.vscode` serve?
+
+### `extensions.json`
+
+The `extensions.json` file is used to specify which extensions should be installed when the project is opened in VS Code. This is useful for sharing the project with other developers and ensuring that everyone has the same extensions installed.
+
+If you are missing any of the recommended extensions, you will see a notification in the bottom right corner of the screen. You can click on the notification to install the missing extensions.
+
+### `settings.json`
+
+The `settings.json` file is used to specify the settings for the project. This is useful for sharing the project with other developers and ensuring that everyone has the same settings.
+
+<YouTubeEmbed videoId="h9ZC0bWBLs4" height={400} />
+
+## Assignment - 20 points
+
+You should have already forked the repository and cloned it to your local machine. We will be using it for some future assignments.
+
+Now, as you probably anticipated, you will be expected to write a reflection about this lesson. This is a good time to start thinking about how you will write your reflections.
+
+Remember to use well-formatted MD. Use headings, lists, paragraphs, etc. **DO NOT** just write a wall of text.
+
+Ultimately, it should be very apparent that you went through the lesson in a detail-oriented manner. As always, it shouldn't **just** be a summary. Put your own twist on things with your own analogies or any experiences you have had that relate to the lesson. This is a great way to show that you are learning and growing as a developer.

@@ -91,6 +91,10 @@ const NAV_ITEMS: NavItem[] = [
       { title: 'Array Methods', url: '/functional/array-methods' },
     ],
   },
+  {
+    title: 'Prepare for JS in the Browser',
+    submenu: [{ title: 'Template Repo', url: '/template-repo' }],
+  },
 ] as const
 
 function checkForSectionChange(
