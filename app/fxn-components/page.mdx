@@ -1,0 +1,190 @@
+import { YouTubeEmbed } from '@next/third-parties/google'
+
+# Function Components I
+
+## Function Components
+
+Function components are a foundational concept for modern JS libraries and frameworks, such as React. From a high level, their job is to receive data in the form of **props** (function parameters) and to return something that can be rendered by a browser.
+
+In addition, these components maintain and manage **state**, and usually have children.
+
+### Example
+
+```javascript
+function Greeting(props) {
+  return `<p>Hello, ${props.name}!</p>`
+}
+```
+
+See what's happening here? We're defining a function called `Greeting` that takes in `props` as an argument. Inside the function, we're returning a string of HTML that includes the name passed in through `props`. This is a simple example of a function component.
+
+Note the naming convention. For function components, which are intended to return HTML, we use **PascalCase**. This is a common convention in the React community and helps differentiate components from regular JavaScript functions.
+
+Now, note that besides the new naming convention, there is nothing new here in terms of JavaScript concepts!
+
+### Props
+
+Props are short for "properties" and are a way to pass data from a parent component to a child component. They are similar to function parameters in JavaScript. In the example above, `props` is an object that contains the properties passed to the `Greeting` component.
+
+## Component Composition
+
+Component composition is the process of combining multiple components to create a more complex UI. This is a powerful feature of function components, as it allows you to build reusable and modular components.
+
+```javascript
+function App() {
+  return `<div>
+      <Greeting name="Student" />
+      <Message text="Welcome to web development!" />
+    </div>`
+}
+```
+
+So, what's this? We have an `App` component that returns a `div` containing two child components: `Greeting` and `Message`. This is an example of component composition, where we are combining multiple components to create a more complex UI.
+
+Again...nothing new here!
+
+## Component-Based Personal Website Assignment
+
+### Overview
+
+In this assignment, you will create a simple one-page personal website using function components. You'll demonstrate your HTML knowledge while applying the component-based approach we've discussed in class.
+
+### Requirements
+
+#### Basic Structure (10 points)
+
+1. Create the following function components (2 points each):
+   - `Header` - Contains your name and a brief title/tagline
+   - `About` - Information about yourself
+   - `Skills` - List of your skills or interests
+   - `Content` - Main content section (see creative options below)
+   - `Footer` - Copyright information and year
+
+#### HTML Proficiency (15 points)
+
+Demonstrate your HTML knowledge by including at least 10 different HTML elements across your components:
+
+1. Headings (`h1`, `h2`, etc.) (1 point)
+2. Paragraphs (`p`) (1 point)
+3. Lists (`ul`/`ol` and `li`) (2 points)
+4. Images (`img`) with alt attributes (2 points)
+5. Semantic sectioning elements (`section`, `article`, etc.) (2 points)
+6. Emphasis/text formatting (`em`, `strong`, etc.) (1 point)
+7. Horizontal rule (`hr`) (1 point)
+8. Links (`a`) to external resources (2 points)
+9. A table (`table`, `tr`, `td`) to display information (2 points)
+10. A simple form element for contact info (does not need to function) (1 point)
+
+#### Component Implementation (5 points)
+
+1. Proper props usage (2 points)
+2. Correct component composition (1 point)
+3. Proper rendering to DOM (1 point)
+4. Following PascalCase naming convention (1 point)
+
+#### Git Version Control (5 points)
+
+1. Proper repository setup (1 point)
+2. Minimum of 5 meaningful commits with descriptive messages (3 points)
+3. Clear commit history showing incremental development (1 point)
+
+### Creative Content Options
+
+Make this website truly your own! Instead of just copying the example, choose content that reflects your personal interests. Some ideas include:
+
+- A collection of your favorite recipes
+- Profiles of your pets or dream pets
+- A showcase of your favorite video games, books, or movies
+- A hobby or collection you're passionate about
+- Travel destinations you've visited or want to visit
+- Sports, teams, or athletes you follow
+- A collection of your favorite music albums
+
+Note that, we are going HTML only. No, CSS 💄 (yet!)
+
+### Example Component Structure
+
+```javascript
+// Your personal data to pass to components
+const personalInfo = {
+  name: 'Your Name',
+  title: 'Web Developer & Game Enthusiast',
+  about: 'A brief description about yourself...',
+  skills: ['HTML', 'CSS', 'JavaScript', 'Component Thinking'],
+  games: [
+    {
+      title: 'Game Title 1',
+      genre: 'RPG',
+      imageUrl: 'images/game1.jpg',
+      description: 'Why I love this game...',
+    },
+    {
+      title: 'Game Title 2',
+      genre: 'Strategy',
+      imageUrl: 'images/game2.jpg',
+      description: 'What makes this game special...',
+    },
+  ],
+  year: 2025,
+}
+
+// Main App component
+function App() {
+  // Render the complete page by composing components
+  return `
+    <div id="personal-website">
+      ${Header({ name: personalInfo.name, title: personalInfo.title })}
+      ${About({ text: personalInfo.about })}
+      ${Skills({ skills: personalInfo.skills })}
+      ${Content({ games: personalInfo.games })}
+      ${Footer({ name: personalInfo.name, year: personalInfo.year })}
+    </div>
+  `
+}
+
+// Example of a Content component for favorite games
+function Content(props) {
+  // Using the games array passed as a prop
+  const gamesList = props.games
+    .map(
+      (game) =>
+        `<article class="game-card">
+      <h3>${game.title}</h3>
+      <img src="${game.imageUrl}" alt="${game.title} cover image">
+      <p><strong>Genre:</strong> ${game.genre}</p>
+      <p>${game.description}</p>
+    </article>`,
+    )
+    .join('')
+
+  return `
+    <section id="favorite-games">
+      <h2>My Favorite Games</h2>
+      <div class="games-container">
+        ${gamesList}
+      </div>
+    </section>
+  `
+}
+
+// Rendering to the DOM
+document.getElementById('root').innerHTML = App()
+```
+
+### Resources
+
+[Here's a Gist](https://gist.github.com/manavm1990/f82ead332fe480e1df3cab4d09a2febb) to help you get started with the `personalInfo` object.
+
+<YouTubeEmbed videoid="97Khzhl-1ZQ" height={400} />
+
+### Submission
+
+Your repository 🔗.
+
+### Grading Criteria
+
+- Functionality: Does the website render correctly? (10 points)
+- HTML Usage: Is there appropriate and correct use of various HTML elements? (15 points)
+- Component Structure: Are components properly defined and used? (5 points)
+- Git Usage: Is there proper commit history with meaningful messages? (5 points)
+- Creativity: Did you create original content rather than just following the example? (bonus)

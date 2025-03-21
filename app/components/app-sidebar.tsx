@@ -95,6 +95,10 @@ const NAV_ITEMS: NavItem[] = [
     title: 'Prepare for JS in the Browser',
     submenu: [{ title: 'Template Repo', url: '/template-repo' }],
   },
+  {
+    title: 'Function Components',
+    submenu: [{ title: 'Function Components I', url: '/fxn-components' }],
+  },
 ] as const
 
 function checkForSectionChange(
