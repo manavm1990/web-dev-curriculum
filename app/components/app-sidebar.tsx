@@ -106,7 +106,7 @@ const NAV_ITEMS: NavItem[] = [
     title: 'Special Interview Topics',
     submenu: [
       { title: 'Semantic Versioning', url: '/interview/sem-ver' },
-      { title: 'Values and References', url: '/interview/values-and-references' },
+      { title: 'Values and References', url: '/interview/values-references' },
     ],
   },
 ] as const
