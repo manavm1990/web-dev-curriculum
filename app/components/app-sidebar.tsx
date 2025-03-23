@@ -93,11 +93,14 @@ const NAV_ITEMS: NavItem[] = [
   },
   {
     title: 'Prepare for JS in the Browser',
-    submenu: [{ title: 'Template Repo', url: '/template-repo' }],
+    url: '/template-repo',
   },
   {
     title: 'Function Components',
-    submenu: [{ title: 'Function Components I', url: '/fxn-components' }],
+    submenu: [
+      { title: 'Function Components I', url: '/fxn-components' },
+      { title: 'CSS Review', url: '/fxn-components/css-review' },
+    ],
   },
 ] as const
 
