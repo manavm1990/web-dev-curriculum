@@ -1,0 +1,49 @@
+import { YouTubeEmbed } from '@next/third-parties/google'
+
+# Semantic Versioning
+
+## Review
+
+Recall that every JS project has a **manifest** file. This is a JSON file called `package.json` and it contains metadata about the project. This includes the name, version, description, author, license, dependencies, and scripts.
+
+For this topic, we are focusing on dependencies. A dependency is a package that your project needs to run. For example, if you are using React, you need to install the `react` package.
+
+There are also developer dependencies. These are packages that you need to develop your project, but not run it. For example, ESLint and Prettier. These tools are for the benefit of the developer, not the end user. They are not needed to run the project.
+
+For instance, in our Node JS Template, the `package.json` looks something like:
+
+```json
+ "devDependencies": {
+    "@eslint/js": "^9.21.0",
+    "eslint": "^9.21.0",
+    "eslint-config-prettier": "^10.0.2",
+    "globals": "^16.0.0",
+    "prettier": "3.5.2"
+  }
+```
+
+## Versioning
+
+The versioning of a package is important. It tells you what version of the package you are using. This is important because packages can change over time. A new version of a package can introduce breaking changes. This means that the new version of the package is not compatible with the old version.
+
+The versioning of a package is done using **semantic versioning**. This is a system for versioning packages. It uses three numbers separated by dots. For example, `1.0.0`. The first number is the major version, the second number is the minor version, and the third number is the patch version.
+
+Look back at the JSON ☝️. Notice the `^` in front of the version number? This is a special character that tells NPM to install the latest version of the package that is compatible with the version you specified. For example, if you specify `^1.0.0`, NPM will install the latest version of the package that is compatible with `1.x.x`. This means that it will install any version that is greater than or equal to `1.0.0` and less than `2.0.0`.
+
+## Major, Minor, and Patch
+
+The three numbers in the version number have special meanings.
+
+- **Major**: This number is incremented when there are breaking changes. This means that the new version of the package is not compatible with the old version. For example, if you are using `1.0.0` and the new version is `2.0.0`, you will **probably** need to update your code to work with the new version.
+- **Minor**: This number is incremented when new features are added to the package. This means that the new version of the package is compatible with the old version. For example, if you are using `1.0.0` and the new version is `1.1.0`, you can use the new features without changing your code.
+- **Patch**: This number is incremented when there are bug fixes. This means that the new version of the package is compatible with the old version. For example, if you are using `1.0.0` and the new version is `1.0.1`, you can use the new version without changing your code.
+
+There's more to it than that, but this covers the major points.
+
+## Assignment
+
+Watch the following video. You can follow along if you like, but it's not necessary to do so.
+
+<YouTubeEmbed videoId="t3Mb2aC8Hwg" height={400} />
+
+Then, create a new MD Gist (remember to use the `.md` extension) and write a short summary of what you learned in this lesson. Be sure to include any key points about semantic versioning and its importance.

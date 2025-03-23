@@ -102,6 +102,13 @@ const NAV_ITEMS: NavItem[] = [
       { title: 'CSS Review', url: '/fxn-components/css-review' },
     ],
   },
+  {
+    title: 'Special Interview Topics',
+    submenu: [
+      { title: 'Semantic Versioning', url: '/interview/sem-ver' },
+      { title: 'Values and References', url: '/interview/values-and-references' },
+    ],
+  },
 ] as const
 
 function checkForSectionChange(
