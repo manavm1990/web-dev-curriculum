@@ -97,10 +97,7 @@ const NAV_ITEMS: NavItem[] = [
   },
   {
     title: 'Function Components',
-    submenu: [
-      { title: 'Function Components I', url: '/fxn-components' },
-      { title: 'CSS Review', url: '/fxn-components/css-review' },
-    ],
+    url: 'Function Components I',
   },
   {
     title: 'Special Interview Topics',
@@ -110,8 +107,11 @@ const NAV_ITEMS: NavItem[] = [
     ],
   },
   {
-    title: 'Tailwind CSS',
-    url: '/tailwind-css',
+    title: 'CSS 💄',
+    submenu: [
+      { title: 'CSS Review', url: '/css/css-review' },
+      { title: 'Tailwind CSS', url: '/css/tailwind' },
+    ],
   },
 ] as const
 
