@@ -109,6 +109,10 @@ const NAV_ITEMS: NavItem[] = [
       { title: 'Values and References', url: '/interview/values-references' },
     ],
   },
+  {
+    title: 'Tailwind CSS',
+    url: '/tailwind-css',
+  },
 ] as const
 
 function checkForSectionChange(

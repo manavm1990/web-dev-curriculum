@@ -1,0 +1,131 @@
+import { YouTubeEmbed } from '@next/third-parties/google'
+import Large from '../components/ui/typography/large'
+
+# Tailwind CSS
+
+## Introduction
+
+So, you've learned a bit of CSS 💄. You know that CSS:
+
+- is a language for describing the **presentation** of a document written in HTML
+- works via a `link` tag in the `<head>` of your HTML document
+- can be used to style elements, control layout, and create responsive designs
+- is essential for any successful front-end developer, as presentation is what 'sells the product.'
+
+## CSS Critical Concepts: Quick Reminders
+
+### CSS Selectors and Specificity
+
+- Remember the specificity hierarchy: inline styles > IDs > classes > elements
+- Combine selectors to target specific elements (e.g., `nav a.active`)
+- Use `!important` sparingly—it overrides normal specificity rules
+
+### The Box Model
+
+- Every HTML element is a box with content, padding, border, and margin
+- The `box-sizing` property controls how dimensions are calculated
+- `box-sizing: border-box` includes padding and border in the element's dimensions
+
+### Layout Fundamentals
+
+- `display` property controls how elements behave in layout
+- `position` (relative, absolute, fixed, sticky) determines element positioning
+- `z-index` manages stacking order (only works on positioned elements)
+
+### Flexbox and Grid
+
+- Flexbox is one-dimensional (row or column)
+- Grid is two-dimensional (rows and columns simultaneously)
+- Both simplify complex layouts that were difficult with floats
+
+### Responsive Design
+
+- Media queries allow styles based on viewport characteristics
+- Use relative units (%, em, rem, vh, vw) for flexibility
+- Mobile-first approach starts with styles for small screens
+
+### CSS Variables
+
+- Declared with `--variable-name` and accessed with `var(--variable-name)`
+- Define in `:root` for global scope or in specific selectors for local scope
+- Useful for theme colors, spacing values, and other repeated properties
+
+These foundations will help you understand Tailwind's utility-based approach to CSS.
+
+---
+
+<Large>
+  If any of the above is not already familiar, please reference on Mozilla Developer Network (MDN)
+  ASAP!
+</Large>
+
+---
+
+## What is Tailwind CSS?
+
+Tailwind CSS represents a paradigm shift in how developers approach styling web applications. Unlike traditional CSS frameworks that provide pre-designed components, Tailwind offers a comprehensive set of low-level utility classes that enable developers to build custom designs directly within their HTML markup.
+
+## The Utility-First Approach
+
+The core philosophy behind Tailwind is "utility-first" - composing designs by applying pre-defined utility classes directly to HTML elements rather than writing custom CSS. This approach allows developers to:
+
+- Build complex interfaces without leaving the HTML
+- Maintain consistency through predetermined design constraints
+- Reduce CSS file sizes in production environments
+- Eliminate the need to create and maintain custom class names
+
+## Advantages for Development Teams
+
+Tailwind offers several significant benefits for development teams:
+
+- **Development Speed**: Dramatically accelerates the UI development process by eliminating context switching between HTML and CSS files
+- **Consistency**: Enforces design system constraints through predefined spacing, color, and typography scales
+- **Maintainability**: Reduces the accumulation of custom CSS over time, making codebases more maintainable
+- **Responsive Design**: Simplifies responsive layouts with intuitive breakpoint prefixes
+- **Collaboration**: Improves team collaboration by keeping styling decisions visible in the markup
+
+## Comparing Approaches
+
+### Traditional CSS
+
+```html
+<button class="btn-primary">Save Changes</button>
+
+/* In separate CSS file */ .btn-primary { background-color: #3490dc; color: white; padding: 0.5rem
+1rem; border-radius: 0.25rem; font-weight: 600; } .btn-primary:hover { background-color: #2779bd; }
+```
+
+### Tailwind CSS
+
+```html
+<button class="rounded bg-blue-500 px-4 py-2 font-semibold text-white hover:bg-blue-700">
+  Save Changes
+</button>
+```
+
+## Business Use Cases
+
+Tailwind CSS is particularly valuable for:
+
+- Teams building custom UIs that need to maintain brand consistency
+- Projects requiring rapid iteration and prototyping
+- Products with complex, responsive interfaces
+- Organizations seeking to standardize their design language
+- Teams looking to reduce CSS maintenance overhead
+
+The Tailwind approach represents a fundamental shift in how teams build and maintain web interfaces, offering significant efficiency gains while maintaining design flexibility.
+
+---
+
+<YouTubeEmbed videoid="BW1ASYNAdKY" height={400} />
+<YouTubeEmbed videoid="4t7J_fZyjpw" height={400} />
+
+## Assignment - 20 points
+
+Review the Tailwind Documentation and familiarize yourself with the utility classes. Find some CSS in there that you haven't ever used before. Cross reference it with the MDN documentation. Create a short explainer video (1-3 minutes) on the utility class and how it works. 5 pts.
+
+Use the Tailwind Playground to create something 🆒. 10 points. 👇🏾
+
+<YouTubeEmbed videoid="tIpTSweBhRg" height={400} />
+
+Finally, write up a reflection about this intro to Tailwind. What are your first impressions? Love it? Hate it? Not sure? 5 points.
