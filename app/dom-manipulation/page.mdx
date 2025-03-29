@@ -1,0 +1,119 @@
+import Mermaid from '@/components/mermaid'
+import { YouTubeEmbed } from '@next/third-parties/google'
+
+# Introduction to the Document Object Model (DOM)
+
+## What is the DOM?
+
+The Document Object Model (DOM) is a programming interface for HTML and XML documents. It represents the page as a structured tree where each node is an object representing a part of the document.
+
+The DOM is not part of JavaScript itself. It is an API that the browser provides to JavaScript. When a web page loads, the browser creates a Document Object Model of the page, enabling JavaScript to access and manipulate the page's content, structure, and styles.
+
+## The Document Object
+
+The `document` object is your gateway to the DOM. It represents the entire HTML document and provides methods and properties to access and modify the elements on the page. Every element, attribute, and piece of text in the HTML document becomes a node in the DOM tree, accessible through the `document` object.
+
+## DOM Structure
+
+<Mermaid
+  chart={`
+graph TD
+document[document] --> html[html]
+html --> head[head]
+html --> body[body]
+head --> title[title]
+head --> meta[meta]
+body --> header[header]
+body --> main[main]
+body --> footer[footer]
+header --> h1[h1]
+main --> p[paragraph]
+main --> div[div]
+div --> span[span]
+div --> button[button]
+footer --> a[link]`}
+/>
+
+## Accessing DOM Elements
+
+There are several ways to select elements from the DOM:
+
+```javascript
+// By ID - returns a single element
+const header = document.getElementById('header')
+
+// By class name - returns a live HTMLCollection
+const buttons = document.getElementsByClassName('btn')
+
+// By tag name - returns a live HTMLCollection
+const paragraphs = document.getElementsByTagName('p')
+
+// CSS selector - returns the first matching element
+const mainTitle = document.querySelector('#main-title')
+
+// CSS selector - returns all matching elements as a NodeList
+const navLinks = document.querySelectorAll('nav a')
+
+// Accessing form elements
+const emailInput = document.forms['contact-form']['email']
+```
+
+### Understanding Return Types
+
+- `getElementById()` returns a single element or `null` if not found
+- `getElementsByClassName()` and `getElementsByTagName()` return a live HTMLCollection that updates automatically when the DOM changes
+- `querySelector()` returns the first matching element or `null` if not found
+- `querySelectorAll()` returns a static NodeList of all matching elements
+
+## Manipulating DOM Elements
+
+### Changing Content
+
+```javascript
+// Text content (without HTML interpretation)
+element.textContent = 'New text content'
+
+// HTML content (interprets HTML tags)
+element.innerHTML = '<strong>Bold text</strong> and <em>italic text</em>'
+
+// Create and append text
+const textNode = document.createTextNode('New text node')
+element.appendChild(textNode)
+```
+
+### Modifying Attributes
+
+```javascript
+// Get attribute value
+const imgSrc = image.getAttribute('src')
+
+// Set attribute
+link.setAttribute('href', 'https://example.com')
+
+// Direct property access for common attributes
+image.src = 'new-image.jpg'
+button.disabled = true
+input.value = 'Default text'
+
+// Data attributes
+const userId = element.dataset.userId // Gets data-user-id
+element.dataset.lastUpdated = '2025-03-27' // Sets data-last-updated
+```
+
+## Assignment - 20 points
+
+Watch this:
+
+<YouTubeEmbed videoid="DjSl6FElYc4" height={400} />
+
+And, watch this:
+
+<YouTubeEmbed videoid="Vo_8uc1j2Yk" height={400} />
+
+In Wes' video, he mentions a couple of cool shortcuts, including the `...` operator for spreading a NodeList into a bona fide array. This is just a quick reminder that the `...` operator is not just for arrays, but also works with NodeLists and other iterable objects. It's shorter than doing the `Array.from()` method, but it does the same thing.
+
+Using some of the same approaches that shown in the above videos, some of the other points mentioned in the written materials ☝️ and perhaps some chatting with AI 🤖 (MDN Plus or Claude Sonnet), create your own demo of DOM manipulation and scraping using any appropriate website of your choice.
+
+This will be a 3-8 minute video and should show not only simple text manipulations, but also something involving `querySelectorAll` to target multiple elements, similar to what I showed.
+
+Now, as usual write up a Gist about **your** thoughts (less AI needed for this part!) on this DOM manipulation stuff. Is it useful? Did you enjoy it? Is it challenging?

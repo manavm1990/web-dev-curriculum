@@ -110,9 +110,11 @@ const NAV_ITEMS: NavItem[] = [
     title: 'CSS 💄',
     submenu: [
       { title: 'CSS Review', url: '/css/css-review' },
-      { title: 'Tailwind CSS', url: '/css/tailwind' },
+      { title: 'Tailwind CSS I', url: '/css/tailwind' },
+      { title: 'Tailwind CSS II', url: '/css/tailwind-2' },
     ],
   },
+  { title: 'DOM Manipulation', url: '/dom-manipulation' },
 ] as const
 
 function checkForSectionChange(
