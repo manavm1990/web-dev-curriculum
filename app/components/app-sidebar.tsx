@@ -104,6 +104,7 @@ const NAV_ITEMS: NavItem[] = [
     submenu: [
       { title: 'Semantic Versioning', url: '/interview/sem-ver' },
       { title: 'Values and References', url: '/interview/values-references' },
+      { title: 'Nested Maps & JSON', url: '/interview/nested-maps-json' },
     ],
   },
   {

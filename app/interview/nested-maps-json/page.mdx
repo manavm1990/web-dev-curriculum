@@ -1,0 +1,109 @@
+import Lead from '@/components/ui/typography/lead'
+import { YouTubeEmbed } from '@next/third-parties/google'
+
+# Nested Maps and JSON! 😕
+
+<Lead>
+  ⚠️ This example is a bit more advanced and may not be appropriate for this class...but, we're
+  going to push the ✉️, as they say!
+</Lead>
+
+<YouTubeEmbed videoId="plIn3apR8CY" height={400} />
+
+The `monsters` data from the video:
+
+```js
+const monsters = [
+  {
+    name: 'Cacodemon',
+    health: 400,
+    attacks: [{ type: 'Plasma Ball', damage: { min: 10, max: 60 } }],
+  },
+  {
+    name: 'Baron of Hell',
+    health: 1000,
+    attacks: [
+      { type: 'Claw', damage: { min: 15, max: 75 } },
+      { type: 'Fireball', damage: { min: 15, max: 75 } },
+    ],
+  },
+  {
+    name: 'Cyberdemon',
+    health: 4000,
+    attacks: [{ type: 'Rocket', damage: { min: 20, max: 200 } }],
+  },
+  {
+    name: 'Hell Knight',
+    health: 800,
+    attacks: [{ type: 'Claw', damage: { min: 15, max: 75 } }],
+  },
+  {
+    name: 'Imp',
+    health: 200,
+    attacks: [{ type: 'Demon Fire', damage: { min: 10, max: 100 } }],
+  },
+  {
+    name: 'Lost Soul',
+    health: 100,
+    attacks: [{ type: 'Charge', damage: { min: 5, max: 25 } }],
+  },
+  {
+    name: 'Pinky',
+    health: 300,
+    attacks: [{ type: 'Rend', damage: { min: 5, max: 50 } }],
+  },
+  {
+    name: 'Revenant',
+    health: 500,
+    attacks: [{ type: 'Rocket Barrage', damage: { min: 10, max: 100 } }],
+  },
+  {
+    name: 'Spectre',
+    health: 200,
+    attacks: [{ type: 'Enraged Lunge', damage: { min: 5, max: 50 } }],
+  },
+  {
+    name: 'Spider Mastermind',
+    health: 2000,
+    attacks: [{ type: 'Chaingun', damage: { min: 10, max: 100 } }],
+  },
+  {
+    name: 'Arch Vile',
+    health: 1000,
+    attacks: [{ type: 'Inferno', damage: { min: 25, max: 100 } }],
+  },
+  {
+    name: 'Zombieman',
+    health: 200,
+    attacks: [{ type: 'Shotgun', damage: { min: 5, max: 50 } }],
+  },
+]
+```
+
+## Assignment - 10 points
+
+Reflect! What do you think 🤔❔ Too crazy? Make sense? What parts actually made sense to you and what parts were just too much?
+
+Now...we have the same issue in the results.
+
+```shell
+node src/index.js
+[
+  {
+    "name": "Cacodemon",
+    "health": 400,
+    "attacks": [
+      {
+        "type": "Plasma Ball",
+        "damage": {
+          "min": 10,
+          "max": 70
+        }
+      }
+    ]
+  },
+```
+
+How can we avoid this mutation? Work with AI 🤖 to gain a better understanding and figure out how to avoid the mutation. **HINT:** We don't want to keep doing `...` ad infinitum! **ANOTHER HINT:** One possible solution is kind of revealed in the video...
+
+Update your reflection to discuss the solution. Or, you may create a video.
