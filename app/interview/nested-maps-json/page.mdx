@@ -1,4 +1,5 @@
 import Lead from '@/components/ui/typography/lead'
+import Small from '@/components/ui/typography/small'
 import { YouTubeEmbed } from '@next/third-parties/google'
 
 # Nested Maps and JSON! 😕
@@ -8,9 +9,7 @@ import { YouTubeEmbed } from '@next/third-parties/google'
   going to push the ✉️, as they say!
 </Lead>
 
-<YouTubeEmbed videoId="plIn3apR8CY" height={400} />
-
-The `monsters` data from the video:
+Consider this updated Monsters database:
 
 ```js
 const monsters = [
@@ -79,6 +78,26 @@ const monsters = [
   },
 ]
 ```
+
+<Small>The data above is not necessarily canonical to Doom</Small>
+
+Now, we want to iterate over this data and add 10 to the max attack damage for each monster 😅.
+
+## Think Like a Developer
+
+Again, forget about code. Forget about computers. All we have is pencil and paper. How do we do this?
+
+1. Start at the first monster. It's the Cacodemon.
+1. Find the list of attacks for the Cacodemon. It's `[{ type: 'Plasma Ball', damage: { min: 10, max: 60 } }]`.
+1. Identify the max damage. It's 60. Add 10 to it. Now it's 70.
+1. Update it and proceed to the next monster.
+1. Repeat until all monsters are done.
+
+Now, let's shift back to thinking in code, as a functional programmer. We know that we are dealing with iteration, so think Array methods. We're not working with a true/false test here, so it's not `filter` or `find` or `some`. We are working with a transformation, so it's `map`.
+
+But, something's different here. We have a list or array inside of another array...🤔. An iteration inside of an interation....A `map` inside of a `map`!
+
+<YouTubeEmbed videoId="plIn3apR8CY" height={400} />
 
 ## Assignment - 10 points
 
