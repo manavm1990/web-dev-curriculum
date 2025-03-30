@@ -63,7 +63,7 @@ const emailInput = document.forms['contact-form']['email']
 - `getElementById()` returns a single element or `null` if not found
 - `getElementsByClassName()` and `getElementsByTagName()` return a live HTMLCollection that updates automatically when the DOM changes
 - `querySelector()` returns the first matching element or `null` if not found
-- `querySelectorAll()` returns a static NodeList of all matching elements
+- `querySelectorAll()` returns a static `NodeList` of all matching elements. It's kind of like an Array, but not quite. You can use `Array.from()` or the spread operator (`...`) to convert it into a true Array.
 
 ## Manipulating DOM Elements
 
@@ -106,7 +106,11 @@ Watch this:
 
 <YouTubeEmbed videoid="DjSl6FElYc4" height={400} />
 
-And, watch this:
+In the above video, we used `querySelectorAll` to select multiple elements using a CSS 💄 selector. As indicated in the 🎶 above ☝️, this gives us back an array-like object, a `NodeList`. From there we can use `map` to iterate over the element objects and return something out such as their `innerText`. As we know, this will create a new Array with the results of the mapping function.
+
+Specifically, in the video above, we were able to get a list of just the champions' names.
+
+Now, watch this:
 
 <YouTubeEmbed videoid="Vo_8uc1j2Yk" height={400} />
 
