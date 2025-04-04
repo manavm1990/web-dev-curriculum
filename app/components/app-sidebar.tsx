@@ -113,6 +113,7 @@ const NAV_ITEMS: NavItem[] = [
       { title: 'CSS Review', url: '/css/css-review' },
       { title: 'Tailwind CSS I', url: '/css/tailwind' },
       { title: 'Tailwind CSS II', url: '/css/tailwind-2' },
+      { title: 'HTML-Tailwind CSS', url: '/css/html-tailwind' },
     ],
   },
   { title: 'DOM Manipulation', url: '/dom-manipulation' },
