@@ -117,6 +117,10 @@ const NAV_ITEMS: NavItem[] = [
     ],
   },
   { title: 'DOM Manipulation', url: '/dom-manipulation' },
+  {
+    title: 'Forms',
+    submenu: [{ title: 'Render and Store', url: '/forms/render' }],
+  },
 ] as const
 
 function checkForSectionChange(
