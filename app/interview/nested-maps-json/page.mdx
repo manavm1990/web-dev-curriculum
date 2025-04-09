@@ -126,3 +126,56 @@ node src/index.js
 How can we avoid this mutation? Work with AI 🤖 to gain a better understanding and figure out how to avoid the mutation. **HINT:** We don't want to keep doing `...` ad infinitum! **ANOTHER HINT:** One possible solution is kind of revealed in the video...
 
 Update your reflection to discuss the solution. Or, you may create a video.
+
+---
+
+# Solution
+
+## Review and Nested Spreads
+
+First, we review the problem. We have a list of monsters. Each monster has a list of attacks. Each attack has a damage object with min and max values. We want to add 10 to the max value for each attack. We want to avoid mutating the original data.
+
+We discover the the **spread operator** is not going to help us if there is nested data. Unfortunately, since each nested object is its own reference (unlike primitives, which are just copied as is), it will take a lot of ongoing spreading to copy the data 🙅🏾‍♀️.
+
+<YouTubeEmbed videoId="6Dm9OHG2M8M" height={400} />
+
+```js
+const monsters = [
+  {
+    name: 'Cacodemon',
+    health: 400,
+    attacks: [{ type: 'Plasma Ball', damage: { min: 10, max: 60 } }],
+  },
+  {
+    name: 'Baron of Hell',
+    health: 1000,
+    attacks: [
+      { type: 'Claw', damage: { min: 15, max: 75 } },
+      { type: 'Fireball', damage: { min: 15, max: 75 } },
+    ],
+  },
+]
+
+const updatedMonsters = monsters.map((monster) => ({
+  ...monster,
+  attacks: monster.attacks.map((attack) => ({
+    ...attack,
+    damage: {
+      ...attack.damage,
+      max: attack.damage.max + 10,
+    },
+  })),
+}))
+```
+
+## stringify to break the reference!
+
+If we take any JS objects, we can convert them to a string using `JSON.stringify`. This will break the reference. We can then convert it back to an object using `JSON.parse`.
+
+<YouTubeEmbed videoId="7I2pjfHTWD0" height={400} />
+
+## Structured Clones
+
+Even better, and the most modern solution is to use `structuredClone`.
+
+<YouTubeEmbed videoId="DuJij94sdz8" height={400} />
