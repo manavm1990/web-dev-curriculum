@@ -1,0 +1,169 @@
+import { YouTubeEmbed } from '@next/third-parties/google'
+
+# Form Handling
+
+## Overview
+
+One of the most common things that JS is used for on the web is client-side form validation. You've probably experienced this before when filling out a form and before you ever submit the form, the browser will check to see if the form is valid. If it isn't, it will show you an error message and prevent you from submitting the form until you fix the errors. This is called client-side validation.
+
+Well, the poorly designed form implementations allow you to submit the form, wait on the submission to the server and only then do you get the error message. This is called server-side validation, and although it's necessary for security reasons, it's not the best user experience.
+
+Client-side validation is a way to check if the data entered into a form is valid before it is sent to the server. In other words, this is mostly done from the browser, therefore it's 'client-side,' as opposed to 'server-side.'
+
+## Application Programming Interface (API)
+
+Before we proceed, let's again clarify the relationship between the browser and JS.
+
+As you already know, JS loves objects. Everything in JS is an object except for primitives and even those sometimes behave as objects.
+
+Therefore, any external system, such as a web browser, that can model its functionality as objects is a great fit for JS.
+
+Whenever we say things like, 'model its functionality,' we are essentially describing an API, or application programming interface. This allows different software systems to communicate with each other effectively. APIs define the methods and data formats that applications can use to communicate, making them essential for building modern web applications. We don't need to know how the software, such as a browser works internally, but we do need to know how to interact with it.
+
+In other words, even though the browser is an incredibly complex piece of software, it exposes a simple API that we can use to interact with it. This API is what allows us to create web applications that can respond to user input and perform complex tasks.
+
+You've already been using part of the browser's API in the form of the `document` object, or the Document Object Model (DOM). The DOM is a representation of the HTML document that the browser creates when it loads a web page. It allows us to manipulate the structure and content of the page using JS.
+
+It's worth noting that the DOM is a subset of the Browser Object Model (BOM). Leveraging the BOM allows us to interact with the browser itself, such as opening new windows, navigating to different URLs, and accessing browser-specific features. However, for the most part, we will be working with the DOM and the `document` object.
+
+## Form Elements
+
+Since you've already experienced `document.querySelector`, the following code, although new, should be familiar enough: `const form = document.querySelector('form');`
+
+This code selects the first `<form>` element in the document and assigns it to the variable `form`. We can then use this variable to access the properties and methods of the form element.
+
+We'll assume that there's only a single form present in the DOM at any given time, which is a realistic assumption for most web applications. However, if you do have multiple forms, you can use `document.querySelectorAll` to select all of them and ➿ through them as needed.
+
+Continuing on, consider the following code, which references the `form` variable ☝️: `const nameInput = form.querySelector('#name');`.
+
+Yes, `querySelector` can be used on any element, not just the `document` object. This is because the `querySelector` method is inherited from the `Element` interface, which is the base interface for all HTML elements.
+
+This means that we can use `querySelector` on any element to select its child elements. In this case, we are selecting the input element with the ID of `name` that is a child of the form element.
+
+Assuming that the HTML is semantically correct, it may look like this example from MDN:
+
+```html
+<form action="" method="get" class="form-example">
+  <div class="form-example">
+    <label for="name">Enter your name: </label>
+    <input type="text" name="name" id="name" required />
+  </div>
+  <div class="form-example">
+    <label for="email">Enter your email: </label>
+    <input type="email" name="email" id="email" required />
+  </div>
+  <div class="form-example">
+    <input type="submit" value="Subscribe!" />
+  </div>
+</form>
+```
+
+Each input has an `id` that matches the `for` attribute of the corresponding label. This is important for accessibility, as it allows screen readers to associate the label with the input field.
+
+So, putting the HTML together with the previous JS snippet we can see that `nameInput` is going to be an object representation of the input field with the ID of `name`. This means that we can access its properties and methods just like we would with any other object in JS.
+
+For example, we can use the `value` property to get or set the value of the input field:
+
+```javascript
+const nameInput = form.querySelector('#name')
+
+console.log(nameInput.value) // Get the value of the input field
+
+nameInput.value = 'John Doe' // Set the value of the input field
+```
+
+Now, it's not likely that we want to set the values of form fields, as the user needs to do that. However, we can use the `value` property to get the value of the input field when the form is submitted.
+
+## Event Objects
+
+The browser's API also includes a set of event objects that allow us to respond to user input. These events are triggered by user actions, such as clicking a button or typing in a text field. When an event occurs, the browser creates an event object that contains information about the event, such as the type of event and the target element.
+
+To handle these events, we can add event listeners to our form elements. For example, we can listen for the `submit` event on the form to validate the input before sending it to the server.
+
+Or, even better, we can listen for the `blur` event on any of the form inputs to validate the input as soon as the user leaves the field. This is a great way to provide immediate feedback to the user and improve the overall user experience.
+
+There are many other events such as `focus` (opposite of `blur`), `input`, `change`, and `keydown` that we can use to respond to user input. Each of these events has its own event object that contains information about the event, allowing us to create more interactive and responsive forms.
+
+## Review our Form Rendering
+
+In the previous lesson, we created some form components including `Input`, `Label` and `Button`. We managed put those together, plug in 'state data' from a global store and convert that data into a form that we can render.
+
+<YouTubeEmbed videoid="_aV1VZMfujQ" height={220} />
+
+## Submit Event example
+
+By default, whenever we click a submit button, the browser will submit the form and refresh the page. But, we can prevent this from happening by adding an event listener to the form and calling the `preventDefault` method on the event object.
+
+```javascript
+const form = document.querySelector('form')
+
+form.addEventListener('submit', (event) => {
+  event.preventDefault() // Prevent the default form submission
+  console.log('Form submitted!')
+})
+```
+
+This code will prevent the form from being submitted and the page from being refreshed when the submit button is clicked. Instead, it will log 'Form submitted!' to the console.
+
+<YouTubeEmbed videoid="ru-0dpaibmw" height={220} />
+
+## Create a Form Submission Object from the Form data
+
+The browser provides a special object constructor function, `FormData`, that allows us to easily create a form submission object from the form data.
+
+Assuming that all of the form inputs have `name` attributes, we can create a new `FormData` object by passing the form element to the constructor. This is not too useful on its own, but we can call `entries()` on the `FormData` object and pass that to `Object.fromEntries()` to create a plain object that contains the form data.
+
+```javascript
+const form = document.querySelector('form')
+const formData = new FormData(form) // Create a FormData object from the form element
+const data = Object.fromEntries(formData.entries()) // Create a plain object from the FormData object
+console.log(data) // Log the form data object
+```
+
+<YouTubeEmbed videoid="H2Zf5HBYHN8" height={220} />
+
+## 😅 It's Gettin' Kinda Hectic - Recap Time!
+
+<YouTubeEmbed videoid="t3yN4muIJBc" height={220} />
+
+## Add Some `length` Validations
+
+```js
+validators: {
+      name(value) {
+        return value.length >= 3
+      },
+      password(value) {
+        return value.length >= 6
+      },
+    },
+```
+
+To our state, we'll add some validators that should pair nicely with our inputs. In our `validators` object, we have 2️⃣ **methods,** `name` and `password`. Recall that `name` and `password` also correlate to the names of 2️⃣ of our inputs! Coincidence? I think not! 😏
+
+Rather, each of these methods are deliberately named to match the name of the input they are validating. This is a common pattern in form validation, as it allows us to easily associate the validator with the corresponding input field. Additionally, we can expand our validators in the future to include more complex validation rules as needed.
+
+For now, all we are doing is receiving the value of the input and checking if it meets the minimum length requirement. If it does, we return `true`, otherwise we return `false`. This is a simple yet effective way to validate user input and ensure that the data we receive is in the correct format.
+
+<YouTubeEmbed videoid="ZAoT9UhaYmw" height={220} />
+
+## What's Next?
+
+So far, this is all we have done with our validation:
+
+```js
+console.log(store.state.validators.name(formSubmission.name))
+console.log(store.state.validators.password(formSubmission.password))
+```
+
+We called our `name` validator and passed in the value of the `name` input. We did the same for the `password` validator. This is a good start, but we need to do more to make our validation system robust and user-friendly.
+
+## Assignment - 15 points
+
+Take the form that you created from the last assignment and add some validation to it. You can use the validators that we created in this lesson or create your own. The goal is to ensure that the form data is valid before it is submitted to the server.
+
+As usual, make sure to write good commit messages to show your iterative progress along the way.
+
+And, as usual, create Gist documentation and reflect on these complex topics. How do you feel? Overwhelmed? Kind of getting it?
+
+Remember that it is getting fairly deep for an entry-level JS course! It's totally normal to feel overwhelmed. Just keep pushing through and you'll get it! 💪

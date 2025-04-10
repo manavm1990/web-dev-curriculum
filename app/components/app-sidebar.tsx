@@ -119,7 +119,10 @@ const NAV_ITEMS: NavItem[] = [
   { title: 'DOM Manipulation', url: '/dom-manipulation' },
   {
     title: 'Forms',
-    submenu: [{ title: 'Render and Store', url: '/forms/render' }],
+    submenu: [
+      { title: 'Render and Store', url: '/forms/render' },
+      { title: 'Validation', url: '/forms/validation' },
+    ],
   },
 ] as const
 
