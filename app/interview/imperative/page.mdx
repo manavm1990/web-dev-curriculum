@@ -1,0 +1,456 @@
+import Mermaid from '@/components/mermaid'
+
+# Imperative Programming, Scope and Side Effects
+
+## Learning Objectives 🦉
+
+- Strengthen your understanding of fundamental JavaScript concepts
+- Develop skills for identifying and managing side effects
+- Practice techniques for effective state management
+- Enhance your ability to explain technical concepts clearly
+- Build experience with skills commonly tested in technical interviews
+
+## Interview Considerations
+
+In an interview situation, the following types of questions could be answered using the concepts covered in this lesson:
+
+- Explain the difference between imperative and declarative programming.
+- Describe the concept of scope in JavaScript and how it affects variable visibility.
+- Discuss the implications of side effects in functions and how to manage them.
+- Analyze a code snippet for potential side effects and scope issues.
+- Refactor code to improve state management and reduce side effects.
+- Explain the difference between local and global scope. When would you choose to use each, and what are the risks of using global scope?
+- Look at this function that updates a shopping cart. What side effects do you see, and how might you refactor it to minimize them?
+
+## Introduction
+
+Imperative programming is one of the fundamental programming styles used in JavaScript (and other languages). The term "imperative" comes from the idea of giving commands or instructions, similar to using the imperative mood in language ("Do this, then do that").
+
+## What Makes JavaScript Programming "Imperative"?
+
+In imperative JavaScript, you:
+
+- Give specific instructions - You tell the computer exactly HOW to perform tasks step-by-step
+- Change data directly - You modify variables and data structures in place
+- Control the flow - You use loops and conditional statements to determine what happens when
+
+```js
+// Imperative approach to finding even numbers
+function findEvenNumbers(numbers) {
+  // Create a place to store our results
+  let evenNumbers = []
+
+  for (let i = 0; i < numbers.length; i++) {
+    if (numbers[i] % 2 === 0) evenNumbers.push(numbers[i])
+  }
+
+  // Return all the even numbers we found
+  return evenNumbers
+}
+
+// Using our function
+const myNumbers = [1, 2, 3, 4, 5, 6]
+const myEvenNumbers = findEvenNumbers(myNumbers)
+console.log(myEvenNumbers) // Output: [2, 4, 6]
+```
+
+In this example, we explicitly tell the computer how to find even numbers by using a loop and an `if` statement. We change the state of our `evenNumbers` array directly by pushing new values into it.
+
+### Pros
+
+- **Control**: You have fine-grained control over the flow of your program.
+- **Performance**: In some cases, imperative code can be more efficient because it avoids the overhead of function calls and abstractions.
+- **Familiarity**: Many developers are used to this style, especially if they come from a background in languages like C or Java.
+
+### Cons
+
+- **Readability**: Imperative code can become complex and hard to read, especially as the number of instructions increases.
+- **Maintainability**: Changing one part of the code can have unintended consequences on other parts, making it harder to maintain.
+- **State Management**: Managing state can become cumbersome, especially in larger applications where multiple parts of the code may need to access or modify the same data.
+- **Side Effects**: Imperative code often relies on side effects, which can lead to bugs and unexpected behavior.
+
+The last point about side effects bears further exploration. And, in order to do that, we need to understand the concept of **scope**.
+
+## Scope
+
+Scope refers to the visibility and lifetime of variables in your code. In JavaScript, there are two main types of scope:
+
+- **Global Scope**: Variables declared outside of any function or block are globally scoped. They can be accessed from anywhere in your code.
+- **Local Scope**: Variables declared inside a function or block are locally scoped. They can only be accessed within that function or block.
+- **Block Scope:** Variables declared with `let` or `const` within code blocks or sets of braces, like ➿ loops or conditionals.
+
+```js
+// Global scope
+let globalVar = "I'm global!"
+const anotherGlobal = 'Also global!'
+
+function myFunction() {
+  // Terrible function name. Just for demo.
+  // Function scope
+  let functionVar = "I'm function-scoped!"
+
+  if (true) {
+    // A 'fake' conditional for demo purposes
+    // Block scope
+    let blockVar = "I'm block-scoped!"
+
+    console.log(globalVar) // Accessible
+    console.log(functionVar) // Accessible
+    console.log(blockVar) // Accessible
+  }
+
+  console.log(globalVar) // Accessible
+  console.log(functionVar) // Accessible
+  console.log(blockVar) // Error: `blockVar` is not defined
+}
+
+myFunction()
+console.log(globalVar) // Accessible
+console.log(functionVar) // Error: `functionVar` is not defined
+```
+
+In imperative programming, scope management becomes critical because we're frequently modifying variables. Poor scope management can lead to variables "leaking" into unexpected parts of your program.
+
+For example, if you declare a variable in the global scope and then modify it inside a function, that change will affect the variable everywhere in your code. This can lead to bugs that are hard to track down.
+
+```js
+// Global scope
+let globalVar = "I'm global!"
+
+function myFunction() {
+  // Function scope
+  let localVar = "I'm local!"
+
+  // Modifying the global variable
+  globalVar = "I've been modified!"
+  console.log(globalVar) // Output: "I've been modified!"
+}
+
+myFunction()
+console.log(globalVar) // Output: "I've been modified!"
+```
+
+In the example above, `globalVar` is accessible from anywhere in the code, while `localVar` can only be accessed within `myFunction`.
+
+As a general rule in programming, limit the scope of your variables. Use local scope over global scope when possible. Think about your home. You don't want global scope to your home! Instead, keep your personal space private and only share what is necessary.
+
+### Module Scope
+
+The above examples showed contrived, rudimentary examples of scope. In real life, in the pursuit of modularity, we often use modules to encapsulate our code. Modules are self-contained units of code that can be imported and exported. They help manage scope by allowing you to define variables and functions that are only accessible within the module.
+
+```js
+// myModule.js
+
+let moduleVar = "I'm module-scoped!"
+
+function moduleFunction() {
+  console.log(moduleVar) // Accessible
+}
+
+export { moduleFunction }
+```
+
+```js
+// main.js
+
+// Destructure the import by name.
+import { moduleFunction } from './myModule.js'
+
+moduleFunction() // Output: "I'm module-scoped!"
+// console.log(moduleVar) // Error: `moduleVar` is not defined
+```
+
+In this example, `moduleVar` is only accessible within `myModule.js`, and it cannot be accessed from `main.js`. This encapsulation helps prevent naming conflicts and keeps your code organized.
+
+## Side Effects
+
+Side effects occur when a function modifies some state outside of its own scope or has an observable interaction with the outside world. This can include changing global variables, modifying data structures, or performing I/O operations like logging to the console or making network requests.
+
+A function has a side effect when it:
+
+- Modifies a variable outside its scope
+- Modifies an object passed as an argument
+- Interacts with the browser or operating system
+- Makes API calls or database queries
+- Writes to files
+- Logs to the console
+
+```js
+let globalVar = 0
+
+function increment() {
+  globalVar += 1 // Side effect: modifying a global variable
+}
+
+increment()
+console.log(globalVar) // Output: 1
+```
+
+In this example, the `increment` function has a side effect because it modifies the `globalVar` variable outside of its own scope. This can lead to unexpected behavior if multiple parts of your code are trying to modify the same variable.
+
+In fact whenever we write: `console.` we are causing a side effect. We are modifying the state of the console, which is outside of our code.
+
+When working with the DOM, we are also causing side effects. For example, when we change the text of an HTML element, we are modifying the state of the DOM.
+
+```js
+// Changing the text of an HTML element
+const myElement = document.getElementById('myElement')
+
+myElement.textContent = 'Hello, World!' // Side effect: modifying the DOM
+```
+
+In this example, we are modifying the state of the DOM by changing the text content of an HTML element. This is a side effect because it affects the outside world (the DOM) and is not contained within our function.
+
+```js
+// Example 1: Modifying a global variable
+let counter = 0
+
+function incrementCounter() {
+  counter++ // Side effect: modifying a variable outside function scope
+}
+
+// Example 2: Modifying an object passed as an argument
+function processUser(user) {
+  user.name = user.name.toUpperCase() // Side effect: modifying the input object
+}
+
+const person = { name: 'Alice' }
+processUser(person)
+console.log(person.name) // Output: "ALICE" - original object was changed
+
+// Example 3: DOM manipulation
+function showMessage(message) {
+  document.getElementById('message').textContent = message // Side effect: changing the DOM
+}
+
+// Example 4: API calls
+function fetchUserData(userId) {
+  fetch(`/api/users/${userId}`)
+    .then((response) => response.json())
+    .then((data) => {
+      // Process data...
+    })
+  // Side effect: making an HTTP request
+}
+```
+
+### Why Are Side Effects Bad?
+
+While side effects are often necessary, they can lead to several problems:
+
+- **Unpredictability**: Functions with side effects can produce different results depending on the state of the program, making it hard to reason about your code.
+- **Hard to predict**: When functions modify shared state, the outcome depends on the order of execution.
+- **Debugging**: Side effects can make debugging difficult because you have to track down all the places where state is modified.
+
+```js
+// Global state
+let currentUser = null
+let cart = []
+let orderTotal = 0
+
+// Functions that use and modify the global state
+function login(username, password) {
+  // Authenticate user...
+  currentUser = { username, name: 'Example User' }
+}
+
+function addToCart(item) {
+  if (!currentUser) {
+    console.error('User must be logged in')
+    return false
+  }
+
+  cart.push(item)
+  updateOrderTotal()
+  return true
+}
+
+function updateOrderTotal() {
+  orderTotal = 0
+  for (let i = 0; i < cart.length; i++) {
+    orderTotal += cart[i].price
+  }
+}
+
+function checkout() {
+  if (cart.length === 0) {
+    console.error('Cart is empty')
+    return false
+  }
+
+  // Process payment, create order...
+  console.log(`Order placed: $${orderTotal}`)
+  cart = []
+  orderTotal = 0
+  return true
+}
+```
+
+In this example, the functions `login`, `addToCart`, `updateOrderTotal`, and `checkout` all modify the global state. This can lead to unpredictable behavior if multiple parts of the code are trying to modify the same state at the same time.
+
+---
+
+<Mermaid
+  chart={`
+flowchart TD
+    A[Function Call] --> B[Local Scope Effects]
+    A --> C[Side Effects]
+    
+    C --> D[Global Variable\nModification]
+    C --> E[DOM Changes]
+    C --> F[Network Requests]
+    C --> G[Console Output]
+    
+    D --> H[Affects Other\nFunctions]
+    E --> I[Visual Changes]
+    F --> J[Data Persistence]
+    
+    H --> K[Unpredictable\nBehavior]
+    
+    style C fill:#6366f1,color:#f8fafc
+    style D fill:#818cf8,color:#f8fafc
+    style E fill:#818cf8,color:#f8fafc
+    style F fill:#818cf8,color:#f8fafc
+    style G fill:#818cf8,color:#f8fafc
+    style H fill:#c7d2fe,color:#000
+    style I fill:#c7d2fe,color:#000
+    style J fill:#c7d2fe,color:#000
+    style K fill:#f87171,color:#f8fafc
+`}
+/>
+
+---
+
+### Managing Side Effects
+
+Even within imperative programming, there are techniques to reduce the negative impact of side effects:
+
+- **Use local variables**: Whenever possible, use local variables instead of global ones. This reduces the risk of unintended side effects.
+- **Avoid shared state**: Try to avoid sharing state between different parts of your code. If you need to share data, consider using function arguments or return values instead.
+- **Minimize global state**: Keep as much state as possible within local function scope.
+- **Centralize state management**: When you need shared state, manage it in a single place rather than modifying it from many different functions.
+- **Make side effects explicit**: Design your code so it's clear when a function has side effects.
+
+```js
+// Better approach: Centralizing state management
+const shoppingService = {
+  currentUser: null,
+  cart: [],
+  orderTotal: 0,
+
+  login(username, password) {
+    // Authenticate user...
+    this.currentUser = { username, name: 'Example User' }
+    return this.currentUser
+  },
+
+  addToCart(item) {
+    if (!this.currentUser) {
+      console.error('User must be logged in')
+      return false
+    }
+
+    this.cart.push(item)
+    this.updateOrderTotal()
+    return true
+  },
+
+  updateOrderTotal() {
+    this.orderTotal = 0
+    for (let i = 0; i < this.cart.length; i++) {
+      this.orderTotal += this.cart[i].price
+    }
+    return this.orderTotal
+  },
+
+  checkout() {
+    if (this.cart.length === 0) {
+      console.error('Cart is empty')
+      return false
+    }
+
+    // Process payment, create order...
+    console.log(`Order placed: $${this.orderTotal}`)
+    this.cart = []
+    this.orderTotal = 0
+    return true
+  },
+}
+```
+
+This approach still uses imperative programming but makes the side effects more manageable by:
+
+- Encapsulating related state and functions together
+- Making it clear which functions modify which state
+- Reducing the risk of unexpected interactions between different parts of the code
+- Centralizing state management to a single object
+- Using methods to interact with the state instead of direct access
+
+### State Management
+
+Managing the state of a real-life application is the most challenging aspect of software development. It requires careful consideration of how data flows through the application, how it is modified, and how to ensure consistency across different components.
+
+The improved example above is a simple example of the concept of a state management library. It encapsulates the state and provides methods to interact with it. This is similar to how state management libraries like MobX work.
+
+Part of what React is, arguably the biggest part of what it is is **a state management library.** It allows developers to manage the state of their applications in a predictable way, making it easier to build complex user interfaces.
+
+However, note that React, still the most prevalent library used for building real-life user interfaces (UIs) is 💯 not about imperative programming. It uses a declarative approach, leveraging functional JavaScript...
+
+## Homework Assignment: Understanding Imperative Programming, Scope, and Side Effects - 20 Points
+
+This assignment combines video reflection with practical coding and "thinking like a developer" exercises to reinforce your understanding of imperative programming, scope, and side effects in JavaScript.
+
+### Part 1: Video Reflection (80% of grade)
+
+Create a 5-7 minute video where you demonstrate your understanding of the concepts covered in our lesson. Your video should:
+
+1. Explain what imperative programming is and how it differs from declarative programming
+2. Define scope in JavaScript and explain the differences between global, local, block, and module scope
+3. Describe what side effects are, why they can be problematic, and strategies for managing them
+4. Analyze the following code snippet, identifying all instances of scope and side effects:
+
+```js
+let score = 0
+const playerName = 'Player 1'
+
+function updateScore(points) {
+  score += points
+  displayScore()
+}
+
+function displayScore() {
+  console.log(`${playerName}'s score: ${score}`)
+  document.getElementById('score-display').textContent = score
+}
+
+function resetGame() {
+  score = 0
+  displayScore()
+  console.log('Game reset')
+}
+
+// Event listeners
+document.getElementById('score-button').addEventListener('click', function () {
+  updateScore(10)
+})
+```
+
+Explain how you would refactor ♻️ this code to better manage state and reduce problematic side effects.
+
+## Part 2: State Management Diagram (20% of grade)
+
+Select a feature from a website you use frequently (e.g., shopping cart, user authentication, comment system). Create a diagram that:
+
+1. Identifies all state that would need to be managed for this feature
+1. Classifies each piece of state as local or global
+1. Maps out which components would need access to which state
+1. Highlights potential side effects that could occur
+
+You can create your diagram however you like including with pen and paper or on a white board and take a picture of it. You may want to use [Excalidraw.](https://excalidraw.com/)You can export your diagram as an image file for submission.
+
+Include this diagram in your submission with a brief written explanation (150-200 words). A 🔗 to a Gist for the text, of course. And, if you upload your image and can share a link, then you can just embed that in your MD!
+
+## Deliverables
+
+- Preferably a link to your video. Note that as this is more of an interview style, you must include your face! You can use YouTube, Loom, ScreenPal or whatever you like. If you do upload a file directly to BrightSpace, **make sure to include your last name in the file name.** I will take points off this time if it's not done as this has previously been discussed on Teams!
+- A Gist 🔗 with a diagram embedded in the MD. Alternatively, the image may be uploaded to BrightSpace as a clearly named image file.
