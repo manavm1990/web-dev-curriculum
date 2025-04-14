@@ -1,0 +1,472 @@
+# Declarative Programming with Functional JavaScript
+
+## Learning Objectives 🦉
+
+- Learn how to write declarative code using JavaScript
+- Develop skills for thinking in a declarative way
+- Practice transforming imperative code into declarative code
+- Understand how functional programming relates to declarative programming
+- Explore how declarative concepts serve as a foundation for modern frameworks (without requiring React knowledge)
+
+## Interview Considerations
+
+In an interview situation, the following types of questions could be answered using the concepts covered in this lesson:
+
+- Explain the difference between declarative and imperative programming
+- Provide examples of declarative programming patterns in JavaScript
+- Discuss how array methods like map, filter, and reduce support declarative programming
+- Refactor imperative code into a more declarative style
+- Explain how declarative programming can reduce side effects
+- Discuss the benefits of immutability in JavaScript applications
+
+## Introduction
+
+If imperative programming is about giving step-by-step instructions (the "how"), declarative programming is about describing the desired outcome (the "what"). In declarative programming, you express the logic of your program without explicitly describing the control flow or step-by-step execution.
+
+JavaScript supports both imperative and declarative styles. While we've been working primarily with imperative programming so far, modern JavaScript increasingly favors declarative approaches, especially when working with data transformations.
+
+## What Makes JavaScript Programming "Declarative"?
+
+In declarative JavaScript, you:
+
+- Focus on what you want - You define the desired outcome rather than listing the steps
+- Use higher-order functions - You leverage functions like map, filter, and reduce
+- Avoid direct mutation - You create new data rather than modifying existing data
+- Think in transformations - You view your program as a series of data transformations
+
+```js
+// Declarative approach to finding even numbers
+function getEvenNumbers(numbers) {
+  return numbers.filter((num) => num % 2 === 0)
+}
+
+// Using our function
+const myNumbers = [1, 2, 3, 4, 5, 6]
+const myEvenNumbers = getEvenNumbers(myNumbers)
+
+console.log(myEvenNumbers) // Output: [2, 4, 6]
+```
+
+In this example, we don't explicitly tell the computer how to loop through the numbers or how to build the result array. Instead, we declare what we want (numbers filtered by a condition) and let the built-in filter method handle the implementation details.
+
+## Comparing Imperative vs Declarative Approaches
+
+Let's compare the imperative approach from a previous lesson with a declarative JavaScript approach for the same task:
+
+```js
+// Imperative approach to finding even numbers
+function findEvenNumbers(numbers) {
+  // Create a place to store our results
+  let evenNumbers = []
+
+  for (let i = 0; i < numbers.length; i++) {
+    if (numbers[i] % 2 === 0) evenNumbers.push(numbers[i])
+  }
+
+  // Return all the even numbers we found
+  return evenNumbers
+}
+
+const myNumbers = [1, 2, 3, 4, 5, 6]
+const myEvenNumbers = findEvenNumbers(myNumbers)
+
+console.log(myEvenNumbers) // Output: [2, 4, 6]
+```
+
+In the imperative version, we explicitly loop through the array and check each number. In the declarative version, we simply state that we want to filter the numbers based on a condition.
+
+```js
+// Declarative approach
+function getEvenNumbers(numbers) {
+  return numbers.filter((num) => num % 2 === 0)
+}
+
+const myNumbers = [1, 2, 3, 4, 5, 6]
+const myEvenNumbers = getEvenNumbers(myNumbers)
+
+console.log(myEvenNumbers) // Output: [2, 4, 6]
+```
+
+In the declarative approach, we:
+
+- Use built-in array methods that abstract away the implementation details
+- Focus on what we want (even numbers) rather than how to get them
+- Write more concise, expressive code
+
+## Higher-Order Functions
+
+Higher-order functions are functions that can take other functions as arguments or return them as results. They are a key feature of functional programming and enable declarative programming in JavaScript.
+
+Higher-order functions allow us to create more abstract and reusable code. For example, the `map`, `filter`, and `reduce` methods are higher-order functions that operate on arrays.
+
+### Declarative Array Methods
+
+```js
+const numbers = [1, 2, 3, 4, 5]
+
+// map: Transform each element
+const doubled = numbers.map((num) => num * 2)
+// [2, 4, 6, 8, 10]
+
+// filter: Select elements that pass a test
+const evens = numbers.filter((num) => num % 2 === 0)
+// [2, 4]
+
+// reduce: Combine elements into a single value
+const sum = numbers.reduce((total, num) => total + num, 0)
+// 15
+
+// some: Check if at least one element passes a test
+const hasEven = numbers.some((num) => num % 2 === 0)
+// true
+
+// every: Check if all elements pass a test
+const allPositive = numbers.every((num) => num > 0)
+// true
+
+// find: Get the first element that passes a test
+const firstEven = numbers.find((num) => num % 2 === 0)
+// 2
+```
+
+These methods allow us to express our intent clearly without getting lost in the implementation details.
+
+## Pros and Cons of Declarative Programming
+
+### Pros
+
+- Readability: Declarative code tends to be more concise and easier to understand at a glance.
+- Maintainability: By focusing on what rather than how, the code is often more maintainable and less prone to bugs.
+- Abstraction: Implementation details are abstracted away, allowing developers to focus on business logic.
+- Predictability: Declarative code is often more predictable because it emphasizes what the outcome should be.
+- Functional Composition: Declarative programming often leads to better functional composition, making it easier to build complex functionality from simple functions.
+- Immutability: Declarative programming often encourages immutability, which can lead to fewer side effects and bugs. This immutable approach makes it easier to track changes, debug issues, and reason about your code.
+- Side Effects: Declarative programming can help reduce side effects, making it easier to reason about the code.
+
+### Cons
+
+- Learning Curve: The declarative paradigm can be challenging for developers used to imperative programming.
+- Abstraction Overhead: The abstractions that make declarative programming possible can sometimes add performance overhead.
+- Debugging Complexity: When things go wrong, the abstractions can make it harder to debug.
+- "Magic": The abstraction can sometimes feel like "magic," making it difficult to understand what's happening behind the scenes.
+
+## Function Composition and Chaining
+
+Function composition is a powerful concept in functional programming that allows you to combine simple functions to create more complex ones. In JavaScript, you can compose functions using higher-order functions or by chaining methods together.
+
+Declarative programming often involves function composition - combining simple functions to create more complex operations.
+
+```js
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+const sumOfSquaredEvens = numbers
+  .filter((num) => num % 2 === 0)
+  .map((num) => num * num)
+  .reduce((total, num) => total + num, 0)
+
+console.log(sumOfSquaredEvens) // 220
+```
+
+The declarative approach reads almost like a sentence: "Filter the numbers to get even ones, map them to their squares, and reduce them to a sum."
+
+## Immutability in Declarative JavaScript
+
+Immutability is a key concept in functional programming and declarative programming. It means that once a value is created, it cannot be changed. Instead of modifying existing data, you create new data structures.
+
+```js
+function addItemToCart(cart, item) {
+  return [...cart, item] // Creates a new array with all items
+}
+
+const myCart = ['apple', 'banana']
+const newCart = addItemToCart(myCart, 'orange')
+
+console.log(myCart) // ['apple', 'banana'] - unchanged
+console.log(newCart) // ['apple', 'banana', 'orange'] - new array
+```
+
+This immutable approach makes it easier to track changes, debug issues, and reason about your code.
+
+## Declarative DOM Manipulation
+
+DOM manipulation is often highly imperative, but we can make it more declarative by focusing on the desired state of the DOM rather than the steps to change it.
+
+In fact, this is at the ❤️ of a libraries like React, which abstracts away the imperative details of DOM manipulation. They use function components and state management to create a more declarative approach to building user interfaces.
+
+```js
+// Imperative DOM manipulation
+function updateCounter(count) {
+  const counterElement = document.getElementById('counter')
+  counterElement.textContent = count
+
+  if (count % 2 === 0) {
+    counterElement.classList.add('even')
+    counterElement.classList.remove('odd')
+  } else {
+    counterElement.classList.add('odd')
+    counterElement.classList.remove('even')
+  }
+}
+
+// More declarative approach
+function renderCounter(count) {
+  const counterTemplate = `
+    <div id="counter" class="${count % 2 === 0 ? 'even' : 'odd'}">
+      ${count}
+    </div>
+  `
+
+  document.getElementById('counter-container').innerHTML = counterTemplate
+}
+```
+
+Now, the above code is **not** React, but it is a more declarative approach to DOM manipulation. It focuses on the desired state of the DOM rather than the steps to achieve it.
+
+## Real-World Example: Refactoring Our Shopping Cart
+
+Let's revisit the shopping cart example from a previous lesson and refactor it to be more declarative.
+
+```js
+const shoppingCart = {
+  // Private state - CLOSURE
+  createCart() {
+    let state = {
+      currentUser: null,
+      items: [],
+    }
+
+    return {
+      // Pure functions that return new state
+      login(username, password) {
+        // Authenticate user...
+        return {
+          ...state,
+          currentUser: { username, name: 'Example User' },
+        }
+      },
+
+      addItem(item) {
+        if (!state.currentUser) {
+          console.error('User must be logged in')
+          return state
+        }
+
+        return {
+          ...state,
+          items: [...state.items, item],
+        }
+      },
+
+      getOrderTotal() {
+        return state.items.reduce((total, item) => total + item.price, 0)
+      },
+
+      checkout() {
+        if (state.items.length === 0) {
+          console.error('Cart is empty')
+          return state
+        }
+
+        const orderTotal = this.getOrderTotal()
+        console.log(`Order placed: $${orderTotal}`)
+
+        return {
+          ...state,
+          items: [],
+        }
+      },
+
+      // State updater
+      updateState(newState) {
+        state = newState
+        return this
+      },
+    }
+  },
+}
+
+// Usage
+const myCart = shoppingCart.createCart()
+
+myCart
+  .updateState(myCart.login('user123', 'password'))
+  .updateState(myCart.addItem({ name: 'Book', price: 20 }))
+  .updateState(myCart.addItem({ name: 'Pen', price: 5 }))
+
+console.log(`Order total: $${myCart.getOrderTotal()}`)
+myCart.updateState(myCart.checkout())
+```
+
+In this refactored version:
+
+- State is encapsulated and not directly modified
+- Functions return new state rather than modifying existing state
+- The code is more explicit about data flow
+- Side effects are isolated to specific places
+
+### Wait...Closures?
+
+In the above example, we used closures to encapsulate the state of the shopping cart. This is a common pattern in JavaScript that allows us to create private state and expose only the necessary methods to interact with it.
+
+Before diving into the technical details, let's understand closures with a simple analogy:
+
+Imagine a function as a special backpack. When a function is created inside another function, it packs up the variables it needs from its parent's environment before leaving. Even after the parent function has finished running, the inner function still has access to those packed variables wherever it goes.
+
+Let's see a simple example:
+
+```js
+function createGameCharacter(name) {
+  // This variable is in the parent function's scope
+  let health = 100
+
+  // This inner function is returned and "remembers" the name and health
+  return function displayStatus() {
+    return `${name}'s health: ${health}`
+  }
+}
+
+// Create two character status functions
+const displayDoomGuyStatus = createGameCharacter('DoomGuy')
+const displayCacoStatus = createGameCharacter('Cacodemon')
+
+// Even though createGameCharacter finished running,
+// the returned functions still remember their own character's information
+console.log(displayDoomGuyStatus()) // "DoomGuy's health: 100"
+console.log(displayCacoStatus()) // "Cacodemon's health: 100"
+```
+
+In this example:
+
+- Each call to `createGameCharacter` creates a new environment with its own name and health
+- The inner function `displayStatus` "closes over" these variables, packing them in its backpack
+- Whenever we call `doomGuyStatus()` later, it still has access to the name and health from when it was created.
+
+This is the essence of a closure - a function that remembers and can access variables from where it was created, even after that outer function has finished execution.
+
+Closures are functions that have access to their outer function's scope, even after the outer function has returned. This allows us to create private variables and methods that cannot be accessed from outside the closure.
+
+```js
+function createCounter() {
+  let count = 0
+
+  return {
+    increment() {
+      count++
+      return count
+    },
+    decrement() {
+      count--
+      return count
+    },
+    getCount() {
+      return count
+    },
+  }
+}
+
+const counter = createCounter()
+console.log(counter.increment()) // 1
+console.log(counter.increment()) // 2
+console.log(counter.decrement()) // 1
+console.log(counter.getCount()) // 1
+```
+
+In this example, the `count` variable is private to the `createCounter` function. The returned object has methods that can access and modify the `count` variable, but it cannot be accessed directly from outside the closure.
+
+You've already seen closures in action with the Vite template counter example:
+
+```js
+export function setupCounter(element) {
+  let counter = 0
+  const setCounter = (count) => {
+    counter = count
+    element.innerHTML = `count is ${counter}`
+  }
+  element.addEventListener('click', () => setCounter(counter + 1))
+  setCounter(0)
+}
+```
+
+A closure occurs when a function "remembers" and accesses variables from outside its own scope, even when that function is executed in a different context. In the example above:
+
+- The `setupCounter` function creates a local variable counter
+- The inner `setCounter` function can access and modify the counter variable
+- The click event handler function can also access both counter and `setCounter`
+- Even after `setupCounter` finishes execution, the inner functions still have access to `counter`
+
+#### Closures in Our Shopping Cart Example
+
+In our declarative shopping cart refactoring, we used a closure to maintain private state:
+
+```js
+const shoppingCart = {
+  // Create a closure to maintain private state
+  createCart() {
+    let state = {
+      currentUser: null,
+      items: [],
+    }
+
+    // Return an object with methods that "close over" the state variable
+    return {
+      // Methods that have access to the private state
+      login(username, password) {
+        // ...
+      },
+      addItem(item) {
+        // ...
+      },
+      // ...
+    }
+  },
+}
+```
+
+Here, the state variable is encapsulated within the `createCart` function and inaccessible directly from outside. Only the methods returned by `createCart` can access and modify the state. This is a powerful pattern for declarative programming because:
+
+- Encapsulation: The state is protected from unintended modifications
+- Predictability: State changes only happen through well-defined methods
+- Immutability: We can implement immutable updates by returning new state objects
+
+## Conclusion
+
+Declarative programming, with concepts like higher-order functions, immutability, and closures, provides a powerful approach to writing more maintainable, readable code. These concepts form the foundation of modern JavaScript frameworks and libraries, even though we haven't explored those frameworks in this course yet.
+
+By understanding these principles now, you're building the mental models that will serve you well as you continue your programming journey, whether you eventually work with React or other modern frameworks.
+
+## Homework Assignment: Understanding Declarative Programming and Functional JavaScript - 20 Points
+
+### Task 1: Refactor Imperative Code (5 points)
+
+Refactor the following imperative code into a more declarative style using higher-order functions:
+
+```js
+function getOddNumbers(numbers) {
+  let oddNumbers = []
+
+  for (let i = 0; i < numbers.length; i++) {
+    if (numbers[i] % 2 !== 0) oddNumbers.push(numbers[i])
+  }
+
+  return oddNumbers
+}
+const myNumbers = [1, 2, 3, 4, 5, 6]
+const myOddNumbers = getOddNumbers(myNumbers)
+console.log(myOddNumbers) // Output: [1, 3, 5]
+```
+
+You could write this code anywhere you like, perhaps going back to our NodeJS repo? You don't need to do any commits. You will just create 3 minute video explaining your code and how you refactored it.
+
+### Task 2: Reflections 🪞 (15 points)
+
+Most of this lesson should have been a review of stuff that we have already covered. Write up a reflection on the following questions:
+
+- What is declarative programming? How does it differ from imperative programming?
+- Why is declarative programming often preferred in modern JavaScript?
+- How do higher-order functions support declarative programming?
+
+Also, dissect the shopping cart example. What are the benefits of using closures in this context? How does it help with encapsulation and immutability? What does this mean: `// Pure functions that return new state`?
+
+Run the code (you can do so however you like, such as in the Node repo). Make some updates or changes to the code. Try to break it. Discuss this and/or share your screenshots in your reflection.
+
+⚠️ Be mindful of overusing the AI 🤖. If your reflection sounds like regurgitated 🤮 AI 🤖 jargon instead of something insightful that demonstrates that you took the time to read and think 🤔 about this lesson your score will reflect that, and you will likely be more 😕 later on! Please ensure your reflection is thorough and well-considered.

@@ -106,6 +106,8 @@ const NAV_ITEMS: NavItem[] = [
       { title: 'Values and References', url: '/interview/values-references' },
       { title: 'Nested Maps & JSON', url: '/interview/nested-maps-json' },
       { title: 'Imperative', url: '/interview/imperative' },
+      { title: 'Declarative', url: '/interview/declarative' },
+      { title: 'OOP', url: '/interview/oop' },
     ],
   },
   {
