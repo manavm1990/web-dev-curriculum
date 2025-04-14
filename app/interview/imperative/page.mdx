@@ -162,6 +162,32 @@ moduleFunction() // Output: "I'm module-scoped!"
 
 In this example, `moduleVar` is only accessible within `myModule.js`, and it cannot be accessed from `main.js`. This encapsulation helps prevent naming conflicts and keeps your code organized.
 
+```js
+// playerModule.js
+let score = 0 // This 'score' variable is isolated to this module
+export function incrementPlayerScore() {
+  score += 10
+  return score
+}
+
+// enemyModule.js
+let score = 1000 // This 'score' variable is completely separate!
+export function decrementEnemyScore() {
+  score -= 5
+  return score
+}
+
+// main.js - Both work without interfering with each other
+import { incrementPlayerScore } from './playerModule.js'
+import { decrementEnemyScore } from './enemyModule.js'
+console.log(incrementPlayerScore()) // Output: 10
+console.log(decrementEnemyScore()) // Output: 995
+```
+
+In this example, both `playerModule.js` and `enemyModule.js` have their own `score` variable. They are completely separate and do not interfere with each other, thanks to module scope.
+
+This is a powerful feature of JavaScript modules, allowing you to create isolated pieces of code that can be reused without worrying about variable conflicts.
+
 ## Side Effects
 
 Side effects occur when a function modifies some state outside of its own scope or has an observable interaction with the outside world. This can include changing global variables, modifying data structures, or performing I/O operations like logging to the console or making network requests.
