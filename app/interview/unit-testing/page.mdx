@@ -1,0 +1,75 @@
+# Tests ✅
+
+## Overview
+
+In real life, how do we ensure that our code is 🏃🏾‍♂️ properly? Sure, we can just keep refreshing and/or 🏃🏾‍♂️ with Node and using `console.log`, but that's not exactly scalable. Instead, in real life we write tests.
+
+Testing is a huge topic, but in this brief lesson we will mention (not cover exhaustively) the following:
+
+- Overview and Types of Tests
+- Static Analysis
+- Unit Tests with Vitest
+- Test Driven Development (TDD)
+
+## Overview and Types of Tests
+
+In the real world, we have to test our code. There are many types of tests.
+
+- **Static Analysis**: This is not a test per se, but a way to analyze your code without running it. This includes things like TypeScript, ESLint, and Prettier. These tools help you catch errors before you even run your code. We have already been doing this! ✅
+- **Smoke 😶‍🌫️ Tests**: These are very basic tests that just see if anything is 🏃🏾‍♂️ at all. It's called a smoke tests b/c it's as if we are just turning the power on and seeing if our stuff starts smoking.
+- **Unit Tests**: These are tests that test a single unit of code. This is usually a function or a class. The goal is to test the smallest possible piece of code in isolation. This is what we will focus on in this lesson. ✅
+- **Integration Tests**: These are tests that test how different pieces of code work together. In other words, once we have some functions passing unit tests, how do they work together? This is usually done by testing a single function that calls other functions. This is somewhat common in React, where a function component integrates other smaller functions.
+- **End-to-End Tests**: These are tests that test the entire application from start to finish. This includes testing the user interface, the backend, and the database. The goal is to test the application as a whole and ensure that all parts are working together correctly.
+- **Performance/Stress Tests**: These are tests that test how well the application performs under load. This includes testing how fast the application is, how much memory it uses, and how many requests it can handle at once.
+- **Security Tests**: These are tests that test how secure the application is. This includes testing for vulnerabilities, such as SQL injection and cross-site scripting (XSS).
+- **Accessibility Tests**: These are tests that test how accessible the application is. This includes testing for things like screen readers, keyboard navigation, and color contrast.
+- **Visual Regression Tests**: These are tests that test how the application looks. This includes testing for things like layout, colors, and fonts. This is usually done by taking a screenshot of the application and comparing it to a previous screenshot.
+
+## Unit Tests
+
+These are fairly easy to write or generate with AI 🤖. As indicated, they test an individual unit of code such as a function.
+
+For instance, let's say we have a `utils.js` file with the following function:
+
+```javascript
+export function add(a, b) {
+  return a + b
+}
+```
+
+We would then have another test file. There are a couple of ways to organize this, but the simplest would be to have a file called: `utils.test.js` in the same directory as `utils.js`. This file would look like this:
+
+```javascript
+import { describe, it, expect } from 'vitest'
+import { add } from './utils.js'
+
+describe('add', () => {
+  it('should add two numbers', () => {
+    expect(add(1, 2)).toBe(3)
+  })
+
+  it('should add negative numbers', () => {
+    expect(add(-1, -2)).toBe(-3)
+  })
+
+  it('should add zero', () => {
+    expect(add(0, 0)).toBe(0)
+  })
+})
+```
+
+This is a very simple test, but it shows the basic structure of a unit test. We use `describe` to group our tests, and `it` to define each individual test. We then use `expect` to make assertions about the output of our function.
+
+Notice that even without knowing much about the code, because of the names of the functions from Vitest, it's fairly easy to understand what is going on. In fact, it reads kind of like a sentence, "It should add 2️⃣ numbers." This is a good practice to follow when writing tests. It makes it easier to understand what the tests are doing and why they are failing.
+
+## Test Driven Development (TDD)
+
+Test Driven Development (TDD) is a software development process that relies on the repetition of a very short development cycle: requirements are turned into specific test cases, and then the software is improved to pass those tests.
+
+In other words, we write the tests first, we watch them fail ❌, and then we write the code to make them pass ✅. This is a great way to ensure that our code is working as expected and that we are not introducing any bugs.
+
+There are some in the dev community that swear by this methodology, while others think it's a waste of time. The truth is that it depends on the project and the team. Some teams find it helpful to write tests first, while others prefer to write the code first and then write the tests. There is no right or wrong way to do it, but it's important to find a process that works for you and your team.
+
+## Summary
+
+In this lesson, we learned about the different types of tests and the importance of unit tests. We also learned about Test Driven Development (TDD) and how it can help us write better code. By writing tests first, we can catch bugs early and ensure that our code is working as expected.

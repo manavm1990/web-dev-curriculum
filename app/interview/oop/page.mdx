@@ -1,0 +1,427 @@
+import Large from '@/components/ui/typography/large'
+import { YouTubeEmbed } from '@next/third-parties/google'
+import Mermaid from '@/components/mermaid'
+
+# Objects and Prototypes in JavaScript
+
+## Learning Objectives
+
+- Understand JavaScript's object system and how to use the Object prototype methods
+- Master practical applications of `Object.entries`, `Object.keys`, and other essential methods
+- Apply object manipulation techniques in your functional code
+- Recognize how objects fit into modern JavaScript development
+
+## Interview Considerations
+
+In an interview situation, the following types of questions could be answered using the concepts covered in this lesson:
+
+- Explain the statement: "Everything in JS is an object except primitives, and even some of those can behave like objects temporarily."
+- How can you use `Object.entries` and `Object.keys` to work with data?
+- What's the difference between using `Object.assign` and the spread operator?
+- How can you efficiently manipulate and transform objects in JavaScript?
+
+## Overview
+
+At its core, JavaScript is an object-oriented language. This means that it uses objects as the primary means of structuring and organizing code. Objects are collections of properties and methods that can represent real-world entities or abstract concepts.
+
+However, as we have already seen, JavaScript is a multi-paradigm language. This means that it supports multiple programming styles, including functional programming and imperative/procedural programming. This flexibility allows developers to choose the best approach for their specific use case.
+
+In modern JavaScript, especially on the front-end where React is generally the go-to library (DOES NOT mean that it's the 'best'), for all intents and purposes we don't do any OOP programming. It's mostly functional. However, those functional methods are, under the hood, based on JavaScript's prototype-based object system.
+
+## The Evolution of JavaScript Development
+
+While JavaScript has object-oriented capabilities, the industry has largely moved toward functional programming practices for several compelling reasons:
+
+- Predictability: Functional code with immutable data structures creates fewer side effects
+- Testability: Pure functions are easier to test than stateful objects
+- Composability: Small, focused functions can be combined in powerful ways
+- React Ecosystem: React and its related libraries encourage functional approaches
+
+Understanding objects remains crucial, but knowing how to use them in a functional context is the more valuable skill in today's JavaScript landscape.
+
+## An Important Note 🎵 for C# and Java Developers
+
+<Large>Skip this section if you are not involved in C# or Java development.</Large>
+
+JS does not implement OOP in the in the same way as the aforementioned languages do. **Traditionally** those languages are rigidly OOP. Case and point, the concept of creating an object out of thin air without first defining a class is unheard of!
+
+For example, to create a person object in C# you would do something like this:
+
+```csharp
+public class Person
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
+}
+Person person = new Person();
+person.Name = "John Doe";
+person.Age = 30;
+```
+
+In JavaScript, you can create an object without defining a class first:
+
+```javascript
+const person = {
+  name: 'John Doe',
+  age: 30,
+}
+```
+
+This is a fundamental difference between JavaScript and traditional OOP languages. In JavaScript, objects are more flexible and can be created and manipulated on the fly. This allows for a more dynamic and fluid programming style.
+
+Now, in all fairness, modern versions of Java and C# have started to become more flexible and now allow for some functional programming. Case and point, Java now has lambda expressions and C# has LINQ. However, the core of those languages is still OOP. In JavaScript, OOP is just one of many paradigms that can be used.
+
+We must also mention the keyword `class`. Yes, as of ES2017, JavaScript added a `class` keyword. However, this is just syntactic sugar over the existing prototype-based inheritance. It does not change the underlying object system of JavaScript. In fact, the `class` keyword is just a more convenient way to create constructor functions and prototypes, which we will explore later in this lesson.
+
+## Objects
+
+In JavaScript, an object is a collection of properties, where each property is a key-value pair. The key is usually, but not always a string that identifies the property, and the value can be any valid JavaScript data type, including other objects or functions.
+
+## Object Literal Notation
+
+This is the most common way to create objects. You simply define the object using curly braces `{}` and specify the properties inside.
+
+```javascript
+const person = {
+  name: 'John Doe',
+  age: 30,
+  greet() {
+    return `Hello, my name is ${this.name}`
+  },
+}
+```
+
+Above, `this` is a reference to the object itself. So when we call `greet()`, it will return `Hello, my name is John Doe`.
+
+However, we don't do these sorts of things to often in modern JavaScript. We typically just use the object literal notation to create objects and then use functions to manipulate them.
+
+```javascript
+function greet({ name }) {
+  return `Hello, my name is ${name}`
+}
+```
+
+Note that the function is using object destructuring, where we 'cherry-pick' the `name` property from the object instead of worrying about: `person.name`, when all we care about is the person's name! This is a common pattern in modern JavaScript, especially when working with functional programming.
+
+### Accessing Object Properties: Dot vs. Bracket Notation
+
+As we already know, 99.8% of the time, we use dot notation to access object properties. However, there are some cases where we need to use bracket notation.
+
+```javascript
+const monster = {
+  name: 'Cacodemon',
+  health: 400,
+  specialAbility: 'Plasma Ball',
+}
+
+// Dot notation
+console.log(monster.name) // "Cacodemon"
+
+// Bracket notation
+console.log(monster['health']) // 400
+```
+
+But, why? Why would we ever want to use bracket notation? Well, there are a few reasons, but the primary use case is when we have a dynamic property name. That is, our property name is not known until runtime. This is common when we are working with data from an API or when we are using a variable to store the property name.
+
+```javascript
+const propertyName = 'specialAbility'
+console.log(monster[propertyName]) // "Plasma Ball"
+```
+
+### Creating Objects with Dynamic Keys
+
+Related to accessing a dynamic property bound to a variable, we can also create objects with dynamic keys. This is useful when we want to create an object with properties that are not known until runtime.
+
+```javascript
+const dynamicKey = 'specialAbility'
+const monster = {
+  name: 'Cacodemon',
+  health: 400,
+  [dynamicKey]: 'Plasma Ball',
+}
+console.log(monster) // { name: 'Cacodemon', health: 400, specialAbility: 'Plasma Ball' }
+```
+
+This is a common pattern when working with data from an API or when we want to create an object with properties that are not known until runtime. Here's another example:
+
+```javascript
+/**
+ * NOTE: More than 2️⃣ parameters, so should use object destructuring.
+ * Simplified for this example...
+ */
+function createMonster(name, statName, statValue) {
+  const monster = {
+    name: name,
+
+    // Using bracket notation to create a property with a dynamic name
+    [statName]: statValue,
+  }
+
+  return monster
+}
+
+const demon = createMonster('Imp', 'attackPower', 25)
+console.log(demon) // { name: "Imp", attackPower: 25 }
+
+const boss = createMonster('Cyberdemon', 'healthPoints', 4000)
+console.log(boss) // { name: "Cyberdemon", healthPoints: 4000 }
+```
+
+## Constructor Functions
+
+While less common in modern codebases, you can create a function that acts as a blueprint for creating objects. This is where one would see the `new` keyword, similar to other languages, where we are using a constructor function to...construct instances of an object.
+
+By convention, these are capitalized to indicate that they are constructor functions, similar to how we capitalize function components when working in the DOM. This is not a requirement, but it is a convention that is widely followed.
+
+And do note that aside from both being functions and typically being capitalized, constructor functions have absolutely nothing to do with function components.
+
+Function components use their function parameters to render HTML, while constructor functions use their parameters to create objects.
+
+```javascript
+function Person(name, age) {
+  this.name = name
+  this.age = age
+  this.greet = function () {
+    return `Hello, my name is ${this.name}`
+  }
+}
+
+const person1 = new Person('John Doe', 30)
+const person2 = new Person('Jane Doe', 25)
+
+// We can add additional methods on the prototype
+Person.prototype.sayAge = function () {
+  return `I am ${this.age} years old`
+}
+const person3 = new Person('Jack Doe', 35)
+const person4 = new Person('Jill Doe', 28)
+console.log(person1.greet()) // Hello, my name is John Doe
+console.log(person2.greet()) // Hello, my name is Jane Doe
+console.log(person3.sayAge()) // I am 35 years old
+console.log(person4.sayAge()) // I am 28 years old
+```
+
+## Prototypes
+
+In JavaScript, every object has a prototype. A prototype is an object that serves as a template for creating new objects. When you create a new object, it inherits properties and methods from its prototype.
+
+<Mermaid
+  chart={`
+graph TD
+    A[Object.prototype] --> B[Array.prototype]
+    A --> C[String.prototype]
+    A --> D[Function.prototype]
+    B --> E[Your Array]
+    C --> F[Your String]
+    D --> G[Your Function]
+    
+    style A fill:#6366f1,stroke:#4f46e5,color:#f8fafc
+    style B,C,D fill:#818cf8,stroke:#4f46e5,color:#f8fafc
+    style E,F,G fill:#c7d2fe,stroke:#4f46e5,color:#000
+`}
+/>
+
+Examples of built-in prototypes include `Array.prototype`, `String.prototype`, and `Object.prototype`. You can also create your own prototypes, such as the `Person` prototype in the example above.
+
+## Boxing Primitives
+
+Some of you more astute readers may have noticed: `String.prototype`. There's also `Number.prototype` and `Boolean.prototype`. These are the primitive types in JavaScript. However, when you call a method on a primitive type, JavaScript temporarily converts the primitive to an object. This is called "boxing."
+
+For example, when you call `toUpperCase()` on a string, JavaScript creates a temporary `String` object, calls the method on it, and then discards the object. This is why you can call methods on strings, numbers, and booleans even though they are not objects.
+
+```javascript
+const str = 'hello'
+
+console.log(str.toUpperCase()) // HELLO
+
+// Primitives are immutable.
+console.log(str) // hello
+
+// We still end up with a primitive. The 'object mode' is just temporary.
+console.log(typeof str) // string
+console.log(typeof str.toUpperCase()) // string
+```
+
+{/* TODO: Assign learners to research other 'primitive methods' and do a video tutorial on it. */}
+
+## `Object` is the 1️⃣ True King
+
+All other objects, including arrays, functions, and even the `window` object (used in the DOM), are derived from the `Object` prototype. This means that they inherit properties and methods from `Object.prototype`.
+
+For example, when you create an array, it inherits methods like `forEach`, `map`, and `filter` from `Array.prototype`, which in turn inherits from `Object.prototype`.
+
+---
+
+<YouTubeEmbed videoid="pwlpBPHuEm8" height={220} />
+
+---
+
+## Object Methods
+
+Accessing the `.prototype` property isn't particularly useful, but there are some **static methods** that are useful.
+
+### Static Methods?
+
+Static methods are methods that belong to the prototype itself. They are not called on instances of the object, but rather on the constructor function itself. And, intuitively, these usually makes sense as they wouldn't make sense to be called on an instance.
+
+Take `Math`, for example (which inherits from `Object`). It has static methods like `Math.max()` and `Math.min()`. These methods are not called on instances of `Math`, but rather on the `Math` object itself. In fact, `Math` is unique in that we can't create an instance of a `Math` object. That wouldn't really make sense. `Math` is just `Math`.
+
+We've also seen `Array.from`. Again, if we already have an instance of an array, there would be no reason to call `Array.from()` on it, right?
+
+Anyway, syntactically speaking, we recognize static methods because they are called on the constructor function itself (capitalized), not on instances of the object.
+
+### `Object.create()`
+
+You can create a new object using an existing object as a prototype. This allows you to inherit properties and methods from the prototype object.
+
+```javascript
+const person1 = {
+  name: 'John Doe',
+  age: 30,
+  greet() {
+    return `Hello, my name is ${this.name}`
+  },
+  sayAge() {
+    return `I am ${this.age} years old`
+  },
+}
+
+// Create a new object using `person1` as the prototype
+const person2 = Object.create(person1)
+
+/**
+ * `person2` inherits properties and methods from `person1`,
+ * but they are different references.
+ * `person2` can have its own properties without affecting `person1`.
+ *
+ * 🤔 🐘
+ */
+
+person2.name = 'Jane Doe'
+person2.age = 25
+console.log(person2.greet()) // Hello, my name is Jane Doe
+console.log(person2.sayAge()) // I am 25 years old
+
+console.log(person1.greet()) // Hello, my name is John Doe
+console.log(person1.sayAge()) // I am 30 years old
+```
+
+Object.create() is useful for creating objects that share functionality without having to define the same methods multiple times. The new object has access to all the properties and methods of its prototype, but can also have its own unique properties.
+
+#### Copying Objects vs. Creating Prototypes
+
+In modern JavaScript, whenever we want to make a copy of an object, we often use the spread operator `...`. However, it's important to understand that this works differently from `Object.create()`:
+
+```javascript
+// Using the spread operator to create a copy
+const person1 = {
+  name: 'John Doe',
+  age: 30,
+  greet() {
+    return `Hello, my name is ${this.name}`
+  },
+}
+
+// This creates a new object with copied properties
+const person2 = { ...person1 }
+
+// Changing person2 doesn't affect person1
+person2.name = 'Jane Doe'
+person2.age = 25
+
+console.log(person2.greet()) // Hello, my name is Jane Doe
+console.log(person1.greet()) // Hello, my name is John Doe
+```
+
+The key differences between these approaches:
+
+1. With `Object.create()`, the new object inherits properties through a prototype chain.
+1. With the spread operator `...`, properties are copied directly to the new object.
+
+For most common tasks in modern JavaScript, especially when working with React and other functional programming approaches, you'll use the spread operator more often than `Object.create()`.
+
+### `Object.keys` and `Object.values`
+
+These methods transform objects into arrays that can be processed with array methods:
+
+```javascript
+const user = { name: 'Alex', role: 'Developer', level: 'Senior' }
+
+// Getting an array of keys
+const keys = Object.keys(user) // ['name', 'role', 'level']
+
+// Getting an array of values
+const values = Object.values(user) // ['Alex', 'Developer', 'Senior']
+
+// Using with array methods
+const uppercaseProps = Object.keys(user).map((key) => key.toUpperCase())
+console.log(uppercaseProps) // ['NAME', 'ROLE', 'LEVEL']
+const userValues = Object.values(user).map((value) => value.toUpperCase())
+console.log(userValues) // ['ALEX', 'DEVELOPER', 'SENIOR']
+```
+
+### `Object.entries` and `Object.fromEntries`
+
+These methods provide elegant transformations between objects and arrays:
+
+```javascript
+const user = { name: 'Alex', role: 'Developer' }
+
+// Convert object to array of [key, value] pairs
+const entries = Object.entries(user) // [['name', 'Alex'], ['role', 'Developer']]
+
+// Transform the data
+const transformed = entries.map(([key, value]) => [key, value.toUpperCase()])
+
+// Convert back to an object
+const uppercaseValues = Object.fromEntries(transformed) // { name: 'ALEX', role: 'DEVELOPER' }
+console.log(uppercaseValues) // { name: 'ALEX', role: 'DEVELOPER' }
+console.log(Object.keys(uppercaseValues)) // ['name', 'role']
+console.log(Object.values(uppercaseValues)) // ['ALEX', 'DEVELOPER']
+```
+
+### Creating and Combining Objects
+
+There are multiple ways to create and combine objects in JavaScript:
+
+```javascript
+// Using Object.assign
+const defaults = { theme: 'light', notifications: true }
+const userPreferences = { theme: 'dark' }
+const settings = Object.assign({}, defaults, userPreferences)
+
+// Using spread operator (more common in modern code)
+const settingsWithSpread = { ...defaults, ...userPreferences }
+console.log(settingsWithSpread) // { theme: 'dark', notifications: true }
+```
+
+The spread operator provides a more readable syntax and is generally preferred in modern JavaScript.
+
+### Functional Object Manipulation Techniques
+
+Modern JavaScript encourages treating objects as immutable data structures:
+
+```javascript
+// Adding properties without mutation
+const product = { id: 1, price: 100 }
+const enhancedProduct = { ...product, category: 'electronics' }
+
+// Removing properties without mutation
+const { category, ...productWithoutCategory } = enhancedProduct
+
+// Transforming objects
+const withTax = {
+  ...product,
+  priceWithTax: product.price * 1.2,
+}
+```
+
+These techniques create new objects rather than modifying existing ones, leading to more predictable code with fewer side effects.
+
+## Conclusion
+
+While JavaScript's object system and prototype inheritance are fundamental to the language, modern development has evolved toward more functional approaches. Understanding objects remains crucial, but the most valuable skill is knowing how to use them in a functional context.
+
+By mastering object manipulation techniques like Object.entries, Object.keys, and the spread operator, you'll be well-equipped to write clean, maintainable code that aligns with contemporary best practices. Remember that in today's JavaScript ecosystem, composition is favored over inheritance, and pure functions are preferred over stateful objects.
+
+These foundational concepts will serve you well in interviews and practical development, even as frameworks and libraries continue to evolve.

@@ -428,46 +428,18 @@ This assignment combines video reflection with practical coding and "thinking li
 
 ### Part 1: Video Reflection (80% of grade)
 
-Create a 5-7 minute video where you demonstrate your understanding of the concepts covered in our lesson. Your video should:
+Create a 3-5 minute video where you demonstrate your understanding of the concepts covered in our lesson. Your video should:
 
-1. Explain what imperative programming is and how it differs from declarative programming
-2. Define scope in JavaScript and explain the differences between global, local, block, and module scope
-3. Describe what side effects are, why they can be problematic, and strategies for managing them
-4. Analyze the following code snippet, identifying all instances of scope and side effects:
+1. Define scope in JavaScript and explain the differences between global, local, block, and module scope
+2. Describe what side effects are, why they can be problematic, and strategies for managing them
 
-```js
-let score = 0
-const playerName = 'Player 1'
-
-function updateScore(points) {
-  score += points
-  displayScore()
-}
-
-function displayScore() {
-  console.log(`${playerName}'s score: ${score}`)
-  document.getElementById('score-display').textContent = score
-}
-
-function resetGame() {
-  score = 0
-  displayScore()
-  console.log('Game reset')
-}
-
-// Event listeners
-document.getElementById('score-button').addEventListener('click', function () {
-  updateScore(10)
-})
-```
-
-Explain how you would refactor ♻️ this code to better manage state and reduce problematic side effects.
+You can simply reference the examples in this lesson, or you can create your own examples. You can use any video recording tool you like, such as Loom, ScreenPal, or even Zoom. Just make sure to include your face in the video!
 
 ## Part 2: State Management Diagram (20% of grade)
 
 Select a feature from a website you use frequently (e.g., shopping cart, user authentication, comment system). Create a diagram that:
 
-1. Identifies all state that would need to be managed for this feature
+1. Identifies some state that would need to be managed for this feature
 1. Classifies each piece of state as local or global
 1. Maps out which components would need access to which state
 1. Highlights potential side effects that could occur
