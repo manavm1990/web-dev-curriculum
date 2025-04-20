@@ -1,0 +1,175 @@
+# JavaScript Runtime: The Heap, Call Stack, and Event Loop
+
+## Learning Objectives
+
+By the end of this lesson, you will be able to:
+
+- Explain how the heap stores JavaScript data
+- Describe how the call stack tracks function execution in JavaScript's single-threaded environment
+- Understand how the event loop enables asynchronous programming with callbacks.
+
+## Interview Considerations
+
+In technical interviews, you might encounter questions about JavaScript's internal mechanisms such as:
+
+- "What are the implications of JavaScript being single-threaded?"
+- "How does the call stack work in JavaScript?"
+- "What is the purpose of the heap in JavaScript?"
+
+## Introduction
+
+JavaScript powers interactive websites and applications that seem to do many things at once - loading data, responding to clicks, animating elements, and more. But behind this apparent multitasking is a clever system that allows JavaScript to juggle multiple operations despite only being able to do one thing at a time.
+
+## The JavaScript Runtime: How Your Code Actually Runs
+
+When you run JavaScript code, whether in a browser or with Node.js, it doesn't execute in isolation. It runs within an environment that provides the structure and tools needed to make your code work. This environment has several key components that work together:
+
+1. The Heap - where your data is stored
+2. The Call Stack - which keeps track of what code is running
+3. The Event Loop - which helps manage multiple tasks
+4. Browser/Node APIs - which provide additional functionality
+
+Let's examine each of these components to understand how they work together.
+
+## The Heap: Where JavaScript Stores Your Data
+
+The heap is simply the memory space where JavaScript stores all your data - the variables, objects, arrays, and functions you create in your code.
+
+### How Memory Works in JavaScript:
+
+```javascript
+// All these values are stored in the heap
+const playerName = 'DoomGuy'
+const health = 100
+const weapons = ['Pistol', 'Shotgun', 'BFG']
+const player = {
+  name: playerName,
+  health: health,
+  weapons: weapons,
+}
+```
+
+When you create variables in JavaScript, they all ultimately point to values stored in the heap. For simple values like numbers and strings, the variable directly references the value. For more complex values like objects and arrays, the variable references the memory address where that data structure begins.
+
+Think of the heap like a storage warehouse where JavaScript keeps all the data your program uses. When you create a new variable, JavaScript allocates space in this warehouse and stores your data there. It binds your variable name to the address of that data in the heap.
+
+### Memory Management
+
+JavaScript uses a process called garbage collection to manage memory. When you create an object or array, JavaScript keeps track of how many references point to that data. If no references exist (i.e., no variables are pointing to it), JavaScript automatically frees up that memory space.
+
+```javascript
+let player = { name: 'DoomGuy' }
+
+// player now points to a new object
+player = { name: 'DoomGuy', health: 100 }
+
+// The first object is no longer referenced and will be garbage collected
+```
+
+This automatic memory management helps prevent memory leaks and keeps your application running smoothly.
+
+## The Call Stack: Keeping Track of Your Code Execution
+
+JavaScript is single-threaded, meaning it can only execute one piece of code at a time. The call stack is how JavaScript keeps track of what it's currently doing and what it needs to do next.
+
+### What is the Call Stack?
+
+Imagine the call stack as a stack of plates. When you call a function, JavaScript adds a new plate to the top of the stack. When the function finishes, JavaScript removes that plate. The function at the top of the stack is always the one that's currently running.
+
+```javascript
+function calculateDamage(weapon, critical) {
+  // This function is now on top of the call stack
+  const baseDamage = getWeaponDamage(weapon)
+  // When getWeaponDamage is called, it goes on top of the stack
+  return critical ? baseDamage * 2 : baseDamage
+}
+
+function getWeaponDamage(weapon) {
+  // Now getWeaponDamage is on top of the stack
+  if (weapon === 'BFG') return 100
+  if (weapon === 'Shotgun') return 30
+  return 10 // Default damage
+}
+
+// When we call calculateDamage, it gets added to the call stack
+const damage = calculateDamage('Shotgun', true)
+```
+
+Here's what happens in the call stack:
+
+1. `calculateDamage` is added to the call stack
+2. Inside `calculateDamage`, `getWeaponDamage` is called and added to the stack
+3. `getWeaponDamage` executes and returns a value (30)
+4. `getWeaponDamage` is removed from the stack
+5. `calculateDamage` continues execution, calculates the result (60), and returns
+6. `calculateDamage` is removed from the stack
+
+### The Problem with Single-Threading
+
+JavaScript can only do one thing at a time. This becomes a problem when operations take a long time to complete, like:
+
+- Fetching data from a server
+- Reading large files
+- Complex calculations
+
+If these operations were handled directly in the call stack, your entire program would freeze while waiting for them to complete. This would make for a terrible user experience - imagine if your entire web page froze every time it needed to load some data!
+
+## The Event Loop: How JavaScript Manages Multiple Tasks
+
+JavaScript is single-threaded, meaning that it can only do one thing at a time. Can you see why this could become problematic?
+
+A dynamic web application needs to be able to manage multiple tasks, fetching data, updating the UI, responding to user interactions. There's no way that just doing one task at a time is going to cut it!
+
+This is where the event loop comes in. The event loop is a clever mechanism that allows JavaScript to handle multiple operations without blocking the main thread.
+
+### How the Event Loop Works:
+
+1. JavaScript runs your code on the call stack
+2. When it encounters an asynchronous operation (like a fetch request), it hands that operation off to the browser or Node.js (C++ code). These entities can certainly handle multiple tasks on behalf of JavaScript.
+3. JavaScript continues executing other code without waiting
+4. When the asynchronous operation completes, its callback function is placed in a queue
+5. The event loop constantly checks if the call stack is empty
+6. If the call stack is empty, the event loop takes the first callback from the queue and puts it on the call stack to be executed
+
+Let's see a simple example:
+
+```javascript
+console.log('Starting')
+
+// This is an asynchronous operation, using a callback function. It's a timer.
+setTimeout(() => {
+  console.log('Timeout completed')
+}, 2000)
+
+console.log('Continuing')
+```
+
+The output will be:
+
+```
+Starting
+Continuing
+Timeout completed  (after 2 seconds)
+```
+
+Here's what happens:
+
+1. `console.log("Starting")` runs immediately
+2. `setTimeout` is encountered, and JavaScript hands off the timer to the browser
+3. JavaScript continues to the next line without waiting
+4. `console.log("Continuing")` runs immediately
+5. After 2 seconds, the browser puts the timeout callback in the queue
+6. The event loop sees the call stack is empty and moves the callback to the call stack
+7. The callback runs, logging "Timeout completed"
+
+This mechanism allows JavaScript to remain responsive while handling operations that take time to complete.
+
+## Conclusion
+
+In this lesson, we explored the JavaScript runtime environment, focusing on the heap, call stack, and event loop. Understanding these concepts is crucial for writing efficient and responsive JavaScript code. Asynchronous programming is a powerful tool that allows JavaScript to handle multiple tasks without blocking the main thread, ensuring a smooth user experience.
+
+## Assignment - 10 points
+
+### Video Reflection/Interview
+
+Citing the interview questions, provide your answers for them in a video format with your face showing. In addition, reference the lesson and reflect on the concepts themselves. Can you provide any additional insights, analogies or reflections? Feel free to discuss with AI 🤖, but your thoughts and words must be your own, and not just be reading some AI 🤖 script.
