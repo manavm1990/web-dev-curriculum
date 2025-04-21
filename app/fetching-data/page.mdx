@@ -1,0 +1,70 @@
+import { YouTubeEmbed } from '@next/third-parties/google'
+
+# Data Fetching and Promises
+
+## Overview
+
+When building websites, we often need to get information from other places on the internet - like weather data, user profiles, or game scores. JavaScript helps us do this with something called **asynchronous programming**.
+
+In synchronous code, everything happens one after another. But that would be a problem for fetching data - your whole website would freeze while waiting for data to arrive!
+
+Let's explore how JavaScript handles this challenge through some simple, practical examples.
+
+## What is Asynchronous Programming?
+
+Think about ordering food at a restaurant:
+
+1. You place your order (make a request)
+2. Instead of standing at the counter waiting, you sit at your table (continue doing other things)
+3. When your food is ready, they call your number (receive the response)
+
+This is exactly how asynchronous programming works! Your code can make a request for data and then continue running other code while waiting for the response.
+
+## A Brief History of Handling Asynchronous Code
+
+JavaScript has evolved several ways to handle asynchronous operations:
+
+### Callbacks (The Old Way)
+
+```javascript
+// Using callbacks (pre-2015)
+setTimeout(() => {
+  console.log('Hello, world!')
+}, 1000)
+```
+
+**Problem**: When you needed multiple asynchronous operations in sequence, you'd end up with deeply nested callbacks - what developers call "callback hell" or "pyramid of doom."
+
+### Promises (Since 2015)
+
+Promises are a cleaner way to handle asynchronous tasks. They represent a value that might not be available yet, but will be at some point.
+
+```javascript
+// Using promises with then/catch
+fetch('https://api.example.com/data')
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data)
+  })
+  .catch((error) => {
+    console.error('Error:', error)
+  })
+```
+
+<YouTubeEmbed videoid="RVa4tZmVE2w" height={400} />
+
+#### Promises with `await`.
+
+As we saw above, whenever we work with promises, we can use the `.then()` method to handle the result. But there's a cleaner way to do this using the `await` keyword.
+
+`await` is **syntactic sugar** for `then()`. Generally, the term syntactic sugar just means a shorter, sweeter way to write something. In this case, `await` is a shorter way to write the same thing as `.then()`. It makes your code look cleaner and easier to read. NO CALLBACKS! 🤓
+
+<YouTubeEmbed videoid="qekcEcWhzNo" height={400} />
+
+## Assignment - 10 Points
+
+Work through the code shown in the videos ☝️. Make sure to make commits after each part. So, you should have at least 2️⃣ commits. One where the code uses `then`, and then other with `await`.
+
+Be sure to `push` your work and share the 🔗 in your BrightSpace submission.
+
+Also include a Gist reflection. What do you think about the code snippets and the videos? Does it make sense? Are you able to relate what we have learned about synchronous code and functions along with JSON to tie it together here? Are there any significant knowledge gaps that concern you?

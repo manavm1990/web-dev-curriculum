@@ -109,6 +109,7 @@ const NAV_ITEMS: NavItem[] = [
       { title: 'Declarative', url: '/interview/declarative' },
       { title: 'OOP', url: '/interview/oop' },
       { title: 'Unit Testing', url: '/interview/unit-testing' },
+      { title: 'Internals', url: '/interview/internals' },
     ],
   },
   {
@@ -125,6 +126,7 @@ const NAV_ITEMS: NavItem[] = [
     title: 'Forms',
     submenu: [{ title: 'Render and Store', url: '/forms/render' }],
   },
+  { title: 'Fetching Data', url: '/fetching-data' },
 ] as const
 
 function checkForSectionChange(
